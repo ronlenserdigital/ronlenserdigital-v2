@@ -220,7 +220,7 @@ export function AsciiCanvas({
             if (flick < 0.55) continue;
             const ch = NOISE_GLYPHS[Math.floor(flick * NOISE_GLYPHS.length)];
             const dx0 = (x - midX) / midX;
-            ctx.fillStyle = `rgba(150,150,150,${0.12 + flick * 0.16})`;
+            ctx.fillStyle = `rgba(190,160,140,${0.12 + flick * 0.16})`;
             ctx.fillText(ch, x * cell, y * cell * 1.05 + dx0 * dx0 * curve * cell * rows * 0.06);
             continue;
           }
@@ -241,8 +241,23 @@ export function AsciiCanvas({
           const age = Math.min(1, (reveal - threshold) * 7);
           const a = Math.min(1, 0.32 + l * 0.95) * age;
 
-          const g = l > 0.78 ? 255 : l > 0.5 ? 226 : 186;
-          ctx.fillStyle = `rgba(${g},${g},${g},${a})`;
+          // colour comes from the source pixel: the face renders in real
+          // skin tone, the hood and jacket stay neutral on their own
+          let cr = px[i], cg = px[i + 1], cb = px[i + 2];
+
+          // lift toward white in the hot spots so highlights still pop
+          if (l > 0.86) {
+            const k = (l - 0.86) / 0.14;
+            cr += (255 - cr) * k;
+            cg += (255 - cg) * k;
+            cb += (255 - cb) * k;
+          }
+
+          // floor the darkest cells so they read as glyphs, not mud
+          const lift = 62 * (1 - l);
+          ctx.fillStyle = `rgba(${Math.min(255, cr + lift) | 0},${
+            Math.min(255, cg + lift) | 0
+          },${Math.min(255, cb + lift) | 0},${a})`;
 
           ctx.fillText(ch, x * cell, y * cell * 1.05 + bow);
         }

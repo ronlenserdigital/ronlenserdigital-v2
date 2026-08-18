@@ -357,6 +357,25 @@ Put it at `public/ron.jpg`. The grid reads contrast, not detail:
 | `fps` | `24` | frame cap. The grid does not need 60. |
 | `curve` | `0.16` | barrel bow. `0` is flat. |
 
+### Colour
+
+Glyphs take their colour from the source pixel, so the face renders in Ron's
+actual skin tone rather than a tint. Sampled off the original photo:
+
+| | |
+|---|---|
+| skin highlight | `#ECC6AF` |
+| skin midtone | `#E0A887` |
+
+`public/ron.jpg` is kept in colour for this reason. It is processed with the
+tone curve applied to luminance only, chroma carried along, so skin stays
+skin through the contrast lift. Saturation is pushed 1.45x, because a face
+reduced to 6px glyphs loses apparent colour.
+
+The renderer lifts hot spots toward white and floors dark cells so they read
+as glyphs rather than mud. The hood and jacket stay neutral on their own,
+since they are neutral in the photo.
+
 ### Motion
 
 Three behaviours, all driven off one `reveal` value per cell:
