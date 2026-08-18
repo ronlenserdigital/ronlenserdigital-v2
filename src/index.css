@@ -14,6 +14,10 @@
   --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Martian Mono", ui-monospace, monospace;
 
+  /* hero only, matching the source component */
+  --font-name: "Fira Code", ui-monospace, monospace;
+  --font-tagline: "Antic", ui-sans-serif, system-ui, sans-serif;
+
   --text-mega: clamp(3rem, 11.5vw, 11rem);
   --text-big: clamp(2.2rem, 6.2vw, 5.2rem);
   --text-mid: clamp(1.6rem, 3.2vw, 2.8rem);

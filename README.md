@@ -310,3 +310,16 @@ portfolio and wrong for a page whose job is booking calls.
 "Everyone uses the same template. You won't." moved down into the Statement
 section, at `text-mega` with the outline treatment on `same`. The pitch is
 still on the page, it just sits second now behind the name.
+
+### Hero fonts
+
+The hero matches the source component rather than the site face:
+
+| Element | Face | Token |
+|---|---|---|
+| RON / LENSER | Fira Code 700 | `--font-name` |
+| Tagline | Antic | `--font-tagline` |
+| Everything else | Fraunces / Inter Tight / Martian Mono | `--font-display` etc |
+
+Scoped to the hero only, via `.font-name` and `.font-tagline`. To revert the
+name to the site face, swap `font-name` for `display` on the `h1`.

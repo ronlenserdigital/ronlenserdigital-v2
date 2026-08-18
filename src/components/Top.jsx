@@ -69,7 +69,7 @@ export function Hero({ ready }) {
 
       {/* the name */}
       <div className="relative py-10 text-center">
-        <h1 className="display leading-[0.78] tracking-tighter uppercase">
+        <h1 className="font-name leading-[0.75] font-bold tracking-tighter uppercase">
           <span className="line-mask block">
             <span
               className="line-inner block text-[clamp(4rem,17vw,13rem)] text-accent"
@@ -98,7 +98,7 @@ export function Hero({ ready }) {
           text="Custom websites, written line by line, for businesses that are tired of looking like everyone else."
           animateBy="words"
           delay={26}
-          className="max-w-[46ch] justify-center text-center text-base leading-snug text-graphite md:text-lg"
+          className="font-tagline max-w-[46ch] justify-center text-center text-lg leading-snug text-graphite md:text-xl"
         />
 
         <a
