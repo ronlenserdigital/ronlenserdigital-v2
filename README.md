@@ -320,3 +320,40 @@ The hero matches the source component rather than the site face:
 
 Scoped to the hero only, via `.font-name` and `.font-tagline`. To revert the
 name to the site face, swap `font-name` for `display` on the `h1`.
+
+## ASCII hero
+
+`ui/ascii-canvas.jsx` renders a source into a grid of monospace glyphs,
+brightness mapped to a density ramp, with a barrel curve so the grid bows
+like a CRT.
+
+Written from scratch. No gsap, no three, no shader library: a downscaled
+offscreen draw, one `getImageData` per frame, and `fillText`.
+
+```jsx
+<AsciiCanvas cols={140} />              // procedural, the default
+<AsciiCanvas src="/reel.mp4" />         // render real footage through the grid
+<AsciiCanvas src="/photo.jpg" />        // or a still
+```
+
+| Prop | Default | Notes |
+|---|---|---|
+| `src` | none | image or video URL. Omit for procedural metaballs. |
+| `cols` | `132` | grid width in characters. Higher is finer and slower. |
+| `fps` | `24` | frame cap. The grid does not need 60. |
+| `curve` | `0.16` | barrel bow. `0` is flat. |
+
+Performance: pauses via IntersectionObserver when off screen, capped at 24fps,
+renders a single frame under `prefers-reduced-motion`. If it stutters on a low
+end phone, drop `cols` to about 90.
+
+### Hero structure
+
+Pill nav top left, grid filling the frame, headline bottom left, scroll dot on
+the right edge. The tubelight rail and the old header are gone: the pill nav
+handles sections, the dock at top right handles contact.
+
+### On the reference
+
+The technique is reproduced, not the page. The grid content is procedural and
+ours. Do not paste in their copy, their layout proportions, or their assets.

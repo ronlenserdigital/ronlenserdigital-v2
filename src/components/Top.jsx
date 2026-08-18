@@ -1,118 +1,74 @@
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { useInView, useMagnetic } from "../lib/motion.js";
+import { AsciiCanvas } from "./ui/ascii-canvas.jsx";
 import { BlurText } from "./ui/blur-text.jsx";
 
 /* ------------------------------------------------------------------ */
-/* Hero — name led                                                     */
+/* Hero                                                                */
 /*                                                                     */
-/* Adapted from the 21st.dev portfolio-hero. Kept: the two stacked      */
-/* name lines, the portrait sitting between them, the blur reveal, the  */
-/* scroll cue. Dropped: the .dark toggle (this theme runs on tokens),   */
-/* the third nav (header menu and section rail already exist), the      */
-/* hardcoded acid lime, the stock headshot, and Fira Code / Antic.      */
-/* Added: a CTA, because a hero on a lead-gen site needs one.           */
+/* Structure follows the reference: pill nav top left, character grid   */
+/* filling the frame, headline anchored bottom left. The grid itself is */
+/* ours (procedural metaballs through an ASCII ramp), not their asset.  */
+/*                                                                     */
+/* Swap the grid for real footage by passing src:                       */
+/*   <AsciiCanvas src="/reel.mp4" />                                    */
 /* ------------------------------------------------------------------ */
 
-function Portrait() {
-  const [failed, setFailed] = useState(false);
+const LINKS = [
+  ["Work", "#work"],
+  ["Process", "#process"],
+  ["Pricing", "#pricing"],
+  ["Quote", "#quote"],
+];
 
+export function Hero() {
   return (
-    <div
-      className="group absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
-      data-cursor="RON"
-    >
-      <div className="h-[110px] w-[66px] overflow-hidden rounded-full bg-paper-deep shadow-2xl shadow-ink/30 transition-transform duration-500 group-hover:scale-110 sm:h-[152px] sm:w-[92px] md:h-[188px] md:w-[112px] lg:h-[222px] lg:w-[132px]">
-        {failed ? (
-          <div className="grid h-full place-items-center px-2 text-center">
-            <span className="font-mono text-[0.5rem] leading-tight tracking-[0.1em] text-graphite uppercase">
-              Add
-              <br />
-              /public
-              <br />
-              /ron.jpg
-            </span>
-          </div>
-        ) : (
-          <img
-            src="/ron.jpg"
-            alt="Ron Lenser"
-            onError={() => setFailed(true)}
-            className="h-full w-full object-cover"
-          />
-        )}
-      </div>
-    </div>
-  );
-}
-
-export function Hero({ ready }) {
-  const [ref] = useInView({ threshold: 0.05 });
-  const cta = useMagnetic(0.3);
-
-  return (
-    <section
-      id="top"
-      ref={ref}
-      className="relative flex min-h-screen flex-col justify-between overflow-hidden px-5 pt-40 pb-10 md:px-8 md:pt-48"
-    >
-      {/* the name */}
-      <div className="relative py-10 text-center">
-        <h1 className="font-name leading-[0.75] font-bold tracking-tighter uppercase">
-          <span className="line-mask block">
-            <span
-              className="line-inner block text-[clamp(3.4rem,15vw,11rem)]"
-              style={{ animationDelay: ready ? "0.05s" : "1.1s" }}
-            >
-              Ron
-            </span>
+    <section id="top" className="relative flex min-h-screen flex-col overflow-hidden">
+      {/* pill nav, top left */}
+      <div className="absolute top-4 left-5 z-30 md:left-8">
+        <nav className="flex items-center gap-1 rounded-full border border-hairline bg-ink-soft/70 p-1.5 backdrop-blur-md">
+          <span
+            aria-hidden="true"
+            className="grid h-8 w-8 place-items-center rounded-full bg-accent font-mono text-[0.625rem] font-medium text-accent-ink"
+          >
+            R
           </span>
-          <span className="line-mask block">
-            <span
-              className="line-inner block text-[clamp(3.4rem,15vw,11rem)]"
-              style={{ animationDelay: ready ? "0.16s" : "1.21s" }}
+          {LINKS.map(([label, href]) => (
+            <a
+              key={href}
+              href={href}
+              className="rounded-full px-3.5 py-1.5 text-sm text-graphite transition-colors hover:bg-ink hover:text-paper"
             >
-              Lenser
-            </span>
-          </span>
-        </h1>
-
-        <Portrait />
+              {label}
+            </a>
+          ))}
+        </nav>
       </div>
 
-      {/* tagline + CTA */}
-      <div className="flex flex-col items-center gap-8">
+      {/* the grid */}
+      <AsciiCanvas className="absolute inset-0 h-full w-full" cols={140} />
+
+      {/* headline, bottom left */}
+      <div className="relative z-20 mt-auto px-5 pb-16 md:px-8 md:pb-20">
+        <BlurText
+          as="h1"
+          text="Custom websites, local SEO, and AI that answers."
+          animateBy="words"
+          delay={40}
+          className="display max-w-[16ch] text-big leading-[1.02]"
+        />
         <BlurText
           as="p"
-          text="Custom websites, written line by line, for businesses that are tired of looking like everyone else."
+          text="One person. Every line written by hand. Fredericksburg, Virginia."
           animateBy="words"
-          delay={26}
-          className="font-tagline max-w-[46ch] justify-center text-center text-lg leading-snug text-graphite md:text-xl"
+          delay={18}
+          className="mt-5 max-w-[42ch] text-graphite md:text-lg"
         />
-
-        <a
-          ref={cta}
-          href="#quote"
-          data-cursor="TALK"
-          className="inline-flex items-center gap-4 rounded-full bg-ink py-3 pr-3 pl-8 text-ink transition-colors hover:bg-graphite"
-        >
-          <span className="font-medium">Book a call</span>
-          <span className="grid h-10 w-10 place-items-center rounded-full bg-ink/10">
-            &rarr;
-          </span>
-        </a>
-
-        <a
-          href="#work"
-          aria-label="Scroll to work"
-          className="flex items-center gap-2 text-graphite transition-colors hover:text-accent"
-        >
-          <span className="font-mono text-[0.625rem] tracking-[0.16em] uppercase">
-            Scroll
-          </span>
-          <ChevronDown className="h-4 w-4 motion-safe:animate-bounce" aria-hidden="true" />
-        </a>
       </div>
+
+      {/* scroll dot, right edge */}
+      <div
+        aria-hidden="true"
+        className="absolute top-1/2 right-5 z-20 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-paper/70 md:right-8"
+      />
     </section>
   );
 }
@@ -148,7 +104,7 @@ export function Marquee() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Statement — the pitch that used to be the hero headline             */
+/* Statement                                                           */
 /* ------------------------------------------------------------------ */
 export function Statement() {
   return (
@@ -156,19 +112,22 @@ export function Statement() {
       <div className="grid gap-10 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-3">
           <p className="eyebrow md:sticky md:top-28">
-            02 <span className="mx-1 text-accent">/</span> Why it matters
+            01 <span className="mx-1 text-accent">/</span> Why it matters
           </p>
         </div>
 
         <div className="md:col-span-8 md:col-start-5">
-          <h2 className="display text-big">
+          <h2 className="display text-mega">
             <span className="line-mask block">
-              <span className="line-inner block">Everyone uses the</span>
+              <span className="line-inner block">Everyone uses</span>
             </span>
             <span className="line-mask block">
               <span className="line-inner block">
-                same template. <span className="text-graphite">You won't.</span>
+                the <span className="stroke-type">same</span> template.
               </span>
+            </span>
+            <span className="line-mask block">
+              <span className="line-inner block text-accent">You won't.</span>
             </span>
           </h2>
 

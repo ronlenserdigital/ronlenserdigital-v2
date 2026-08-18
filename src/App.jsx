@@ -1,19 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { reduced } from "./lib/motion.js";
-import { Preloader, CursorDisc, Nav } from "./components/Chrome.jsx";
+import { Preloader, CursorDisc } from "./components/Chrome.jsx";
 import { Hero, Marquee, Statement } from "./components/Top.jsx";
 import { Work, Capabilities, Process, Results } from "./components/Work.jsx";
 import { Testimonials, Clients, Pricing, ContactCard } from "./components/Social.jsx";
 import { Quote } from "./components/Quote.jsx";
 import { QuickActions } from "./components/QuickActions.jsx";
-import { SectionRail } from "./components/SectionRail.jsx";
 import { Footer } from "./components/ui/footer-section.jsx";
 import { ParallaxBreak } from "./components/ui/parallax-layers.jsx";
 
 export default function App() {
   const root = useRef(null);
-  const [ready, setReady] = useState(false);
 
   // smooth scroll
   useEffect(() => {
@@ -62,13 +60,11 @@ export default function App() {
 
   return (
     <div ref={root}>
-      <Preloader onDone={() => setReady(true)} />
+      <Preloader />
       <CursorDisc />
-      <Nav />
-      <SectionRail />
       <QuickActions />
       <main>
-        <Hero ready={ready} />
+        <Hero />
         <Marquee />
         <Statement />
         <ParallaxBreak />
