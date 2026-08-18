@@ -51,14 +51,14 @@ export function Testimonials() {
               <button
                 onClick={() => go(-1)}
                 aria-label="Previous quote"
-                className="grid h-12 w-12 place-items-center rounded-full border border-hairline transition-colors hover:border-paper hover:bg-paper hover:text-paper"
+                className="grid h-12 w-12 place-items-center rounded-full border border-hairline transition-colors hover:border-paper hover:bg-paper hover:text-ink"
               >
                 &larr;
               </button>
               <button
                 onClick={() => go(1)}
                 aria-label="Next quote"
-                className="grid h-12 w-12 place-items-center rounded-full border border-hairline transition-colors hover:border-paper hover:bg-paper hover:text-paper"
+                className="grid h-12 w-12 place-items-center rounded-full border border-hairline transition-colors hover:border-paper hover:bg-paper hover:text-ink"
               >
                 &rarr;
               </button>
@@ -170,7 +170,7 @@ export function ContactCard() {
       <div className="grid items-center gap-10 md:grid-cols-12">
         <div className="md:col-span-3">
           {/* Drop a real headshot at /public/ron.jpg */}
-          <div className="aspect-[4/5] w-full max-w-[260px] bg-paper-deep">
+          <div className="aspect-[4/5] w-full max-w-[260px] border border-hairline bg-ink-soft">
             <div className="grid h-full place-items-center">
               <span className="eyebrow">Photo of Ron</span>
             </div>

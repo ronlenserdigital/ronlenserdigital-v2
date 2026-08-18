@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 import { reduced } from "./lib/motion.js";
-import { Preloader, StatusBar, CursorDisc, Nav } from "./components/Chrome.jsx";
+import { Preloader, CursorDisc, Nav } from "./components/Chrome.jsx";
 import { Hero, Marquee, Statement } from "./components/Top.jsx";
 import { Work, Capabilities, Process, Results } from "./components/Work.jsx";
-import { Testimonials, Clients, Pricing, ContactCard, Closing } from "./components/Social.jsx";
+import { Testimonials, Clients, Pricing, ContactCard } from "./components/Social.jsx";
 import { Quote } from "./components/Quote.jsx";
 import { QuickActions } from "./components/QuickActions.jsx";
 import { SectionRail } from "./components/SectionRail.jsx";
@@ -66,7 +66,6 @@ export default function App() {
       <CursorDisc />
       <Nav />
       <SectionRail />
-      <StatusBar />
       <QuickActions />
       <main>
         <Hero ready={ready} />
@@ -82,7 +81,6 @@ export default function App() {
         <Pricing />
         <ContactCard />
         <Quote />
-        <Closing />
       </main>
       <Footer />
     </div>

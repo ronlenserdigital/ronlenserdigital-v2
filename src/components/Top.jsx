@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { useInView, useScramble, useMagnetic } from "../lib/motion.js";
+import { useInView, useMagnetic } from "../lib/motion.js";
 import { BlurText } from "./ui/blur-text.jsx";
 
 /* ------------------------------------------------------------------ */
@@ -47,8 +47,7 @@ function Portrait() {
 }
 
 export function Hero({ ready }) {
-  const [ref, seen] = useInView({ threshold: 0.05 });
-  const tag = useScramble("INDEPENDENT STUDIO", seen);
+  const [ref] = useInView({ threshold: 0.05 });
   const cta = useMagnetic(0.3);
 
   return (
@@ -57,16 +56,6 @@ export function Hero({ ready }) {
       ref={ref}
       className="relative flex min-h-screen flex-col justify-between overflow-hidden px-5 pt-40 pb-10 md:px-8 md:pt-48"
     >
-      {/* top meta rail */}
-      <div className="flex items-start justify-between">
-        <p className="eyebrow">
-          Fredericksburg VA
-          <span className="mx-2 text-accent">/</span>
-          Est. 2025
-        </p>
-        <p className="eyebrow hidden tabular-nums md:block">{tag}</p>
-      </div>
-
       {/* the name */}
       <div className="relative py-10 text-center">
         <h1 className="font-name leading-[0.75] font-bold tracking-tighter uppercase">

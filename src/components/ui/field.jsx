@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "../../lib/utils.js";
 
 const base =
-  "w-full rounded-lg border border-hairline bg-ink px-3 text-sm text-ink " +
+  "w-full rounded-lg border border-hairline bg-ink-soft px-3 text-sm text-paper " +
   "placeholder:text-graphite/60 outline-none transition-[border-color,box-shadow] " +
   "focus-visible:border-accent focus-visible:ring-[3px] focus-visible:ring-accent/25 " +
   "disabled:pointer-events-none disabled:opacity-50";

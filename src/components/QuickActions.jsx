@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Menu as MenuIcon, X, Phone, MessageSquare, Mail, FileText } from "lucide-react";
 import { MenuContainer, MenuItem } from "./ui/fluid-menu.jsx";
 
@@ -6,27 +5,13 @@ const PHONE = "+15403956493";
 const EMAIL = "ron@ronlenserdigital.com";
 
 /**
- * Fixed quick-action dock, bottom right.
- * One tap to call from a phone, which is the whole point of it.
- * Fades in after the hero so it does not compete with the load animation.
+ * The site menu. Top right, always visible. Replaces the old hamburger and
+ * full screen overlay: one control, four actions, no second layer.
  */
 export function QuickActions() {
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setShow(window.scrollY > window.innerHeight * 0.5);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <div
-      /* raised on mobile so it clears the section rail sitting bottom centre */
-      className={`fixed right-5 bottom-44 z-40 transition-all duration-500 md:right-8 md:bottom-8 ${
-        show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
-      }`}
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      className="fixed top-4 right-5 z-50 md:right-8"
     >
       <MenuContainer label="Get in touch">
         <MenuItem

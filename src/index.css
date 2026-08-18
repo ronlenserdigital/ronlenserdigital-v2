@@ -1,16 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  /* Matches the live ronlenserdigital.com: pure black ground, white text,
-     neutral greys. No chromatic accent on that site, so accent is white. */
+  /* Matched to the live ronlenserdigital.com palette */
   --color-ink: #000000;
-  --color-ink-soft: #0a0a0a;
+  --color-ink-soft: #0e0e0e;
   --color-paper: #ffffff;
   --color-paper-deep: #f5f5f7;
   --color-graphite: #a1a1a1;
   --color-hairline: #262626;
-  --color-accent: #ffffff;
-  --color-accent-ink: #000000;
+  --color-accent: #3080ff;
+  --color-accent-ink: #ffffff;
 
   --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
@@ -18,12 +17,12 @@
   --font-name: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-tagline: "Geist", ui-sans-serif, system-ui, sans-serif;
 
-  --text-mega: clamp(2.8rem, 10vw, 9rem);
-  --text-big: clamp(2rem, 5.4vw, 4.4rem);
-  --text-mid: clamp(1.5rem, 2.8vw, 2.4rem);
+  --text-mega: clamp(3rem, 11.5vw, 11rem);
+  --text-big: clamp(2.2rem, 6.2vw, 5.2rem);
+  --text-mid: clamp(1.6rem, 3.2vw, 2.8rem);
 
-  --display-weight: 500;
-  --display-tracking: -0.04em;
+  --display-weight: 600;
+  --display-tracking: -0.03em;
 
   --pad: 1.25rem;
 }
