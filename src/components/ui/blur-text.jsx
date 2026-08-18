@@ -61,7 +61,11 @@ export function BlurText({
   const still = reduced();
 
   return (
-    <Tag ref={ref} className={`inline-flex flex-wrap ${className}`} style={style}>
+    <Tag
+      ref={ref}
+      className={`inline-flex flex-wrap will-change-transform ${className}`}
+      style={{ transition: "transform 120ms linear", ...style }}
+    >
       {segments.map((seg, i) => (
         <span
           key={`${seg}-${i}`}

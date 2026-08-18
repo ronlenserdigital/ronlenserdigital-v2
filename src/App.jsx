@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { reduced } from "./lib/motion.js";
 import { CursorDisc } from "./components/Chrome.jsx";
-import { Hero, Marquee, Statement } from "./components/Top.jsx";
+import { Hero, AsciiBreak, Marquee, Statement } from "./components/Top.jsx";
 import { Work, Capabilities, Process, Results } from "./components/Work.jsx";
 import { Testimonials, Clients, Pricing, ContactCard } from "./components/Social.jsx";
 import { Quote } from "./components/Quote.jsx";
@@ -63,6 +63,7 @@ export default function App() {
       <QuickActions />
       <main>
         <Hero />
+        <AsciiBreak />
         <Marquee />
         <Statement />
         <Work />

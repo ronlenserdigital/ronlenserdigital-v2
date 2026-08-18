@@ -404,3 +404,40 @@ handles sections, the dock at top right handles contact.
 
 The technique is reproduced, not the page. The grid content is procedural and
 ours. Do not paste in their copy, their layout proportions, or their assets.
+
+
+## Hero
+
+Adapted from the 21st.dev portfolio-hero.
+
+`RON` / `LENSER` stacked in Fira Code 700 with the portrait masked into a tall
+oval sitting between the two lines. Pill nav top left, tagline in Antic, CTA,
+scroll cue.
+
+| | |
+|---|---|
+| Name colour | `--color-signal` `#ECC6AF`, sampled from Ron's skin highlight in the photo |
+| Name face | Fira Code 700, `--font-name` |
+| Tagline face | Antic, `--font-tagline` |
+| Portrait | `public/ron-portrait.jpg`, tall crop, 620x1050 |
+
+Dropped from the original: the `.dark` toggle, the third nav, the acid lime,
+the stock Unsplash headshot. Added a CTA, since the original has none and this
+page exists to book calls.
+
+### Scroll choreography
+
+Driven by `useHeroScroll`, one 0..1 value:
+
+- the two name lines slide apart horizontally, up to 16%
+- the portrait scales up through the gap, 1x to 2.6x
+- the whole block lifts 70px and fades
+- the tagline block fades faster so it clears first
+
+All of it no-ops under `prefers-reduced-motion`.
+
+## ASCII break
+
+The character grid moved out of the hero into its own full bleed band below
+it, so both survive. Same component, `src="/ron.jpg"`, 210 columns, with its
+own resolve and scroll dissolve.
