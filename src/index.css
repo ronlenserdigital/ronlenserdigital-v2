@@ -265,3 +265,8 @@
   transform: scaleX(1);
   transform-origin: left;
 }
+
+/* Anchor targets must clear the fixed top rail */
+section[id] {
+  scroll-margin-top: 5.5rem;
+}

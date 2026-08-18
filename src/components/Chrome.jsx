@@ -158,18 +158,6 @@ export function Nav() {
             Ron Lenser Digital
           </a>
 
-          <nav className="hidden items-center gap-8 lg:flex">
-            {LINKS.slice(0, 4).map(([label, href]) => (
-              <a
-                key={href}
-                href={href}
-                className="link-swap text-sm text-graphite hover:text-ink"
-              >
-                {label}
-              </a>
-            ))}
-          </nav>
-
           <div className="flex items-center gap-4">
             <a
               ref={cta}

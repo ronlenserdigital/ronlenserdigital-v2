@@ -8,6 +8,7 @@ import { Testimonials, Clients, Pricing, ContactCard, Closing } from "./componen
 import { Quote } from "./components/Quote.jsx";
 import { QuickActions } from "./components/QuickActions.jsx";
 import { DirectionSwitch } from "./components/DirectionSwitch.jsx";
+import { SectionRail } from "./components/SectionRail.jsx";
 
 export default function App() {
   const root = useRef(null);
@@ -63,6 +64,7 @@ export default function App() {
       <Preloader onDone={() => setReady(true)} />
       <CursorDisc />
       <Nav />
+      <SectionRail />
       <StatusBar />
       <QuickActions />
       <DirectionSwitch />

@@ -22,7 +22,8 @@ export function QuickActions() {
 
   return (
     <div
-      className={`fixed right-5 bottom-5 z-40 transition-all duration-500 md:right-8 md:bottom-8 ${
+      /* raised on mobile so it clears the section rail sitting bottom centre */
+      className={`fixed right-5 bottom-44 z-40 transition-all duration-500 md:right-8 md:bottom-8 ${
         show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       }`}
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}

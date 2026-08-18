@@ -150,3 +150,34 @@ Built on `ui/fluid-menu.jsx`, ported from 21st.dev. Changes on the way in:
 ```
 
 First child is always the toggle. The rest fan out below it.
+
+## Section rail (tubelight navbar)
+
+`components/SectionRail.jsx` wires `ui/tubelight-navbar.jsx` to five section
+anchors. Top centre on desktop, bottom centre on mobile as icons.
+
+Ported from 21st.dev. Changes on the way in:
+
+- `<a>` instead of `next/link`, this is Vite
+- **no framer-motion.** The lamp glide is a measured sliding indicator using a
+  CSS transition. Same effect, saves about 35 kB gzipped, which was more than
+  half the entire bundle for one animated pill.
+- scroll spy via IntersectionObserver, so the active pill follows the section
+  in view rather than only changing on click
+- `aria-current` on the active link, `sr-only` labels behind the mobile icons
+- re-measures on resize and on `document.fonts.ready` so the pill never drifts
+- indicator snaps instead of gliding under `prefers-reduced-motion`
+
+### Collisions this resolved
+
+- Removed the duplicate inline nav links from `Chrome.jsx`. The rail owns
+  section navigation now; the header keeps the logo, Book a call, and the
+  hamburger for the full menu.
+- The original mounts `bottom-0` on mobile, on top of the QuickActions dock.
+  QuickActions is now `bottom-44` on mobile to clear it.
+- Added `scroll-margin-top` on `section[id]` so anchor jumps do not land
+  under the fixed bar.
+
+Adding or removing an item means editing `ITEMS` in `SectionRail.jsx`. Five is
+about the ceiling before pills get cramped on a small phone. Deep links
+(Capabilities, Results) stay in the menu overlay.
