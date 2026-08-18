@@ -61,11 +61,13 @@ export function Quote() {
   return (
     <section
       id="quote"
-      className="border-t border-hairline px-6 py-24 md:px-10 md:py-36"
+      className="border-t border-hairline px-5 py-20 md:px-8 md:py-32"
     >
-      <div className="mx-auto grid max-w-[1600px] gap-12 md:grid-cols-12 md:gap-8">
+      <div className="grid gap-12 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-4">
-          <p className="eyebrow reveal">Start a project</p>
+          <p className="eyebrow reveal md:sticky md:top-28">
+            10 <span className="mx-1 text-accent">/</span> Start a project
+          </p>
           <h2 className="display reveal mt-6 max-w-[14ch] text-big">
             Tell me what you need.
           </h2>

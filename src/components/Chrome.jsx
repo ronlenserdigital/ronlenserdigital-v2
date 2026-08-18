@@ -55,8 +55,8 @@ export function StatusBar() {
   const open = useAvailability();
 
   return (
-    <div className="hidden border-b border-hairline px-6 py-2.5 md:block md:px-10">
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between">
+    <div className="hidden border-b border-hairline px-5 py-2.5 md:block md:px-8">
+      <div className="flex items-center justify-between">
         <span className="eyebrow">Fredericksburg, Virginia</span>
 
         <span className="eyebrow flex items-center gap-2">
@@ -150,7 +150,7 @@ export function Nav() {
           solid && !menu ? "bg-paper/80 backdrop-blur-md" : ""
         }`}
       >
-        <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
+        <div className="flex items-center justify-between px-5 py-5 md:px-8">
           <a
             href="#top"
             className={`eyebrow transition-colors ${menu ? "!text-paper" : "!text-ink"}`}
@@ -199,8 +199,8 @@ export function Nav() {
             : "pointer-events-none [clip-path:inset(0_0_100%_0)]"
         }`}
       >
-        <div className="flex h-full flex-col justify-center px-6 md:px-10">
-          <nav className="mx-auto w-full max-w-[1600px]">
+        <div className="flex h-full flex-col justify-center px-5 md:px-8">
+          <nav className="w-full">
             {LINKS.map(([label, href], i) => (
               <a
                 key={href}
@@ -226,7 +226,7 @@ export function Nav() {
             ))}
           </nav>
 
-          <div className="mx-auto mt-12 flex w-full max-w-[1600px] flex-col gap-2 text-paper/50 md:flex-row md:gap-10">
+          <div className="mt-12 flex w-full flex-col gap-2 text-paper/50 md:flex-row md:gap-10">
             <a href="tel:+15403956493" className="text-sm hover:text-paper">
               (540) 395-6493
             </a>

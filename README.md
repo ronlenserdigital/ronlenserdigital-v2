@@ -50,49 +50,38 @@ Every section reads from a plain array at the top of its file.
 - [ ] Add a headshot for the contact card.
 - [ ] Verify every number in `RESULTS` is true.
 
-## Visual directions
+## Direction: Oxblood
 
-Three complete directions live in `src/index.css`. Switch with the control
-bottom left in dev, or append `?pick` to any deployed URL.
+Locked. The other two directions were removed.
 
-| id | Palette | Display face |
-|---|---|---|
-| `volt` | black, bone, acid lime `#D6FF3E` | Syne 800 |
-| `steel` | concrete, charcoal, safety orange `#FF5C00` | Archivo 900 at 118 width |
-| `oxblood` | near black, warm bone, deep red `#9B1B1B` | Fraunces 700 |
+| Token | Value |
+|---|---|
+| `ink` | `#12100E` |
+| `ink-soft` | `#1E1B18` |
+| `paper` | `#F4F1E9` |
+| `paper-deep` | `#E6E1D5` |
+| `graphite` | `#79726A` |
+| `hairline` | `#CFC7B8` |
+| `accent` | `#9B1B1B` |
+| `accent-ink` | `#F4F1E9` |
 
-Token names stay the same across all three, so every component keeps working:
-`ink`, `ink-soft`, `paper`, `paper-deep`, `graphite`, `hairline`, `accent`,
-`accent-ink`.
+Fraunces (display, opsz 144 with WONK on) / Inter Tight (body) / Martian Mono
+(labels). All in `src/index.css` under `@theme`.
 
-Once a direction is picked: set `data-dir` on `<html>` in `index.html`, delete
-the other two blocks in `index.css`, delete `components/DirectionSwitch.jsx`
-and its mount in `App.jsx`, and trim `index.html` to just that direction's
-fonts.
+## Layout grid
+
+Every section runs through the shared `Section` shell in `Work.jsx`:
+a sticky numbered label in a narrow left column, content offset to the right.
+Page padding is `px-5 md:px-8` everywhere, no exceptions.
+
+```jsx
+<Section id="pricing" num="08" label="What it costs">...</Section>
+<Section id="results" num="06" label="The numbers" bare>...</Section>
+```
+
+`bare` drops the offset so content spans full width under the label.
 
 ### Token mapping (for pasting shadcn components)
-
-## Deploy
-
-Vercel auto-detects Vite. Build `npm run build`, output `dist`.
-
-## UI primitives
-
-`src/components/ui/` holds reusable form primitives. Ported from shadcn /
-originui, but mapped onto our own tokens with no external dependencies.
-
-| File | Exports |
-|---|---|
-| `ui/select-native.jsx` | `SelectNative` |
-| `ui/label.jsx` | `Label` |
-| `ui/field.jsx` | `Input`, `Textarea` |
-| `lib/utils.js` | `cn()` |
-
-Why `components/ui/` and not just `components/`: it separates dumb reusable
-primitives from page sections that hold copy and layout. When you need a
-button or an input in a future section you look in one folder, not through
-five section files. It is also where shadcn expects components to live, so
-anything you pull from 21st.dev drops in without changing its imports.
 
 Any shadcn component you paste in uses these variable names. Swap them:
 

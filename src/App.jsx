@@ -7,7 +7,6 @@ import { Work, Capabilities, Process, Results } from "./components/Work.jsx";
 import { Testimonials, Clients, Pricing, ContactCard, Closing } from "./components/Social.jsx";
 import { Quote } from "./components/Quote.jsx";
 import { QuickActions } from "./components/QuickActions.jsx";
-import { DirectionSwitch } from "./components/DirectionSwitch.jsx";
 import { SectionRail } from "./components/SectionRail.jsx";
 import { Footer } from "./components/ui/footer-section.jsx";
 
@@ -68,7 +67,6 @@ export default function App() {
       <SectionRail />
       <StatusBar />
       <QuickActions />
-      <DirectionSwitch />
       <main>
         <Hero ready={ready} />
         <Marquee />

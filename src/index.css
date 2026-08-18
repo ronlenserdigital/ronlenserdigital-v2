@@ -1,74 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* Defaults are overridden per direction below. Keep the names stable so
-     every component keeps working when the direction changes. */
-  --color-ink: #0a0b0d;
-  --color-ink-soft: #16181c;
-  --color-paper: #ecebe6;
-  --color-paper-deep: #dedcd4;
-  --color-graphite: #7d7d76;
-  --color-hairline: #c6c4bb;
-  --color-accent: #d6ff3e;
-  --color-accent-ink: #0a0b0d;
-
-  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Martian Mono", ui-monospace, monospace;
-
-  --text-mega: clamp(3rem, 12vw, 12rem);
-  --text-big: clamp(2.2rem, 6.5vw, 5.5rem);
-  --text-mid: clamp(1.6rem, 3.4vw, 3rem);
-
-  --display-weight: 800;
-  --display-tracking: -0.045em;
-  --display-wdth: 100;
-}
-
-/* ---------- DIRECTION 1: VOLT ---------- */
-/* Black, bone, acid lime. Syne. Loud, current, unmistakably a studio. */
-[data-dir="volt"] {
-  --color-ink: #0a0b0d;
-  --color-ink-soft: #16181c;
-  --color-paper: #ecebe6;
-  --color-paper-deep: #dedcd4;
-  --color-graphite: #7d7d76;
-  --color-hairline: #c6c4bb;
-  --color-accent: #d6ff3e;
-  --color-accent-ink: #0a0b0d;
-
-  --font-display: "Syne", sans-serif;
-  --font-sans: "Inter Tight", sans-serif;
-  --font-mono: "Martian Mono", monospace;
-
-  --display-weight: 800;
-  --display-tracking: -0.045em;
-}
-
-/* ---------- DIRECTION 2: STEEL ---------- */
-/* Concrete, charcoal, safety orange. Archivo pushed to full width. */
-[data-dir="steel"] {
-  --color-ink: #17171a;
-  --color-ink-soft: #232327;
-  --color-paper: #cfccc4;
-  --color-paper-deep: #bdb9b0;
-  --color-graphite: #6d6a64;
-  --color-hairline: #a5a199;
-  --color-accent: #ff5c00;
-  --color-accent-ink: #ffffff;
-
-  --font-display: "Archivo", sans-serif;
-  --font-sans: "Archivo", sans-serif;
-  --font-mono: "Roboto Mono", monospace;
-
-  --display-weight: 900;
-  --display-tracking: -0.03em;
-  --display-wdth: 118;
-}
-
-/* ---------- DIRECTION 3: OXBLOOD ---------- */
-/* Near black, warm bone, deep red. Fraunces. Expensive and editorial. */
-[data-dir="oxblood"] {
   --color-ink: #12100e;
   --color-ink-soft: #1e1b18;
   --color-paper: #f4f1e9;
@@ -78,13 +10,27 @@
   --color-accent: #9b1b1b;
   --color-accent-ink: #f4f1e9;
 
-  --font-display: "Fraunces", serif;
-  --font-sans: "Inter Tight", sans-serif;
-  --font-mono: "Martian Mono", monospace;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, monospace;
+
+  --text-mega: clamp(3rem, 11.5vw, 11rem);
+  --text-big: clamp(2.2rem, 6.2vw, 5.2rem);
+  --text-mid: clamp(1.6rem, 3.2vw, 2.8rem);
 
   --display-weight: 700;
   --display-tracking: -0.025em;
+  --display-wdth: 100;
+
+  --pad: 1.25rem;
 }
+
+@media (min-width: 768px) {
+  :root {
+    --pad: 2rem;
+  }
+}
+
 
 
 @layer base {
@@ -124,7 +70,7 @@
     font-weight: var(--display-weight);
     line-height: 0.9;
     letter-spacing: var(--display-tracking);
-    font-variation-settings: "wdth" var(--display-wdth, 100);
+    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
     text-wrap: balance;
   }
 

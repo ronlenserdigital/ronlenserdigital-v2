@@ -1,8 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView, useCountUp } from "../lib/motion.js";
 
+/* Shared shell: sticky numbered label in a narrow left column, content offset
+   right. Consistent with the hero and statement, so the whole page reads off
+   one grid instead of a stack of full width blocks. */
+export function Section({ id, num, label, children, className = "", bare }) {
+  return (
+    <section
+      id={id}
+      className={`border-t border-hairline px-5 py-20 md:px-8 md:py-32 ${className}`}
+    >
+      <div className="grid gap-10 md:grid-cols-12 md:gap-8">
+        <div className="md:col-span-3">
+          <p className="eyebrow md:sticky md:top-28">
+            {num} <span className="mx-1 text-accent">/</span> {label}
+          </p>
+        </div>
+        <div className={bare ? "md:col-span-12" : "md:col-span-8 md:col-start-5"}>
+          {children}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ------------------------------------------------------------------ */
-/* Work — filterable pinned horizontal filmstrip                       */
+/* Work — pinned horizontal filmstrip                                  */
 /* ------------------------------------------------------------------ */
 const PROJECTS = [
   { n: "01", name: "Abbots Lane", tags: ["Website"], year: "2026" },
@@ -29,7 +52,6 @@ function useHorizontalScroll(ref) {
         setP(total <= 0 ? 0 : Math.min(1, Math.max(0, -r.top / total)));
       });
     };
-
     handler();
     window.addEventListener("scroll", handler, { passive: true });
     window.addEventListener("resize", handler);
@@ -50,65 +72,73 @@ export function Work() {
 
   const shown =
     filter === "All" ? PROJECTS : PROJECTS.filter((x) => x.tags.includes(filter));
-
-  const shift = p * Math.max(0, (shown.length - 1.6) * 30);
+  const shift = p * Math.max(0, (shown.length - 1.5) * 30);
   const active = Math.min(shown.length, Math.floor(p * shown.length) + 1);
 
   return (
-    <section id="work" ref={track} className="relative h-[360vh] bg-ink">
+    <section id="work" ref={track} className="relative h-[360vh] bg-ink text-paper">
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
-        <div className="flex flex-wrap items-center justify-between gap-4 px-6 pb-8 md:px-10">
-          <div className="flex flex-wrap gap-2">
-            {FILTERS.map((f) => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`eyebrow rounded-full border px-4 py-2 transition-colors ${
-                  filter === f
-                    ? "border-accent bg-accent !text-paper"
-                    : "border-paper/20 !text-paper/50 hover:border-paper/50"
-                }`}
-              >
-                {f}
-              </button>
-            ))}
+        <div className="flex flex-wrap items-end justify-between gap-4 px-5 pb-8 md:px-8">
+          <div>
+            <p className="eyebrow !text-paper/45">
+              03 <span className="mx-1 text-accent">/</span> Selected work
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {FILTERS.map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setFilter(f)}
+                  className={`rounded-full border px-4 py-1.5 font-mono text-[0.625rem] tracking-[0.14em] uppercase transition-colors ${
+                    filter === f
+                      ? "border-accent bg-accent text-accent-ink"
+                      : "border-paper/20 text-paper/50 hover:border-paper/50"
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <p className="eyebrow !text-paper/50 tabular-nums">
+          <p className="font-mono text-[0.625rem] tracking-[0.14em] text-paper/45 tabular-nums uppercase">
             {String(active).padStart(2, "0")} / {String(shown.length).padStart(2, "0")}
           </p>
         </div>
 
         <div
-          className="flex gap-6 px-6 transition-transform duration-500 ease-out will-change-transform md:gap-10 md:px-10"
+          className="flex items-end gap-6 px-5 transition-transform duration-500 ease-out will-change-transform md:gap-10 md:px-8"
           style={{ transform: `translate3d(-${shift}%, 0, 0)` }}
         >
-          {shown.map((proj) => (
+          {shown.map((proj, i) => (
             <article
               key={proj.n}
               data-cursor="VIEW"
-              className="group w-[78vw] shrink-0 md:w-[42vw]"
+              className="group w-[80vw] shrink-0 md:w-[40vw]"
+              /* alternating heights so the strip is not a row of equal boxes */
+              style={{ marginBottom: i % 2 ? "3.5rem" : 0 }}
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-ink-soft">
-                {/* Swap for <img src="..."> or <video autoPlay muted loop playsInline> */}
-                <div className="absolute inset-0 grid place-items-center">
-                  <span className="eyebrow !text-paper/20">{proj.name}</span>
-                </div>
-                <div className="absolute inset-0 scale-110 bg-accent opacity-0 transition-opacity duration-500 group-hover:opacity-20" />
+                {/* Swap for <img> or <video autoPlay muted loop playsInline> */}
+                <span className="absolute top-4 left-4 font-mono text-[0.625rem] tracking-[0.14em] text-paper/30">
+                  {proj.n}
+                </span>
+                <div className="absolute inset-0 bg-accent opacity-0 transition-opacity duration-500 group-hover:opacity-25" />
               </div>
 
               <div className="mt-5 flex items-baseline justify-between border-t border-paper/15 pt-4">
                 <div>
-                  <h3 className="font-display text-2xl text-paper">{proj.name}</h3>
+                  <h3 className="display text-2xl">{proj.name}</h3>
                   <p className="mt-1 text-sm text-paper/45">{proj.tags.join(" / ")}</p>
                 </div>
-                <span className="eyebrow !text-paper/45">{proj.year}</span>
+                <span className="font-mono text-[0.625rem] tracking-[0.14em] text-paper/45">
+                  {proj.year}
+                </span>
               </div>
             </article>
           ))}
         </div>
 
-        <div className="mt-10 px-6 md:px-10">
+        <div className="mt-10 px-5 md:px-8">
           <div className="h-px w-full bg-paper/15">
             <div className="h-px bg-accent" style={{ width: `${Math.max(4, p * 100)}%` }} />
           </div>
@@ -119,50 +149,43 @@ export function Work() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Capabilities — dense columns                                        */
+/* Capabilities — staggered columns, not an even four up               */
 /* ------------------------------------------------------------------ */
 const CAPS = [
-  [
-    "Websites",
-    ["Custom marketing sites", "Landing pages", "Multi location pages", "Booking and quote flows", "Rebuilds and rescues", "Speed and Core Web Vitals"],
-  ],
-  [
-    "Found on Google",
-    ["Local SEO setup", "Google Business Profile", "Service area pages", "Schema markup", "Review generation", "Rank tracking"],
-  ],
-  [
-    "Answering",
-    ["AI chatbot on site", "AI phone receptionist", "Missed call text back", "Lead routing to your phone", "After hours coverage", "Booking handoff"],
-  ],
-  [
-    "Brand",
-    ["Logo and marks", "Type and color systems", "Vehicle and signage art", "Print and business cards", "Photo direction", "Social templates"],
-  ],
+  ["Websites", ["Custom marketing sites", "Landing pages", "Multi location pages", "Booking and quote flows", "Rebuilds and rescues", "Speed and Core Web Vitals"]],
+  ["Found on Google", ["Local SEO setup", "Google Business Profile", "Service area pages", "Schema markup", "Review generation", "Rank tracking"]],
+  ["Answering", ["AI chatbot on site", "AI phone receptionist", "Missed call text back", "Lead routing to your phone", "After hours coverage", "Booking handoff"]],
+  ["Brand", ["Logo and marks", "Type and color systems", "Vehicle and signage art", "Print and business cards", "Photo direction", "Social templates"]],
 ];
 
 export function Capabilities() {
   return (
-    <section id="capabilities" className="border-t border-hairline px-6 py-24 md:px-10 md:py-36">
-      <div className="mx-auto max-w-[1600px]">
-        <p className="eyebrow reveal">What I do</p>
+    <Section id="capabilities" num="04" label="What I do">
+      <h2 className="display reveal max-w-[16ch] text-big">
+        Four things, done properly.
+      </h2>
 
-        <div className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-4">
-          {CAPS.map(([title, items]) => (
-            <div key={title} className="reveal">
-              <h3 className="font-display text-xl">{title}</h3>
-              <div className="rule mt-4 mb-4" />
-              <ul className="space-y-2.5">
-                {items.map((it) => (
-                  <li key={it} className="text-[0.95rem] leading-snug text-graphite">
-                    {it}
-                  </li>
-                ))}
-              </ul>
+      <div className="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2">
+        {CAPS.map(([title, items], i) => (
+          <div key={title} className="reveal" style={{ marginTop: i % 2 ? "2.5rem" : 0 }}>
+            <div className="flex items-baseline gap-3">
+              <span className="font-mono text-[0.625rem] tracking-[0.14em] text-accent">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="display text-xl">{title}</h3>
             </div>
-          ))}
-        </div>
+            <div className="rule mt-4 mb-4" />
+            <ul className="space-y-2.5">
+              {items.map((it) => (
+                <li key={it} className="text-[0.95rem] leading-snug text-graphite">
+                  {it}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }
 
@@ -178,29 +201,30 @@ const STEPS = [
 
 export function Process() {
   return (
-    <section id="process" className="border-t border-hairline px-6 py-24 md:px-10 md:py-36">
-      <div className="mx-auto max-w-[1600px]">
-        <p className="eyebrow reveal">How a build runs</p>
-        <div className="rule mt-6" />
-
+    <Section id="process" num="05" label="How a build runs" bare>
+      <div className="border-t border-hairline">
         {STEPS.map(([n, title, body, dur]) => (
           <div
             key={n}
-            className="reveal grid grid-cols-12 items-baseline gap-4 border-b border-hairline py-8 transition-colors hover:bg-paper-deep md:gap-8 md:py-10"
+            className="reveal group grid grid-cols-12 items-baseline gap-4 border-b border-hairline py-8 transition-colors hover:bg-paper-deep md:gap-8 md:py-12"
           >
-            <span className="eyebrow col-span-2 md:col-span-1">{n}</span>
+            <span className="col-span-2 font-mono text-[0.625rem] tracking-[0.14em] text-accent md:col-span-1">
+              {n}
+            </span>
             <h3 className="display col-span-10 text-mid md:col-span-3">{title}</h3>
-            <p className="col-span-12 text-graphite md:col-span-6 md:text-lg">{body}</p>
+            <p className="col-span-12 leading-snug text-graphite md:col-span-6 md:text-lg">
+              {body}
+            </p>
             <span className="eyebrow col-span-12 md:col-span-2 md:text-right">{dur}</span>
           </div>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* Results — count-up grid                                             */
+/* Results — count-up, uneven grid                                     */
 /* ------------------------------------------------------------------ */
 const RESULTS = [
   { v: 7, suffix: "", pre: "", label: "Days from signed quote to live site, typical." },
@@ -208,19 +232,23 @@ const RESULTS = [
   { v: 0, suffix: "", pre: "$", label: "Monthly platform fee. You own the site outright." },
   { v: 98, suffix: "+", pre: "", label: "PageSpeed score on the last four builds." },
   { v: 24, suffix: "h", pre: "", label: "Longest you wait on a reply during a build." },
-  { v: 1, suffix: "", pre: "", label: "Person you talk to. Same person who writes it." },
+  { v: 1, suffix: "", pre: "", label: "Person you talk to. Same one who writes it." },
 ];
 
-function ResultTile({ item }) {
+function ResultTile({ item, i }) {
   const [ref, seen] = useInView();
   const n = useCountUp(item.v, seen);
 
   return (
-    <div ref={ref} className="border-t border-hairline pt-6">
+    <div
+      ref={ref}
+      className="border-t border-hairline pt-6"
+      style={{ marginTop: i % 3 === 1 ? "2rem" : 0 }}
+    >
       <span className="display block text-big tabular-nums">
         {item.pre}
         {Math.round(n)}
-        {item.suffix}
+        <span className="text-accent">{item.suffix}</span>
       </span>
       <p className="mt-3 max-w-[24ch] text-sm leading-snug text-graphite">{item.label}</p>
     </div>
@@ -229,19 +257,15 @@ function ResultTile({ item }) {
 
 export function Results() {
   return (
-    <section id="results" className="border-t border-hairline px-6 py-24 md:px-10 md:py-36">
-      <div className="mx-auto max-w-[1600px]">
-        <p className="eyebrow reveal">The numbers</p>
-        <h2 className="display reveal mt-6 max-w-[18ch] text-big">
-          What you actually get for the money.
-        </h2>
-
-        <div className="mt-16 grid gap-x-8 gap-y-12 md:grid-cols-3">
-          {RESULTS.map((r) => (
-            <ResultTile key={r.label} item={r} />
-          ))}
-        </div>
+    <Section id="results" num="06" label="The numbers" bare>
+      <h2 className="display reveal max-w-[16ch] text-big">
+        What you actually get for the money.
+      </h2>
+      <div className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {RESULTS.map((r, i) => (
+          <ResultTile key={r.label} item={r} i={i} />
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

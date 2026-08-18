@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useMagnetic } from "../lib/motion.js";
+import { Section } from "./Work.jsx";
 
 /* ------------------------------------------------------------------ */
 /* Testimonials — carousel with counter                                */
@@ -29,18 +30,16 @@ export function Testimonials() {
   const go = (d) => setI((v) => (v + d + QUOTES.length) % QUOTES.length);
 
   return (
-    <section className="border-t border-hairline px-6 py-24 md:px-10 md:py-36">
-      <div className="mx-auto max-w-[1600px]">
-        <div className="flex items-baseline justify-between">
-          <p className="eyebrow">What clients say</p>
-          <p className="eyebrow tabular-nums">
-            {String(i + 1).padStart(2, "0")} / {String(QUOTES.length).padStart(2, "0")}
-          </p>
-        </div>
+    <Section num="07" label="What clients say">
+      <div className="flex justify-end">
+        <p className="eyebrow tabular-nums">
+          {String(i + 1).padStart(2, "0")} / {String(QUOTES.length).padStart(2, "0")}
+        </p>
+      </div>
 
-        <div className="rule mt-6 mb-10" />
+      <div className="rule mt-4 mb-10" />
 
-        <blockquote key={i} className="reveal is-in">
+      <blockquote key={i} className="reveal is-in">
           <p className="display max-w-[22ch] text-big">{q.body}</p>
           <footer className="mt-10 flex items-end justify-between">
             <div>
@@ -65,9 +64,8 @@ export function Testimonials() {
               </button>
             </div>
           </footer>
-        </blockquote>
-      </div>
-    </section>
+      </blockquote>
+    </Section>
   );
 }
 
@@ -86,13 +84,13 @@ const CLIENTS = [
 export function Clients() {
   const strip = [...CLIENTS, ...CLIENTS, ...CLIENTS];
   return (
-    <section className="overflow-hidden border-t border-hairline py-14">
-      <p className="eyebrow mb-8 px-6 md:px-10">Recent clients</p>
+    <section className="overflow-hidden border-t border-hairline bg-ink py-14 text-paper">
+      <p className="eyebrow mb-8 px-5 !text-paper/45 md:px-8">Recent clients</p>
       <div className="marquee-track">
         {strip.map((c, i) => (
           <span
             key={i}
-            className="flex shrink-0 items-center gap-14 pr-14 font-display text-2xl whitespace-nowrap text-graphite"
+            className="flex shrink-0 items-center gap-14 pr-14 font-display text-3xl whitespace-nowrap text-paper/35"
           >
             {c}
           </span>
@@ -129,11 +127,10 @@ const OFFERS = [
 
 export function Pricing() {
   return (
-    <section id="pricing" className="border-t border-hairline px-6 py-24 md:px-10 md:py-36">
-      <div className="mx-auto max-w-[1600px]">
-        <p className="eyebrow reveal">What it costs</p>
+    <Section id="pricing" num="08" label="What it costs" bare>
+      <h2 className="display reveal max-w-[14ch] text-big">One price. Written down.</h2>
 
-        <div className="mt-12 grid gap-px bg-hairline md:grid-cols-3">
+      <div className="mt-14 grid gap-px bg-hairline md:grid-cols-3">
           {OFFERS.map((o) => (
             <div
               key={o.name}
@@ -159,9 +156,8 @@ export function Pricing() {
               </div>
             </div>
           ))}
-        </div>
       </div>
-    </section>
+    </Section>
   );
 }
 
@@ -170,8 +166,8 @@ export function Pricing() {
 /* ------------------------------------------------------------------ */
 export function ContactCard() {
   return (
-    <section className="border-t border-hairline px-6 py-24 md:px-10 md:py-36">
-      <div className="mx-auto grid max-w-[1600px] items-center gap-10 md:grid-cols-12">
+    <section className="border-t border-hairline px-5 py-20 md:px-8 md:py-32">
+      <div className="grid items-center gap-10 md:grid-cols-12">
         <div className="md:col-span-3">
           {/* Drop a real headshot at /public/ron.jpg */}
           <div className="aspect-[4/5] w-full max-w-[260px] bg-paper-deep">
@@ -184,7 +180,7 @@ export function ContactCard() {
         </div>
 
         <div className="md:col-span-8 md:col-start-5">
-          <p className="eyebrow reveal">Want to talk about a project?</p>
+          <p className="eyebrow reveal">09 <span className="mx-1 text-accent">/</span> Want to talk?</p>
           <h2 className="display reveal mt-6 text-mid">
             Call me and tell me what your business does. If a custom site is not
             the right move for you, I will say so on that call.
@@ -208,8 +204,8 @@ export function Closing() {
   const cta = useMagnetic(0.22);
 
   return (
-    <section id="contact" className="bg-ink px-6 py-24 text-paper md:px-10 md:py-36">
-      <div className="mx-auto max-w-[1600px]">
+    <section id="contact" className="bg-ink px-5 py-24 text-paper md:px-8 md:py-36">
+      <div>
         <h2 className="display reveal text-mega">
           Let's build
           <br />
