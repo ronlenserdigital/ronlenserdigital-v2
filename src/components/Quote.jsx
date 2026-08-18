@@ -10,13 +10,13 @@ const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY ?? "";
 /* What Ron Lenser Digital actually sells. Keep this list honest. */
 const SERVICES = [
   { value: "", label: "Pick one", disabled: true },
-  { value: "website", label: "Custom website — $1,000 one time" },
-  { value: "logo", label: "Logo and brand marks — $150" },
+  { value: "website", label: "Website — $1,000 one time" },
+  { value: "app", label: "App, portal or internal tool — quoted" },
+  { value: "automation", label: "Automation or integration — quoted" },
+  { value: "ai-answering", label: "AI chat or phone answering — from $49/mo" },
   { value: "seo", label: "Local SEO and Google Business Profile" },
-  { value: "chatbot", label: "AI chatbot — $49 per month" },
-  { value: "receptionist", label: "AI receptionist — $99 per month" },
-  { value: "ads", label: "Social and paid ads" },
-  { value: "rescue", label: "Fix or rebuild the site I already have" },
+  { value: "logo", label: "Logo and brand marks — $150" },
+  { value: "rescue", label: "Fix or rebuild something I already have" },
   { value: "unsure", label: "Not sure yet, I want advice" },
 ];
 
@@ -151,7 +151,7 @@ export function Quote() {
             <Textarea
               id={`${uid}-details`}
               name="details"
-              placeholder="What does the business do, and what is wrong with the site you have now?"
+              placeholder="What does the business do, and what is the thing that is slowing it down?"
             />
           </div>
 

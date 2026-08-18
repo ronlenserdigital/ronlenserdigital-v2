@@ -1,7 +1,18 @@
 # ronlenserdigital.com v2
 
+## Positioning
+
+Ron builds with AI: Vercel, Supabase, Claude, Claude Code, Grok. He does not
+hand code and the site must never claim he does. He is not a website shop, he
+builds whatever the problem needs: sites, apps, portals, internal tools,
+automations, AI answering.
+
+The pitch is speed and scope, not craft. One person with an AI stack shipping
+in days what a ten person shop quotes in months. Do not reintroduce "written
+by hand", "no page builders", or "line by line" copy.
+
 React 18 + Vite 6 + Tailwind v4 + Lenis. Zero animation libraries, all motion
-is hand written in `src/lib/motion.js`.
+lives in `src/lib/motion.js`.
 
 ## Run
 

@@ -64,14 +64,14 @@ export function Hero() {
       <div className="relative z-20 mt-auto px-5 pb-14 md:px-8 md:pb-16">
         <BlurText
           as="h1"
-          text="Custom websites, local SEO, and AI that answers."
+          text="Websites, apps, automations. Whatever the problem needs."
           animateBy="words"
           delay={40}
           className="display max-w-[18ch] text-mid leading-[1.05] md:text-big"
         />
         <BlurText
           as="p"
-          text="One person. Every line written by hand. Fredericksburg, Virginia."
+          text="One person with an AI stack, shipping in days what agencies quote in months. Fredericksburg, Virginia."
           animateBy="words"
           delay={18}
           className="mt-5 max-w-[42ch] text-graphite md:text-lg"
@@ -91,11 +91,12 @@ export function Hero() {
 /* Claims marquee                                                      */
 /* ------------------------------------------------------------------ */
 const CLAIMS = [
-  "No templates",
-  "No page builders",
-  "No monthly lock in",
+  "Built with AI",
+  "Shipped in days",
   "You own the code",
-  "Built in Virginia",
+  "No monthly lock in",
+  "Websites, apps, automations",
+  "Fredericksburg VA",
 ];
 
 export function Marquee() {
@@ -133,15 +134,15 @@ export function Statement() {
         <div className="md:col-span-8 md:col-start-5">
           <h2 className="display text-mega">
             <span className="line-mask block">
-              <span className="line-inner block">Everyone uses</span>
+              <span className="line-inner block">A shop of ten</span>
             </span>
             <span className="line-mask block">
               <span className="line-inner block">
-                the <span className="stroke-type">same</span> template.
+                quotes <span className="stroke-type">months.</span>
               </span>
             </span>
             <span className="line-mask block">
-              <span className="line-inner block text-accent">You won't.</span>
+              <span className="line-inner block text-accent">I quote days.</span>
             </span>
           </h2>
 
@@ -150,13 +151,14 @@ export function Statement() {
           <div className="grid gap-8 md:grid-cols-2">
             <BlurText
               as="p"
-              text="A template costs the person selling it nothing, and it shows. Your competitor down the road bought the same one."
+              text="I build with AI. Claude, Claude Code, Grok, Vercel, Supabase. That is not a shortcut, it is the reason one person can do the work of a room."
               animateBy="words"
               delay={20}
               className="text-lg leading-snug text-graphite"
             />
             <p className="reveal text-lg leading-snug">
-              Custom is the only thing they cannot copy off a shelf.{" "}
+              You are not paying for hours. You are paying for the thing to
+              exist and work.{" "}
               <span className="text-accent">That is the entire argument.</span>
             </p>
           </div>

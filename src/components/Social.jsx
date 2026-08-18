@@ -105,30 +105,30 @@ export function Clients() {
 /* ------------------------------------------------------------------ */
 const OFFERS = [
   {
-    name: "Custom website",
+    name: "Website",
     price: "$1,000",
     unit: "one time",
-    body: "Everything written by hand and built around your business. Live in about a week. You own the code outright.",
+    body: "Built around your business, not a theme. Live in about a week. Repo, domain and accounts are yours at hand off.",
     accent: true,
   },
   {
-    name: "AI chatbot",
-    price: "$49",
-    unit: "per month",
-    body: "Answers questions on your site and captures the lead while you are on a job.",
+    name: "Custom build",
+    price: "Quoted",
+    unit: "per project",
+    body: "Apps, portals, dashboards, internal tools, automations. Tell me the problem and I will price the fix, fixed, in writing.",
   },
   {
-    name: "AI receptionist",
-    price: "$99",
+    name: "AI answering",
+    price: "$49",
     unit: "per month",
-    body: "Picks up the calls you miss, books the work, and texts you the details.",
+    body: "Chat on your site from $49. Phone answering that books the job from $99. Both catch what you miss.",
   },
 ];
 
 export function Pricing() {
   return (
     <Section id="pricing" num="08" label="What it costs" bare>
-      <h2 className="display reveal max-w-[14ch] text-big">One price. Written down.</h2>
+      <h2 className="display reveal max-w-[16ch] text-big">One price. Written down. Before I start.</h2>
 
       <div className="mt-14 grid gap-px bg-hairline md:grid-cols-3">
           {OFFERS.map((o) => (
@@ -176,14 +176,14 @@ export function ContactCard() {
             </div>
           </div>
           <p className="mt-4 font-medium">Ron Lenser</p>
-          <p className="text-sm text-graphite">Founder. The one who writes it.</p>
+          <p className="text-sm text-graphite">Founder. The one who builds it.</p>
         </div>
 
         <div className="md:col-span-8 md:col-start-5">
           <p className="eyebrow reveal">09 <span className="mx-1 text-accent">/</span> Want to talk?</p>
           <h2 className="display reveal mt-6 text-mid">
-            Call me and tell me what your business does. If a custom site is not
-            the right move for you, I will say so on that call.
+            Call me and tell me what is actually slowing the business down. If
+            software is not the answer, I will say so on that call.
           </h2>
         </div>
       </div>

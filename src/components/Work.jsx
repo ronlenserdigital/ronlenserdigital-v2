@@ -28,14 +28,14 @@ export function Section({ id, num, label, children, className = "", bare }) {
 /* Work — pinned horizontal filmstrip                                  */
 /* ------------------------------------------------------------------ */
 const PROJECTS = [
-  { n: "01", name: "Abbots Lane", tags: ["Website"], year: "2026" },
-  { n: "02", name: "Casablanca House", tags: ["Website", "SEO"], year: "2026" },
-  { n: "03", name: "Riverbend Co.", tags: ["Brand", "Website"], year: "2025" },
-  { n: "04", name: "Northside Trades", tags: ["Website", "AI"], year: "2025" },
-  { n: "05", name: "Falmouth Auto", tags: ["Website", "SEO"], year: "2025" },
+  { n: "01", name: "Project one", tags: ["Site"], year: "2026" },
+  { n: "02", name: "Project two", tags: ["App"], year: "2026" },
+  { n: "03", name: "Project three", tags: ["Site", "Brand"], year: "2025" },
+  { n: "04", name: "Project four", tags: ["Automation"], year: "2025" },
+  { n: "05", name: "Project five", tags: ["App", "Automation"], year: "2025" },
 ];
 
-const FILTERS = ["All", "Website", "Brand", "SEO", "AI"];
+const FILTERS = ["All", "Site", "App", "Automation", "Brand"];
 
 function useHorizontalScroll(ref) {
   const [p, setP] = useState(0);
@@ -161,8 +161,8 @@ const CAPS = [
 export function Capabilities() {
   return (
     <Section id="capabilities" num="04" label="What I do">
-      <h2 className="display reveal max-w-[16ch] text-big">
-        Four things, done properly.
+      <h2 className="display reveal max-w-[18ch] text-big">
+        Not a website guy. A build guy.
       </h2>
 
       <div className="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2">
@@ -193,10 +193,10 @@ export function Capabilities() {
 /* Process                                                             */
 /* ------------------------------------------------------------------ */
 const STEPS = [
-  ["01", "Call", "Fifteen minutes. I learn the business and what the site has to do.", "1 day"],
+  ["01", "Call", "Fifteen minutes. Tell me the problem, not the solution you think you need.", "1 day"],
   ["02", "Quote", "Fixed price, fixed date, in writing. No hourly, no surprises.", "1 day"],
-  ["03", "Build", "Written by hand. You see it live on a preview link every day.", "5 to 7 days"],
-  ["04", "Launch", "Domain, forms, Google. You get the code and the keys.", "1 day"],
+  ["03", "Build", "You get a live preview link on day one and watch it fill in.", "3 to 10 days"],
+  ["04", "Hand off", "Deployed, connected, documented. The repo and the accounts are yours.", "1 day"],
 ];
 
 export function Process() {
@@ -227,12 +227,12 @@ export function Process() {
 /* Results — count-up, uneven grid                                     */
 /* ------------------------------------------------------------------ */
 const RESULTS = [
-  { v: 7, suffix: "", pre: "", label: "Days from signed quote to live site, typical." },
-  { v: 100, suffix: "%", pre: "", label: "Hand written code. Zero page builders, zero themes." },
-  { v: 0, suffix: "", pre: "$", label: "Monthly platform fee. You own the site outright." },
-  { v: 98, suffix: "+", pre: "", label: "PageSpeed score on the last four builds." },
+  { v: 7, suffix: "", pre: "", label: "Days from signed quote to shipped, typical." },
+  { v: 1, suffix: "", pre: "", label: "Person you talk to. Same one who builds it." },
+  { v: 0, suffix: "", pre: "$", label: "Monthly platform fee. No lock in, no rented software." },
   { v: 24, suffix: "h", pre: "", label: "Longest you wait on a reply during a build." },
-  { v: 1, suffix: "", pre: "", label: "Person you talk to. Same one who writes it." },
+  { v: 100, suffix: "%", pre: "", label: "Yours at hand off. Repo, accounts, domain, all of it." },
+  { v: 0, suffix: "", pre: "", label: "Meetings you sit through that could have been a text." },
 ];
 
 function ResultTile({ item, i }) {
@@ -258,7 +258,7 @@ function ResultTile({ item, i }) {
 export function Results() {
   return (
     <Section id="results" num="06" label="The numbers" bare>
-      <h2 className="display reveal max-w-[16ch] text-big">
+      <h2 className="display reveal max-w-[18ch] text-big">
         What you actually get for the money.
       </h2>
       <div className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">

@@ -99,7 +99,7 @@ export function Footer() {
           <div className="relative">
             <span className="pointer-events-none absolute -top-8 -right-6 h-28 w-28 rounded-full bg-accent/15 blur-3xl" />
 
-            <h2 className="display text-mid">Still on the tools.</h2>
+            <h2 className="display text-mid">Still building.</h2>
 
             <p className="mt-4 flex items-center gap-2 font-mono text-[0.6875rem] tracking-[0.16em] text-graphite uppercase">
               <span
@@ -194,7 +194,7 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Ron Lenser Digital
           </p>
           <p className="font-mono text-[0.6875rem] tracking-[0.16em] text-graphite uppercase">
-            Written by hand in Fredericksburg
+            Built with AI in Fredericksburg
           </p>
         </div>
       </div>
