@@ -47,23 +47,27 @@ export function Hero() {
       {/* Drop a headshot at public/ron.jpg and it renders through the grid.
           Until then the procedural figure stands in. Any video works too:
           src="/reel.mp4" */}
-      <AsciiCanvas src="/ron.jpg" className="absolute inset-0 h-full w-full" cols={150} />
+      <AsciiCanvas
+        src="/ron.jpg"
+        cols={150}
+        className="absolute inset-x-0 top-0 h-[74vh] w-full md:h-[78vh]"
+      />
 
       {/* legibility scrim under the headline */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-2/5"
-        style={{ background: "linear-gradient(to top, #000 12%, transparent 100%)" }}
+        style={{ background: "linear-gradient(to top, #000 34%, transparent 100%)" }}
       />
 
       {/* headline, bottom left */}
-      <div className="relative z-20 mt-auto px-5 pb-16 md:px-8 md:pb-20">
+      <div className="relative z-20 mt-auto px-5 pb-14 md:px-8 md:pb-16">
         <BlurText
           as="h1"
           text="Custom websites, local SEO, and AI that answers."
           animateBy="words"
           delay={40}
-          className="display max-w-[16ch] text-big leading-[1.02]"
+          className="display max-w-[18ch] text-mid leading-[1.05] md:text-big"
         />
         <BlurText
           as="p"

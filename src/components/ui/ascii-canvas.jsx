@@ -216,7 +216,7 @@ export function AsciiCanvas({
         for (let x = 0; x < cols; x++) {
           const i = (y * cols + x) * 4;
           const lum = (px[i] * 0.299 + px[i + 1] * 0.587 + px[i + 2] * 0.114) / 255;
-          if (lum < 0.04) continue;
+          if (lum < 0.025) continue;
 
           const ch = RAMP[Math.min(RAMP.length - 1, Math.floor(lum * RAMP.length))];
           if (ch === " ") continue;
@@ -226,13 +226,13 @@ export function AsciiCanvas({
           const bow = dx * dx * curve * cell * rows * 0.06;
 
           // mostly neutral, a touch of accent in the hot spots
-          const a = Math.min(1, lum * 1.15);
+          const a = Math.min(1, 0.32 + lum * 0.95);
           ctx.fillStyle =
-            lum > 0.82
+            lum > 0.78
               ? `rgba(255,255,255,${a})`
-              : lum > 0.55
-                ? `rgba(252,187,0,${a * 0.5})`
-                : `rgba(210,210,210,${a * 0.5})`;
+              : lum > 0.5
+                ? `rgba(252,187,0,${a * 0.8})`
+                : `rgba(200,200,200,${a * 0.72})`;
 
           ctx.fillText(ch, x * cell, y * cell * 1.05 + bow);
         }
@@ -288,7 +288,7 @@ export function AsciiCanvas({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 85% 78% at 58% 45%, transparent 52%, #000 100%)",
+            "radial-gradient(ellipse 95% 95% at 50% 42%, transparent 68%, #000 100%)",
         }}
       />
     </div>
