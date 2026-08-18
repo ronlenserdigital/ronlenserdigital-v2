@@ -54,34 +54,42 @@ Every section reads from a plain array at the top of its file.
 
 Matched to the live ronlenserdigital.com.
 
-| Token | Value | Was |
+| Token | Value | Use |
 |---|---|---|
-| `ink` | `#000000` | background |
-| `ink-soft` | `#0A0A0A` | raised surfaces |
-| `paper` | `#FFFFFF` | text and inverted surfaces |
-| `paper-deep` | `#F5F5F7` | light section, used sparingly |
-| `graphite` | `#A1A1A1` | secondary text |
-| `hairline` | `#262626` | rules and borders |
-| `accent` | `#FFFFFF` | the live site runs no chromatic accent |
+| `ink` | `#000000` | page background |
+| `ink-soft` | `#0E0E0E` | cards, form fields, plates |
+| `paper` | `#FFFFFF` | text |
+| `paper-deep` | `#F5F5F7` | |
+| `graphite` | `#A1A1A1` | muted text |
+| `hairline` | `#262626` | borders |
+| `accent` | `#3080FF` | |
 
-Outfit (display) / Geist (body) / Geist Mono (labels). Same three faces the
-live site uses. The page ground is black; `body` is `bg-ink text-paper`.
+Outfit (display and hero name), Geist (body), Geist Mono (labels).
 
-There is no colour accent on purpose. Emphasis comes from weight and from
-grey, not from a second hue.
+The page is dark by default: `body` is `ink`, text is `paper`. Anything that
+needs to sit above the page uses `ink-soft`, never `paper`. Watch for
+`text-ink` on a dark surface, that is invisible text.
+
+Accent is one line in `src/index.css`. The live site also carries an amber
+`#FCBB00` if blue turns out to be wrong.
+
+### Chrome
+
+- Header carries the wordmark only.
+- The circular dock at top right is the menu: call, text, email, quote.
+- The tubelight rail handles section navigation.
+- No hamburger, no full screen overlay. One control per job.
 
 ### Token mapping (for pasting shadcn components)
 
-Any shadcn component you paste in uses these variable names. Swap them:
-
 | shadcn | ours |
 |---|---|
-| `bg-background` | `bg-paper` |
-| `text-foreground` | `text-ink` |
+| `bg-background` | `bg-ink` |
+| `text-foreground` | `text-paper` |
 | `border-input` | `border-hairline` |
 | `text-muted-foreground` | `text-graphite` |
 | `ring-ring` | `ring-accent` |
-| `bg-accent` | `bg-paper-deep` |
+| `bg-accent` | `bg-ink-soft` |
 
 ## Quote form
 
