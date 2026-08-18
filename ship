@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Commit and push everything. Usage: ./ship "message"
+set -e
+cd "$(dirname "$0")"
+[ -z "$(git status --porcelain)" ] && echo "Nothing to ship." && exit 0
+npm run build >/dev/null 2>&1 || { echo "BUILD FAILED. Not pushing."; exit 1; }
+git add -A
+git commit -q -m "${1:-Update}"
+git push -q origin main
+echo "Shipped: $(git log --oneline -1)"
