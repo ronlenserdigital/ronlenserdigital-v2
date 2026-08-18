@@ -166,10 +166,29 @@ export function AsciiCanvas({
       bctx.putImageData(img, 0, 0);
     };
 
+    /* Cover fit. Stretching a portrait to the grid squashes the face,
+       and the grid is almost never the same aspect as the source. */
     const paintMedia = () => {
-      const ready = media.videoWidth || media.naturalWidth;
-      if (!ready) return false;
-      bctx.drawImage(media, 0, 0, cols, rows);
+      const mw = media.videoWidth || media.naturalWidth;
+      const mh = media.videoHeight || media.naturalHeight;
+      if (!mw || !mh) return false;
+
+      // the grid draws cells at 1.05x height, so correct for that here
+      const gridAspect = cols / (rows * 1.05);
+      const mediaAspect = mw / mh;
+
+      let sx = 0, sy = 0, sw = mw, sh = mh;
+      if (mediaAspect > gridAspect) {
+        sw = mh * gridAspect;
+        sx = (mw - sw) / 2;
+      } else {
+        sh = mw / gridAspect;
+        sy = (mh - sh) / 2;
+      }
+
+      bctx.fillStyle = "#000";
+      bctx.fillRect(0, 0, cols, rows);
+      bctx.drawImage(media, sx, sy, sw, sh, 0, 0, cols, rows);
       return true;
     };
 
@@ -269,7 +288,7 @@ export function AsciiCanvas({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 72% 62% at 50% 50%, transparent 40%, #000 100%)",
+            "radial-gradient(ellipse 85% 78% at 58% 45%, transparent 52%, #000 100%)",
         }}
       />
     </div>
