@@ -275,3 +275,38 @@ component was not taken, because it would have:
 Two bugs fixed on the way in: the original's cleanup reads `ref.current`
 inside a stale closure and can skip unobserve, and it animates regardless of
 `prefers-reduced-motion`.
+
+
+## Hero
+
+Name led, adapted from the 21st.dev portfolio-hero.
+
+`RON` / `LENSER` stacked in Fraunces at `clamp(4rem, 17vw, 13rem)`, oxblood
+accent, with the portrait masked into a tall oval sitting between the two
+lines. Tagline blurs in below, then the CTA, then the scroll cue.
+
+### Headshot
+
+Drop a portrait at `public/ron.jpg`. Roughly 600x1000, face centred in the
+upper third. The mask is a tall rounded oval, so a square crop will look
+wrong. Until that file exists the hero renders a labelled placeholder rather
+than a broken image.
+
+### What was dropped from the original
+
+- the `.dark` class toggle, this theme runs on tokens
+- the third navigation, the header menu and section rail already cover it
+- the hardcoded `#C3E41D` acid lime
+- the stock Unsplash headshot
+- Fira Code, Antic and Brush Script MT
+
+### What was added
+
+A CTA. The original hero has no call to action at all, which is fine for a
+portfolio and wrong for a page whose job is booking calls.
+
+### Where the old headline went
+
+"Everyone uses the same template. You won't." moved down into the Statement
+section, at `text-mega` with the outline treatment on `same`. The pitch is
+still on the page, it just sits second now behind the name.

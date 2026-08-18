@@ -1,24 +1,64 @@
+import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-import { useScramble, useInView, useMagnetic } from "../lib/motion.js";
+import { useInView, useScramble, useMagnetic } from "../lib/motion.js";
 import { BlurText } from "./ui/blur-text.jsx";
 
 /* ------------------------------------------------------------------ */
-/* Hero                                                                */
-/* Asymmetric editorial grid. Outline type on one word, a media plate  */
-/* sitting inline inside the headline, metadata rail up top, offset    */
-/* lower band. Nothing is centered.                                    */
+/* Hero — name led                                                     */
+/*                                                                     */
+/* Adapted from the 21st.dev portfolio-hero. Kept: the two stacked      */
+/* name lines, the portrait sitting between them, the blur reveal, the  */
+/* scroll cue. Dropped: the .dark toggle (this theme runs on tokens),   */
+/* the third nav (header menu and section rail already exist), the      */
+/* hardcoded acid lime, the stock headshot, and Fira Code / Antic.      */
+/* Added: a CTA, because a hero on a lead-gen site needs one.           */
 /* ------------------------------------------------------------------ */
+
+function Portrait() {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div
+      className="group absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2"
+      data-cursor="RON"
+    >
+      <div className="h-[110px] w-[66px] overflow-hidden rounded-full bg-paper-deep shadow-2xl shadow-ink/30 transition-transform duration-500 group-hover:scale-110 sm:h-[152px] sm:w-[92px] md:h-[188px] md:w-[112px] lg:h-[222px] lg:w-[132px]">
+        {failed ? (
+          <div className="grid h-full place-items-center px-2 text-center">
+            <span className="font-mono text-[0.5rem] leading-tight tracking-[0.1em] text-graphite uppercase">
+              Add
+              <br />
+              /public
+              <br />
+              /ron.jpg
+            </span>
+          </div>
+        ) : (
+          <img
+            src="/ron.jpg"
+            alt="Ron Lenser"
+            onError={() => setFailed(true)}
+            className="h-full w-full object-cover"
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
 export function Hero({ ready }) {
   const [ref, seen] = useInView({ threshold: 0.05 });
   const tag = useScramble("INDEPENDENT STUDIO", seen);
   const cta = useMagnetic(0.3);
 
-  let i = 0;
-  const delay = () => `${(ready ? 0.05 : 1.1) + 0.07 * i++}s`;
-
   return (
-    <section id="top" ref={ref} className="relative overflow-hidden pt-24 md:pt-28">
-      <div className="flex items-start justify-between px-5 md:px-8">
+    <section
+      id="top"
+      ref={ref}
+      className="relative flex min-h-screen flex-col justify-between overflow-hidden px-5 pt-28 pb-8 md:px-8 md:pt-32"
+    >
+      {/* top meta rail */}
+      <div className="flex items-start justify-between">
         <p className="eyebrow">
           Fredericksburg VA
           <span className="mx-2 text-accent">/</span>
@@ -27,92 +67,69 @@ export function Hero({ ready }) {
         <p className="eyebrow hidden tabular-nums md:block">{tag}</p>
       </div>
 
-      <div className="rule mt-5 mb-10 md:mb-14" />
-
-      <h1 className="display px-5 text-mega md:px-8">
-        <span className="line-mask block">
-          <span className="line-inner block" style={{ animationDelay: delay() }}>
-            EVERYONE
-          </span>
-        </span>
-
-        <span className="line-mask block">
-          <span
-            className="line-inner block whitespace-nowrap"
-            style={{ animationDelay: delay() }}
-          >
-            USES THE <span className="stroke-type">SAME</span>
-          </span>
-        </span>
-
-        <span className="flex flex-col gap-4 md:flex-row md:items-end md:gap-6">
+      {/* the name */}
+      <div className="relative py-10 text-center">
+        <h1 className="display leading-[0.78] tracking-tighter uppercase">
           <span className="line-mask block">
-            <span className="line-inner block" style={{ animationDelay: delay() }}>
-              TEMPLATE.
+            <span
+              className="line-inner block text-[clamp(4rem,17vw,13rem)] text-accent"
+              style={{ animationDelay: ready ? "0.05s" : "1.1s" }}
+            >
+              Ron
             </span>
           </span>
-
-          {/* Drop a looping video or a work still in here */}
-          <span
-            className="reveal mb-[0.16em] hidden aspect-[16/9] flex-1 bg-ink-soft md:block"
-            aria-hidden="true"
-          />
-        </span>
-
-        <span className="line-mask block">
-          <span
-            className="line-inner block text-accent"
-            style={{ animationDelay: delay() }}
-          >
-            YOU WON'T.
-          </span>
-        </span>
-      </h1>
-
-      <div className="mt-14 grid gap-8 border-t border-hairline px-5 pt-8 md:mt-20 md:grid-cols-12 md:px-8">
-        <div className="md:col-span-3">
-          <p className="eyebrow">01 / The pitch</p>
-        </div>
-
-        <BlurText
-          as="p"
-          text="I write every line of every site by hand. No page builders, no recycled themes, no monthly platform fee. Most builds go live in about a week."
-          animateBy="words"
-          delay={22}
-          className="max-w-lg text-lg leading-snug md:col-span-5 md:text-xl"
-        />
-
-        <div className="md:col-span-3 md:col-start-10 md:justify-self-end">
-          <a
-            ref={cta}
-            href="#quote"
-            data-cursor="TALK"
-            className="inline-flex items-center gap-4 rounded-full bg-ink py-3 pr-3 pl-8 text-paper transition-colors hover:bg-accent hover:text-accent-ink"
-          >
-            <span className="font-medium">Book a call</span>
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-paper/15">
-              &rarr;
+          <span className="line-mask block">
+            <span
+              className="line-inner block text-[clamp(4rem,17vw,13rem)] text-accent"
+              style={{ animationDelay: ready ? "0.16s" : "1.21s" }}
+            >
+              Lenser
             </span>
-          </a>
-        </div>
+          </span>
+        </h1>
+
+        <Portrait />
       </div>
 
-      <a
-        href="#work"
-        aria-label="Scroll to work"
-        className="mx-auto mt-14 flex w-fit items-center gap-2 text-graphite transition-colors hover:text-accent md:mt-16"
-      >
-        <span className="font-mono text-[0.625rem] tracking-[0.16em] uppercase">
-          Scroll
-        </span>
-        <ChevronDown className="h-4 w-4 motion-safe:animate-bounce" aria-hidden="true" />
-      </a>
+      {/* tagline + CTA */}
+      <div className="flex flex-col items-center gap-8">
+        <BlurText
+          as="p"
+          text="Custom websites, written line by line, for businesses that are tired of looking like everyone else."
+          animateBy="words"
+          delay={26}
+          className="max-w-[46ch] justify-center text-center text-base leading-snug text-graphite md:text-lg"
+        />
+
+        <a
+          ref={cta}
+          href="#quote"
+          data-cursor="TALK"
+          className="inline-flex items-center gap-4 rounded-full bg-ink py-3 pr-3 pl-8 text-paper transition-colors hover:bg-accent hover:text-accent-ink"
+        >
+          <span className="font-medium">Book a call</span>
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-paper/15">
+            &rarr;
+          </span>
+        </a>
+
+        <a
+          href="#work"
+          aria-label="Scroll to work"
+          className="flex items-center gap-2 text-graphite transition-colors hover:text-accent"
+        >
+          <span className="font-mono text-[0.625rem] tracking-[0.16em] uppercase">
+            Scroll
+          </span>
+          <ChevronDown className="h-4 w-4 motion-safe:animate-bounce" aria-hidden="true" />
+        </a>
+      </div>
     </section>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* Claims marquee — inverted band so it cuts the page                  */
+/* Claims marquee                                                      */
 /* ------------------------------------------------------------------ */
 const CLAIMS = [
   "No templates",
@@ -125,7 +142,7 @@ const CLAIMS = [
 export function Marquee() {
   const strip = [...CLAIMS, ...CLAIMS, ...CLAIMS, ...CLAIMS];
   return (
-    <div className="mt-16 overflow-hidden bg-ink py-4 md:mt-24">
+    <div className="overflow-hidden bg-ink py-4">
       <div className="marquee-track">
         {strip.map((c, i) => (
           <span
@@ -142,32 +159,46 @@ export function Marquee() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Statement — sticky section label, offset column, two column body    */
+/* Statement — the pitch that used to be the hero headline             */
 /* ------------------------------------------------------------------ */
 export function Statement() {
   return (
     <section className="px-5 py-24 md:px-8 md:py-40">
       <div className="grid gap-10 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-3">
-          <p className="eyebrow md:sticky md:top-28">02 / Why it matters</p>
+          <p className="eyebrow md:sticky md:top-28">
+            02 <span className="mx-1 text-accent">/</span> Why it matters
+          </p>
         </div>
 
         <div className="md:col-span-8 md:col-start-5">
-          <BlurText
-            as="h2"
-            text="A template costs the person selling it nothing, and it shows."
-            animateBy="words"
-            delay={45}
-            className="display text-big"
-          />
+          <h2 className="display text-mega uppercase">
+            <span className="line-mask block">
+              <span className="line-inner block">Everyone</span>
+            </span>
+            <span className="line-mask block">
+              <span className="line-inner block whitespace-nowrap">
+                uses the <span className="stroke-type">same</span>
+              </span>
+            </span>
+            <span className="line-mask block">
+              <span className="line-inner block">template.</span>
+            </span>
+            <span className="line-mask block">
+              <span className="line-inner block text-accent">You won't.</span>
+            </span>
+          </h2>
 
           <div className="rule my-10" />
 
           <div className="grid gap-8 md:grid-cols-2">
-            <p className="reveal text-lg leading-snug text-graphite">
-              Your competitor down the road bought the same one. Same hero, same
-              three cards, same stock photo of a handshake.
-            </p>
+            <BlurText
+              as="p"
+              text="A template costs the person selling it nothing, and it shows. Your competitor down the road bought the same one."
+              animateBy="words"
+              delay={20}
+              className="text-lg leading-snug text-graphite"
+            />
             <p className="reveal text-lg leading-snug">
               Custom is the only thing they cannot copy off a shelf.{" "}
               <span className="text-accent">That is the entire argument.</span>
