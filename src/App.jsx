@@ -9,6 +9,7 @@ import { Quote } from "./components/Quote.jsx";
 import { QuickActions } from "./components/QuickActions.jsx";
 import { DirectionSwitch } from "./components/DirectionSwitch.jsx";
 import { SectionRail } from "./components/SectionRail.jsx";
+import { Footer } from "./components/ui/footer-section.jsx";
 
 export default function App() {
   const root = useRef(null);
@@ -83,6 +84,7 @@ export default function App() {
         <Quote />
         <Closing />
       </main>
+      <Footer />
     </div>
   );
 }

@@ -231,35 +231,6 @@ export function Closing() {
           ))}
         </div>
 
-        <div className="mt-20 grid gap-8 border-t border-paper/15 pt-10 md:grid-cols-3">
-          <div>
-            <span className="eyebrow !text-paper/45">Phone</span>
-            <a
-              href="tel:+15403956493"
-              className="mt-2 block font-display text-2xl hover:text-accent"
-            >
-              (540) 395-6493
-            </a>
-          </div>
-          <div>
-            <span className="eyebrow !text-paper/45">Email</span>
-            <a
-              href="mailto:ron@ronlenserdigital.com"
-              className="mt-2 block font-display text-2xl break-all hover:text-accent"
-            >
-              ron@ronlenserdigital.com
-            </a>
-          </div>
-          <div>
-            <span className="eyebrow !text-paper/45">Studio</span>
-            <span className="mt-2 block font-display text-2xl">Fredericksburg, VA</span>
-          </div>
-        </div>
-
-        <div className="mt-20 flex flex-col gap-4 border-t border-paper/15 pt-8 text-sm text-paper/40 md:flex-row md:justify-between">
-          <span>Ron Lenser Digital</span>
-          <span>&copy; {new Date().getFullYear()}. Written by hand.</span>
-        </div>
       </div>
     </section>
   );
