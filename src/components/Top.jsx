@@ -1,4 +1,6 @@
+import { ChevronDown } from "lucide-react";
 import { useScramble, useInView, useMagnetic } from "../lib/motion.js";
+import { BlurText } from "./ui/blur-text.jsx";
 
 /* ------------------------------------------------------------------ */
 /* Hero                                                                */
@@ -72,11 +74,13 @@ export function Hero({ ready }) {
           <p className="eyebrow">01 / The pitch</p>
         </div>
 
-        <p className="max-w-lg text-lg leading-snug md:col-span-5 md:text-xl">
-          I write every line of every site by hand. No page builders, no
-          recycled themes, no monthly platform fee. Most builds go live in about
-          a week.
-        </p>
+        <BlurText
+          as="p"
+          text="I write every line of every site by hand. No page builders, no recycled themes, no monthly platform fee. Most builds go live in about a week."
+          animateBy="words"
+          delay={22}
+          className="max-w-lg text-lg leading-snug md:col-span-5 md:text-xl"
+        />
 
         <div className="md:col-span-3 md:col-start-10 md:justify-self-end">
           <a
@@ -92,6 +96,17 @@ export function Hero({ ready }) {
           </a>
         </div>
       </div>
+
+      <a
+        href="#work"
+        aria-label="Scroll to work"
+        className="mx-auto mt-14 flex w-fit items-center gap-2 text-graphite transition-colors hover:text-accent md:mt-16"
+      >
+        <span className="font-mono text-[0.625rem] tracking-[0.16em] uppercase">
+          Scroll
+        </span>
+        <ChevronDown className="h-4 w-4 motion-safe:animate-bounce" aria-hidden="true" />
+      </a>
     </section>
   );
 }
@@ -138,9 +153,13 @@ export function Statement() {
         </div>
 
         <div className="md:col-span-8 md:col-start-5">
-          <h2 className="display reveal text-big">
-            A template costs the person selling it nothing, and it shows.
-          </h2>
+          <BlurText
+            as="h2"
+            text="A template costs the person selling it nothing, and it shows."
+            animateBy="words"
+            delay={45}
+            className="display text-big"
+          />
 
           <div className="rule my-10" />
 

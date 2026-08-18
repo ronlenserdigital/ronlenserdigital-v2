@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useParallax } from "../../lib/motion.js";
+import { BlurText } from "./blur-text.jsx";
 
 /**
  * Parallax layers.
@@ -74,9 +75,13 @@ export function ParallaxBreak() {
         <p className="font-mono text-[0.625rem] tracking-[0.16em] text-accent uppercase">
           No themes were harmed
         </p>
-        <h2 className="display mx-auto mt-5 max-w-[14ch] text-big">
-          Every line of it, typed.
-        </h2>
+        <BlurText
+          as="h2"
+          text="Every line of it, typed."
+          animateBy="letters"
+          delay={26}
+          className="display mt-5 justify-center text-big"
+        />
         <p className="mx-auto mt-5 max-w-[38ch] leading-snug text-paper/55">
           Open the source on anything I have built. You will not find a page
           builder, a bloated theme, or forty plugins holding it together.

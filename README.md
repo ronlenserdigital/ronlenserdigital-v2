@@ -238,3 +238,40 @@ something that calls `new Lenis()`, delete that line before anything else.
 Layer 2 is a wide plate, layer 4 is a smaller front crop. Both are marked in
 the file. Replace the `div` with an `img` at the same size and rotation and
 the parallax keeps working. Travel amounts live in the `LAYERS` array.
+
+## BlurText
+
+`ui/blur-text.jsx`. Segments text by word or letter and lifts each one out of
+a blur when it scrolls into view.
+
+```jsx
+<BlurText as="h2" text="Every line of it, typed." animateBy="letters" delay={26} />
+```
+
+| Prop | Default | Notes |
+|---|---|---|
+| `text` | required | plain string, not children |
+| `as` | `"p"` | any tag |
+| `animateBy` | `"words"` | or `"letters"` |
+| `delay` | `60` | ms between segments |
+| `direction` | `"top"` | or `"bottom"` |
+| `blur` | `10` | starting blur in px |
+
+Used on the hero paragraph, the statement headline, and the parallax heading.
+Keep it to a handful of places. Every heading blurring in reads as a gimmick.
+
+### What was left behind
+
+This was extracted from the 21st.dev portfolio-hero. The rest of that
+component was not taken, because it would have:
+
+- replaced the pitch headline with a name, turning a sales page into a folio
+- toggled a `.dark` class this theme does not use
+- hardcoded `#C3E41D` acid lime, a direction already rejected
+- added a third navigation on top of the header menu and the section rail
+- shipped a stock Unsplash headshot
+- pulled in Fira Code, Antic and Brush Script MT against Fraunces
+
+Two bugs fixed on the way in: the original's cleanup reads `ref.current`
+inside a stale closure and can skip unobserve, and it animates regardless of
+`prefers-reduced-motion`.
