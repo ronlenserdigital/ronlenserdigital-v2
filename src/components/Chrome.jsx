@@ -2,48 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { reduced } from "../lib/motion.js";
 
 /* ------------------------------------------------------------------ */
-/* Preloader                                                           */
-/* ------------------------------------------------------------------ */
-export function Preloader({ onDone }) {
-  const [n, setN] = useState(0);
-  const [gone, setGone] = useState(false);
-
-  useEffect(() => {
-    if (reduced()) {
-      setGone(true);
-      onDone?.();
-      return;
-    }
-    let raf;
-    const t0 = performance.now();
-    const tick = (now) => {
-      const p = Math.min(1, (now - t0) / 1100);
-      setN(Math.floor((1 - Math.pow(1 - p, 3)) * 100));
-      if (p < 1) raf = requestAnimationFrame(tick);
-      else
-        setTimeout(() => {
-          setGone(true);
-          onDone?.();
-        }, 180);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [onDone]);
-
-  return (
-    <div
-      aria-hidden="true"
-      className={`fixed inset-0 z-[100] flex items-end justify-between bg-ink px-5 pb-6 transition-transform duration-[900ms] ease-[cubic-bezier(.76,0,.24,1)] md:px-8 md:pb-10 ${
-        gone ? "-translate-y-full" : ""
-      }`}
-    >
-      <span className="eyebrow">Ron Lenser Digital</span>
-      <span className="display text-big tabular-nums">{String(n).padStart(3, "0")}</span>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /* Cursor disc                                                         */
 /* ------------------------------------------------------------------ */
 export function CursorDisc() {

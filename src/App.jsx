@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { reduced } from "./lib/motion.js";
-import { Preloader, CursorDisc } from "./components/Chrome.jsx";
+import { CursorDisc } from "./components/Chrome.jsx";
 import { Hero, Marquee, Statement } from "./components/Top.jsx";
 import { Work, Capabilities, Process, Results } from "./components/Work.jsx";
 import { Testimonials, Clients, Pricing, ContactCard } from "./components/Social.jsx";
@@ -60,7 +60,6 @@ export default function App() {
 
   return (
     <div ref={root}>
-      <Preloader />
       <CursorDisc />
       <QuickActions />
       <main>

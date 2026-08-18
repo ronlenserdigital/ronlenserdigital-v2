@@ -357,9 +357,23 @@ Put it at `public/ron.jpg`. The grid reads contrast, not detail:
 | `fps` | `24` | frame cap. The grid does not need 60. |
 | `curve` | `0.16` | barrel bow. `0` is flat. |
 
+### Motion
+
+Three behaviours, all driven off one `reveal` value per cell:
+
+| | |
+|---|---|
+| **Resolve** | on load the grid is noise and the image assembles out of it, cell by cell. Order is fixed by a per-cell threshold field biased toward the centre, so the face lands before the edges. Not a fade: each glyph scrambles, then locks. |
+| **Breathe** | once settled, cells flicker on a slow sine offset by their own noise value, so it never reads as a static image. |
+| **Dissolve** | scrolling past the hero runs the resolve backwards and the face falls apart into noise. |
+
+`intro` controls the resolve duration in ms, default `1900`.
+
 Performance: pauses via IntersectionObserver when off screen, capped at 24fps,
-renders a single frame under `prefers-reduced-motion`. If it stutters on a low
-end phone, drop `cols` to about 90.
+renders one settled frame under `prefers-reduced-motion`. If it stutters on a
+low end phone, drop `cols` to about 90.
+
+There is no page preloader. The resolve is the load animation.
 
 ### Hero structure
 

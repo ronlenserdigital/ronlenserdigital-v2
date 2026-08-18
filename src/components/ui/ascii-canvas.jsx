@@ -5,24 +5,31 @@ import { reduced } from "../../lib/motion.js";
  * ASCII character-grid canvas.
  *
  * Renders a source into a grid of monospace glyphs, brightness mapped onto a
- * density ramp, with a slight barrel curve so the grid bows like a CRT.
+ * density ramp, with a barrel curve so the grid bows like a CRT.
  *
- * The source is procedural by default: a lit head and shoulders figure that
- * breathes and sways. Pass `src` (an image or video URL) to render a real
- * photo or reel through the same grid instead, which is the intent once a
- * headshot exists at /public/ron.jpg.
+ * Three motions, all driven off one `reveal` value per cell:
  *
- * Written from scratch. No gsap, no three, no shader library. It is a
- * downscaled offscreen draw, one getImageData per frame, and fillText.
+ *   RESOLVE   on load the grid is pure noise and the image assembles out of
+ *             it, cell by cell, in an order fixed by a per-cell threshold
+ *             field. Not a fade: each glyph scrambles then locks.
+ *   BREATHE   once settled, cells flicker on a slow sine offset by their own
+ *             noise value, so the portrait never looks like a static png.
+ *   DISSOLVE  scrolling past the hero runs resolve backwards and the face
+ *             falls apart into noise again.
+ *
+ * No dependencies. A downscaled offscreen draw, one getImageData per frame,
+ * and fillText.
  */
 
 const RAMP = " .·:-=+*ozUMW%@";
+const NOISE_GLYPHS = "01#%&*+=-<>/\\|?zUMW@";
 
 export function AsciiCanvas({
   src,
   cols = 132,
   fps = 24,
   curve = 0.16,
+  intro = 1900,
   className = "",
 }) {
   const canvasRef = useRef(null);
@@ -36,19 +43,24 @@ export function AsciiCanvas({
     const ctx = canvas.getContext("2d", { alpha: false });
     const still = reduced();
 
-    // offscreen buffer at grid resolution
     const buf = document.createElement("canvas");
     const bctx = buf.getContext("2d", { willReadFrequently: true });
 
     let rows = 0;
     let cell = 0;
     let media = null;
+    let mediaFailed = false;
     let raf = 0;
     let last = 0;
     let visible = true;
-    let t = 0;
+    let scrollFade = 1;
+    const t0 = performance.now();
 
-    let mediaFailed = false;
+    /* Per cell threshold field. Fixed for the life of the grid, so the
+       resolve always assembles in the same order instead of sparkling
+       randomly. Biased toward the centre so the face lands before the
+       edges do. */
+    let field = new Float32Array(0);
 
     if (src) {
       const isVideo = /\.(mp4|webm|mov)$/i.test(src);
@@ -57,11 +69,25 @@ export function AsciiCanvas({
         Object.assign(media, { muted: true, loop: true, playsInline: true, autoplay: true });
         media.play?.().catch(() => {});
       }
-      // no headshot on disk yet, so keep drawing the figure rather than
-      // stalling on a broken frame
-      media.onerror = () => { mediaFailed = true; };
+      media.onerror = () => {
+        mediaFailed = true;
+      };
       media.src = src;
     }
+
+    const buildField = () => {
+      field = new Float32Array(cols * rows);
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const dx = (x / cols - 0.5) * 2;
+          const dy = (y / rows - 0.5) * 2;
+          const dist = Math.sqrt(dx * dx + dy * dy) / 1.414;
+          const rnd = Math.abs((Math.sin(x * 127.1 + y * 311.7) * 43758.5453) % 1);
+          // centre resolves first, edges last, with jitter so it is not a circle
+          field[y * cols + x] = Math.min(1, dist * 0.62 + rnd * 0.5);
+        }
+      }
+    };
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -78,11 +104,11 @@ export function AsciiCanvas({
 
       buf.width = cols;
       buf.height = rows;
+      buildField();
     };
 
-    /* Procedural source: a head and shoulders figure, lit from the upper
-       left, breathing slightly. Reads as a person once mapped onto the
-       character ramp. Replaced entirely the moment `src` is supplied. */
+    /* Procedural stand in: a lit head and shoulders figure. Only used when
+       no src is given, or the file is missing. */
     const paintPortrait = (time) => {
       const w = cols;
       const h = rows;
@@ -96,7 +122,6 @@ export function AsciiCanvas({
       const headR = h * (0.19 + breathe);
       const headY = h * 0.36;
 
-      // key light from upper left
       const key = bctx.createRadialGradient(
         cx - headR * 0.75, headY - headR * 0.8, headR * 0.1,
         cx, headY, headR * 3.4
@@ -105,8 +130,6 @@ export function AsciiCanvas({
       key.addColorStop(0.42, "rgba(190,190,190,1)");
       key.addColorStop(1, "rgba(18,18,18,1)");
 
-      // shoulders
-      bctx.save();
       bctx.beginPath();
       const shoulderY = headY + headR * 1.9;
       bctx.moveTo(cx - w * 0.34, h + 2);
@@ -116,64 +139,19 @@ export function AsciiCanvas({
       bctx.closePath();
       bctx.fillStyle = key;
       bctx.fill();
-      bctx.restore();
 
-      // neck
-      bctx.beginPath();
-      bctx.rect(cx - headR * 0.32, headY + headR * 0.6, headR * 0.64, headR * 1.4);
-      bctx.fillStyle = "rgba(120,120,120,1)";
-      bctx.fill();
-
-      // head
-      bctx.save();
       bctx.beginPath();
       bctx.ellipse(cx, headY, headR * 0.78, headR, 0, 0, Math.PI * 2);
-      bctx.closePath();
       bctx.fillStyle = key;
       bctx.fill();
-      bctx.restore();
-
-      // rim light down the right edge of the head
-      bctx.save();
-      bctx.beginPath();
-      bctx.ellipse(cx, headY, headR * 0.78, headR, 0, -Math.PI * 0.45, Math.PI * 0.4);
-      bctx.lineWidth = Math.max(1, h * 0.012);
-      bctx.strokeStyle = "rgba(255,255,255,0.85)";
-      bctx.stroke();
-      bctx.restore();
-
-      // shadow under the jaw so the head separates from the shoulders
-      bctx.save();
-      bctx.beginPath();
-      bctx.ellipse(cx, headY + headR * 1.15, headR * 0.7, headR * 0.34, 0, 0, Math.PI * 2);
-      bctx.fillStyle = "rgba(0,0,0,0.55)";
-      bctx.filter = "blur(1px)";
-      bctx.fill();
-      bctx.restore();
-
-      // scan shimmer, keeps flat areas alive in the ramp
-      const img = bctx.getImageData(0, 0, w, h);
-      const d = img.data;
-      for (let y = 0; y < h; y++) {
-        const band = 1 + Math.sin(y * 0.55 + time * 1.6) * 0.05;
-        for (let x = 0; x < w; x++) {
-          const i = (y * w + x) * 4;
-          const grain = ((Math.sin(x * 12.9898 + y * 78.233 + time) * 43758.5453) % 1) * 10;
-          const v = Math.max(0, Math.min(255, d[i] * band + grain));
-          d[i] = d[i + 1] = d[i + 2] = v;
-        }
-      }
-      bctx.putImageData(img, 0, 0);
     };
 
-    /* Cover fit. Stretching a portrait to the grid squashes the face,
-       and the grid is almost never the same aspect as the source. */
+    /* Cover fit. Stretching a portrait to the grid squashes the face. */
     const paintMedia = () => {
       const mw = media.videoWidth || media.naturalWidth;
       const mh = media.videoHeight || media.naturalHeight;
       if (!mw || !mh) return false;
 
-      // the grid draws cells at 1.05x height, so correct for that here
       const gridAspect = cols / (rows * 1.05);
       const mediaAspect = mw / mh;
 
@@ -192,11 +170,15 @@ export function AsciiCanvas({
       return true;
     };
 
-    const draw = (time) => {
-      const styles = getComputedStyle(canvas);
-      const bg = styles.getPropertyValue("--ascii-bg") || "#000";
+    const draw = (now) => {
+      const time = (now - t0) / 1000;
 
-      ctx.fillStyle = bg.trim();
+      // resolve on load, eased, then held
+      const introP = still ? 1 : Math.min(1, (now - t0) / intro);
+      const eased = 1 - Math.pow(1 - introP, 3);
+      const reveal = eased * scrollFade;
+
+      ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       if (src && !mediaFailed) {
@@ -214,23 +196,47 @@ export function AsciiCanvas({
 
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
-          const i = (y * cols + x) * 4;
+          const idx = y * cols + x;
+          const i = idx * 4;
           const lum = (px[i] * 0.299 + px[i + 1] * 0.587 + px[i + 2] * 0.114) / 255;
+
+          const threshold = field[idx];
+          const settled = reveal > threshold;
+
+          // cells not yet resolved show drifting noise glyphs
+          if (!settled) {
+            if (reveal < threshold - 0.42) continue;
+            const flick = Math.abs(
+              (Math.sin(x * 91.7 + y * 47.3 + Math.floor(time * 11)) * 43758.5453) % 1
+            );
+            if (flick < 0.55) continue;
+            const ch = NOISE_GLYPHS[Math.floor(flick * NOISE_GLYPHS.length)];
+            const dx0 = (x - midX) / midX;
+            ctx.fillStyle = `rgba(150,150,150,${0.12 + flick * 0.16})`;
+            ctx.fillText(ch, x * cell, y * cell * 1.05 + dx0 * dx0 * curve * cell * rows * 0.06);
+            continue;
+          }
+
           if (lum < 0.025) continue;
 
-          const ch = RAMP[Math.min(RAMP.length - 1, Math.floor(lum * RAMP.length))];
+          // breathe: slow per-cell flicker so it never reads as a still image
+          const pulse = still ? 1 : 0.9 + Math.sin(time * 2.2 + threshold * 12) * 0.1;
+          const l = Math.min(1, lum * pulse);
+
+          const ch = RAMP[Math.min(RAMP.length - 1, Math.floor(l * RAMP.length))];
           if (ch === " ") continue;
 
-          // barrel curve: columns bow away from centre
           const dx = (x - midX) / midX;
           const bow = dx * dx * curve * cell * rows * 0.06;
 
-          // mostly neutral, a touch of accent in the hot spots
-          const a = Math.min(1, 0.32 + lum * 0.95);
+          // fade each cell in over the moment it settles
+          const age = Math.min(1, (reveal - threshold) * 7);
+          const a = Math.min(1, 0.32 + l * 0.95) * age;
+
           ctx.fillStyle =
-            lum > 0.78
+            l > 0.78
               ? `rgba(255,255,255,${a})`
-              : lum > 0.5
+              : l > 0.5
                 ? `rgba(252,187,0,${a * 0.8})`
                 : `rgba(200,200,200,${a * 0.72})`;
 
@@ -244,16 +250,29 @@ export function AsciiCanvas({
       if (!visible) return;
       if (now - last < 1000 / fps) return;
       last = now;
-      t += 0.016;
-      draw(t);
+      draw(now);
+    };
+
+    /* Scroll dissolve: run the resolve backwards as the hero leaves. */
+    const onScroll = () => {
+      const r = wrap.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, -r.top / (r.height * 0.85)));
+      scrollFade = 1 - p;
     };
 
     resize();
+    onScroll();
+
     if (still) {
-      draw(0);
+      draw(performance.now() + intro);
     } else {
       raf = requestAnimationFrame(loop);
     }
+
+    // the image may land after the first frames; redraw when it does
+    if (media) media.onload = () => draw(performance.now());
+
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting), {
       threshold: 0,
@@ -262,27 +281,22 @@ export function AsciiCanvas({
 
     const ro = new ResizeObserver(() => {
       resize();
-      draw(t);
+      draw(performance.now());
     });
     ro.observe(wrap);
 
     return () => {
       cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
       io.disconnect();
       ro.disconnect();
       if (media?.pause) media.pause();
     };
-  }, [src, cols, fps, curve]);
+  }, [src, cols, fps, curve, intro]);
 
   return (
     <div ref={wrapRef} className={`relative ${className}`}>
-      <canvas
-        ref={canvasRef}
-        aria-hidden="true"
-        style={{ "--ascii-bg": "#000000" }}
-        className="block h-full w-full"
-      />
-      {/* edge falloff so the grid dissolves instead of hard-cutting */}
+      <canvas ref={canvasRef} aria-hidden="true" className="block h-full w-full" />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
