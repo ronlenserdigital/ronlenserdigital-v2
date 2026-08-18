@@ -1,45 +1,60 @@
 # ronlenserdigital.com v2
 
-React 18 + Vite 6 + Tailwind v4 + Lenis smooth scroll.
+React 18 + Vite 6 + Tailwind v4 + Lenis. Zero animation libraries, all motion
+is hand written in `src/lib/motion.js`.
 
-## Run it
+## Run
 
 ```
 npm install
 npm run dev
 ```
 
-Open http://localhost:5173
+## Sections
 
-## Deploy to Vercel
+| Order | Component | File |
+|---|---|---|
+| Preloader, status bar, nav, menu overlay, cursor | Chrome | `components/Chrome.jsx` |
+| Hero, claims marquee, statement | Top | `components/Top.jsx` |
+| Work filmstrip, capabilities, process, results | Work | `components/Work.jsx` |
+| Testimonials, clients, pricing, contact card, closing | Social | `components/Social.jsx` |
 
-Push to GitHub, import the repo in Vercel. It auto-detects Vite.
-Framework: Vite. Build: `npm run build`. Output: `dist`.
+## Motion primitives (`src/lib/motion.js`)
 
-## Design tokens
-
-All in `src/index.css` under `@theme`. Change one value, whole site updates.
-
-| Token | Value |
+| Hook | Does |
 |---|---|
-| paper | #E9E5DA |
-| ink | #12110F |
-| cobalt | #2536FF |
-| graphite | #6E6A61 |
-| hairline | #C9C3B4 |
+| `useInView` | fires once on enter |
+| `useCountUp` | eased number count |
+| `useScramble` | glyph decode into text |
+| `useMagnetic` | element pulls toward cursor |
+| `useClock` | live ticking time |
+| `useAvailability` | open / closed vs studio hours |
 
-Display: Bricolage Grotesque. Body: Instrument Sans. Utility: IBM Plex Mono.
+All of them no-op under `prefers-reduced-motion`.
 
-## Where to put your content
+## Editing content
 
-- `src/components/Body.jsx` -> `PROJECTS` array. Swap the placeholder div for
-  `<img>` or `<video autoplay muted loop playsinline>`.
-- `src/components/Body.jsx` -> `STEPS` and `OFFERS` arrays.
-- `src/components/Top.jsx` -> `HERO_LINES` and `CLAIMS`.
+Every section reads from a plain array at the top of its file.
 
-## Notes
+- `PROJECTS` and `FILTERS` in `Work.jsx`
+- `CAPS`, `STEPS`, `RESULTS` in `Work.jsx`
+- `QUOTES`, `CLIENTS`, `OFFERS`, `ROUTES` in `Social.jsx`
+- `LINES`, `CLAIMS` in `Top.jsx`
+- `LINKS` in `Chrome.jsx`
 
-- Work section is a pinned horizontal scroll. Its height is `340vh`. If you add
-  or remove projects, adjust that height and the `shift` multiplier (currently 62).
-- Add `data-cursor="LABEL"` to any element to make the cobalt disc appear over it.
-- Everything respects `prefers-reduced-motion`.
+## Before launch
+
+- [ ] Replace `QUOTES` with real testimonials. They are placeholders.
+- [ ] Replace `PROJECTS` and `CLIENTS` with real work.
+- [ ] Drop screenshots or video into the Work cards (marked in `Work.jsx`).
+- [ ] Add a headshot for the contact card.
+- [ ] Verify every number in `RESULTS` is true.
+
+## Tokens
+
+`src/index.css` under `@theme`. paper `#E9E5DA`, ink `#12110F`, cobalt `#2536FF`.
+Bricolage Grotesque / Instrument Sans / IBM Plex Mono.
+
+## Deploy
+
+Vercel auto-detects Vite. Build `npm run build`, output `dist`.

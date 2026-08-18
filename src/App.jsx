@@ -1,15 +1,18 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
-import { useReveal } from "./hooks.js";
-import { CursorDisc, Nav, Hero, Marquee } from "./components/Top.jsx";
-import { Statement, Work, Process, Pricing, Contact } from "./components/Body.jsx";
+import { reduced } from "./lib/motion.js";
+import { Preloader, StatusBar, CursorDisc, Nav } from "./components/Chrome.jsx";
+import { Hero, Marquee, Statement } from "./components/Top.jsx";
+import { Work, Capabilities, Process, Results } from "./components/Work.jsx";
+import { Testimonials, Clients, Pricing, ContactCard, Closing } from "./components/Social.jsx";
 
 export default function App() {
   const root = useRef(null);
-  useReveal(root);
+  const [ready, setReady] = useState(false);
 
+  // smooth scroll
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (reduced()) return;
     const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
     let raf;
     const loop = (t) => {
@@ -23,18 +26,54 @@ export default function App() {
     };
   }, []);
 
+  // scroll reveals, re-scanned when sections mount
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.15 }
+    );
+
+    const scan = () =>
+      (root.current ?? document)
+        .querySelectorAll(".reveal:not(.is-in)")
+        .forEach((el) => io.observe(el));
+
+    scan();
+    const mo = new MutationObserver(scan);
+    if (root.current) mo.observe(root.current, { childList: true, subtree: true });
+
+    return () => {
+      io.disconnect();
+      mo.disconnect();
+    };
+  }, []);
+
   return (
     <div ref={root}>
+      <Preloader onDone={() => setReady(true)} />
       <CursorDisc />
       <Nav />
+      <StatusBar />
       <main>
-        <Hero />
+        <Hero ready={ready} />
         <Marquee />
         <Statement />
         <Work />
+        <Capabilities />
         <Process />
+        <Results />
+        <Testimonials />
+        <Clients />
         <Pricing />
-        <Contact />
+        <ContactCard />
+        <Closing />
       </main>
     </div>
   );
