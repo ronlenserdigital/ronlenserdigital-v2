@@ -65,7 +65,7 @@ export function Work() {
                 onClick={() => setFilter(f)}
                 className={`eyebrow rounded-full border px-4 py-2 transition-colors ${
                   filter === f
-                    ? "border-cobalt bg-cobalt !text-paper"
+                    ? "border-accent bg-accent !text-paper"
                     : "border-paper/20 !text-paper/50 hover:border-paper/50"
                 }`}
               >
@@ -94,7 +94,7 @@ export function Work() {
                 <div className="absolute inset-0 grid place-items-center">
                   <span className="eyebrow !text-paper/20">{proj.name}</span>
                 </div>
-                <div className="absolute inset-0 scale-110 bg-cobalt opacity-0 transition-opacity duration-500 group-hover:opacity-20" />
+                <div className="absolute inset-0 scale-110 bg-accent opacity-0 transition-opacity duration-500 group-hover:opacity-20" />
               </div>
 
               <div className="mt-5 flex items-baseline justify-between border-t border-paper/15 pt-4">
@@ -110,7 +110,7 @@ export function Work() {
 
         <div className="mt-10 px-6 md:px-10">
           <div className="h-px w-full bg-paper/15">
-            <div className="h-px bg-cobalt" style={{ width: `${Math.max(4, p * 100)}%` }} />
+            <div className="h-px bg-accent" style={{ width: `${Math.max(4, p * 100)}%` }} />
           </div>
         </div>
       </div>

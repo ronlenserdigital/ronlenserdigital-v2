@@ -168,7 +168,7 @@ export function Quote() {
 
             <p aria-live="polite" className="text-sm">
               {status === "sent" && (
-                <span className="text-cobalt">Got it. I will get back to you today.</span>
+                <span className="text-accent">Got it. I will get back to you today.</span>
               )}
               {status === "error" && (
                 <span className="text-graphite">
@@ -193,7 +193,7 @@ function SubmitButton({ status }) {
       type="submit"
       disabled={sending}
       data-cursor="SEND"
-      className="inline-flex items-center gap-4 rounded-full bg-ink py-3 pr-3 pl-8 text-paper transition-colors hover:bg-cobalt disabled:opacity-60"
+      className="inline-flex items-center gap-4 rounded-full bg-ink py-3 pr-3 pl-8 text-paper transition-colors hover:bg-accent disabled:opacity-60"
     >
       <span className="font-medium">{sending ? "Sending" : "Send it"}</span>
       <span className="grid h-10 w-10 place-items-center rounded-full bg-paper/15">

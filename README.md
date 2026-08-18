@@ -50,10 +50,27 @@ Every section reads from a plain array at the top of its file.
 - [ ] Add a headshot for the contact card.
 - [ ] Verify every number in `RESULTS` is true.
 
-## Tokens
+## Visual directions
 
-`src/index.css` under `@theme`. paper `#E9E5DA`, ink `#12110F`, cobalt `#2536FF`.
-Bricolage Grotesque / Instrument Sans / IBM Plex Mono.
+Three complete directions live in `src/index.css`. Switch with the control
+bottom left in dev, or append `?pick` to any deployed URL.
+
+| id | Palette | Display face |
+|---|---|---|
+| `volt` | black, bone, acid lime `#D6FF3E` | Syne 800 |
+| `steel` | concrete, charcoal, safety orange `#FF5C00` | Archivo 900 at 118 width |
+| `oxblood` | near black, warm bone, deep red `#9B1B1B` | Fraunces 700 |
+
+Token names stay the same across all three, so every component keeps working:
+`ink`, `ink-soft`, `paper`, `paper-deep`, `graphite`, `hairline`, `accent`,
+`accent-ink`.
+
+Once a direction is picked: set `data-dir` on `<html>` in `index.html`, delete
+the other two blocks in `index.css`, delete `components/DirectionSwitch.jsx`
+and its mount in `App.jsx`, and trim `index.html` to just that direction's
+fonts.
+
+### Token mapping (for pasting shadcn components)
 
 ## Deploy
 
@@ -77,8 +94,6 @@ button or an input in a future section you look in one folder, not through
 five section files. It is also where shadcn expects components to live, so
 anything you pull from 21st.dev drops in without changing its imports.
 
-### Token mapping
-
 Any shadcn component you paste in uses these variable names. Swap them:
 
 | shadcn | ours |
@@ -87,7 +102,7 @@ Any shadcn component you paste in uses these variable names. Swap them:
 | `text-foreground` | `text-ink` |
 | `border-input` | `border-hairline` |
 | `text-muted-foreground` | `text-graphite` |
-| `ring-ring` | `ring-cobalt` |
+| `ring-ring` | `ring-accent` |
 | `bg-accent` | `bg-paper-deep` |
 
 ## Quote form

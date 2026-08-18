@@ -7,6 +7,7 @@ import { Work, Capabilities, Process, Results } from "./components/Work.jsx";
 import { Testimonials, Clients, Pricing, ContactCard, Closing } from "./components/Social.jsx";
 import { Quote } from "./components/Quote.jsx";
 import { QuickActions } from "./components/QuickActions.jsx";
+import { DirectionSwitch } from "./components/DirectionSwitch.jsx";
 
 export default function App() {
   const root = useRef(null);
@@ -64,6 +65,7 @@ export default function App() {
       <Nav />
       <StatusBar />
       <QuickActions />
+      <DirectionSwitch />
       <main>
         <Hero ready={ready} />
         <Marquee />

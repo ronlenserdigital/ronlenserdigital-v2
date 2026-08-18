@@ -62,7 +62,7 @@ export function StatusBar() {
         <span className="eyebrow flex items-center gap-2">
           <span
             className={`inline-block h-1.5 w-1.5 rounded-full ${
-              open ? "animate-pulse bg-cobalt" : "bg-graphite"
+              open ? "animate-pulse bg-accent" : "bg-graphite"
             }`}
           />
           {open ? "Taking calls now" : "Closed, leave a message"}
@@ -177,7 +177,7 @@ export function Nav() {
               className={`hidden rounded-full px-5 py-2.5 text-sm font-medium transition-colors sm:block ${
                 menu
                   ? "bg-paper text-ink"
-                  : "bg-ink text-paper hover:bg-cobalt"
+                  : "bg-ink text-paper hover:bg-accent"
               }`}
             >
               Book a call
@@ -228,7 +228,7 @@ export function Nav() {
                   transitionDuration: "600ms",
                 }}
               >
-                <span className="display text-big text-paper transition-colors group-hover:text-cobalt">
+                <span className="display text-big text-paper transition-colors group-hover:text-accent">
                   {label}
                 </span>
                 <span className="eyebrow !text-paper/35">

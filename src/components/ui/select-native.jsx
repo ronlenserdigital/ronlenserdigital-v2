@@ -10,7 +10,7 @@ import { cn } from "../../lib/utils.js";
  *   border-input         -> border-hairline
  *   text-foreground      -> text-ink
  *   text-muted-foreground-> text-graphite
- *   ring-ring            -> cobalt
+ *   ring-ring            -> accent
  *   bg-accent            -> bg-paper-deep
  *
  * Native on purpose. It gets the OS picker wheel on iOS and Android for free,
@@ -44,7 +44,7 @@ const SelectNative = React.forwardRef(({ className, children, ...props }, ref) =
           "peer inline-flex w-full cursor-pointer appearance-none items-center rounded-lg",
           "border border-hairline bg-paper text-sm text-ink",
           "transition-[border-color,box-shadow] outline-none",
-          "focus-visible:border-cobalt focus-visible:ring-[3px] focus-visible:ring-cobalt/25",
+          "focus-visible:border-accent focus-visible:ring-[3px] focus-visible:ring-accent/25",
           "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
           "has-[option[disabled]:checked]:text-graphite",
           props.multiple

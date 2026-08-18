@@ -152,7 +152,7 @@ export function Pricing() {
                 </p>
               </div>
               <div className="flex items-baseline gap-3">
-                <span className={`display text-big ${o.accent ? "text-cobalt" : ""}`}>
+                <span className={`display text-big ${o.accent ? "text-accent" : ""}`}>
                   {o.price}
                 </span>
                 <span className={`eyebrow ${o.accent ? "!text-paper/50" : ""}`}>{o.unit}</span>
@@ -213,7 +213,7 @@ export function Closing() {
         <h2 className="display reveal text-mega">
           Let's build
           <br />
-          <span className="text-cobalt">something good.</span>
+          <span className="text-accent">something good.</span>
         </h2>
 
         <div className="mt-16 grid gap-px border-t border-paper/15 md:grid-cols-3">
@@ -223,7 +223,7 @@ export function Closing() {
               ref={i === 0 ? cta : undefined}
               href={href}
               data-cursor={cur}
-              className="group flex items-center justify-between border-b border-paper/15 py-8 pr-4 transition-colors hover:text-cobalt md:border-b-0 md:px-6 md:py-10"
+              className="group flex items-center justify-between border-b border-paper/15 py-8 pr-4 transition-colors hover:text-accent md:border-b-0 md:px-6 md:py-10"
             >
               <span className="font-display text-2xl">{label}</span>
               <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
@@ -236,7 +236,7 @@ export function Closing() {
             <span className="eyebrow !text-paper/45">Phone</span>
             <a
               href="tel:+15403956493"
-              className="mt-2 block font-display text-2xl hover:text-cobalt"
+              className="mt-2 block font-display text-2xl hover:text-accent"
             >
               (540) 395-6493
             </a>
@@ -245,7 +245,7 @@ export function Closing() {
             <span className="eyebrow !text-paper/45">Email</span>
             <a
               href="mailto:ron@ronlenserdigital.com"
-              className="mt-2 block font-display text-2xl break-all hover:text-cobalt"
+              className="mt-2 block font-display text-2xl break-all hover:text-accent"
             >
               ron@ronlenserdigital.com
             </a>

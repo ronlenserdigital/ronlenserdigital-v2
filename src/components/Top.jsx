@@ -2,73 +2,94 @@ import { useScramble, useInView, useMagnetic } from "../lib/motion.js";
 
 /* ------------------------------------------------------------------ */
 /* Hero                                                                */
+/* Asymmetric editorial grid. Outline type on one word, a media plate  */
+/* sitting inline inside the headline, metadata rail up top, offset    */
+/* lower band. Nothing is centered.                                    */
 /* ------------------------------------------------------------------ */
-const LINES = [
-  { text: "Everyone else", accent: false },
-  { text: "uses the same", accent: false },
-  { text: "template.", accent: false },
-  { text: "You won't.", accent: true },
-];
-
 export function Hero({ ready }) {
-  const [ref, seen] = useInView({ threshold: 0.1 });
-  const tag = useScramble("Independent studio", seen);
+  const [ref, seen] = useInView({ threshold: 0.05 });
+  const tag = useScramble("INDEPENDENT STUDIO", seen);
   const cta = useMagnetic(0.3);
 
-  let wordIndex = 0;
+  let i = 0;
+  const delay = () => `${(ready ? 0.05 : 1.1) + 0.07 * i++}s`;
 
   return (
-    <section id="top" ref={ref} className="px-6 pt-28 pb-16 md:px-10 md:pt-36">
-      <div className="mx-auto max-w-[1600px]">
-        <div className="flex items-baseline justify-between">
-          <p className="eyebrow">Custom websites since 2025</p>
-          <p className="eyebrow hidden tabular-nums md:block">{tag}</p>
+    <section id="top" ref={ref} className="relative overflow-hidden pt-24 md:pt-28">
+      <div className="flex items-start justify-between px-5 md:px-8">
+        <p className="eyebrow">
+          Fredericksburg VA
+          <span className="mx-2 text-accent">/</span>
+          Est. 2025
+        </p>
+        <p className="eyebrow hidden tabular-nums md:block">{tag}</p>
+      </div>
+
+      <div className="rule mt-5 mb-10 md:mb-14" />
+
+      <h1 className="display px-5 text-mega md:px-8">
+        <span className="line-mask block">
+          <span className="line-inner block" style={{ animationDelay: delay() }}>
+            EVERYONE
+          </span>
+        </span>
+
+        <span className="line-mask block">
+          <span
+            className="line-inner block whitespace-nowrap"
+            style={{ animationDelay: delay() }}
+          >
+            USES THE <span className="stroke-type">SAME</span>
+          </span>
+        </span>
+
+        <span className="flex flex-col gap-4 md:flex-row md:items-end md:gap-6">
+          <span className="line-mask block">
+            <span className="line-inner block" style={{ animationDelay: delay() }}>
+              TEMPLATE.
+            </span>
+          </span>
+
+          {/* Drop a looping video or a work still in here */}
+          <span
+            className="reveal mb-[0.16em] hidden aspect-[16/9] flex-1 bg-ink-soft md:block"
+            aria-hidden="true"
+          />
+        </span>
+
+        <span className="line-mask block">
+          <span
+            className="line-inner block text-accent"
+            style={{ animationDelay: delay() }}
+          >
+            YOU WON'T.
+          </span>
+        </span>
+      </h1>
+
+      <div className="mt-14 grid gap-8 border-t border-hairline px-5 pt-8 md:mt-20 md:grid-cols-12 md:px-8">
+        <div className="md:col-span-3">
+          <p className="eyebrow">01 / The pitch</p>
         </div>
 
-        <div className="rule my-6" />
+        <p className="max-w-lg text-lg leading-snug md:col-span-5 md:text-xl">
+          I write every line of every site by hand. No page builders, no
+          recycled themes, no monthly platform fee. Most builds go live in about
+          a week.
+        </p>
 
-        <h1 className="display text-mega">
-          {LINES.map((line) => (
-            <span className="block" key={line.text}>
-              <span className={line.accent ? "block text-cobalt" : "block"}>
-                {line.text.split(" ").map((w) => {
-                  const d = 0.06 * wordIndex++;
-                  return (
-                    <span className="line-mask inline-block align-top" key={w + d}>
-                      <span
-                        className="line-inner inline-block pr-[0.22em]"
-                        style={{ animationDelay: `${(ready ? 0.05 : 1.1) + d}s` }}
-                      >
-                        {w}
-                      </span>
-                    </span>
-                  );
-                })}
-              </span>
+        <div className="md:col-span-3 md:col-start-10 md:justify-self-end">
+          <a
+            ref={cta}
+            href="#quote"
+            data-cursor="TALK"
+            className="inline-flex items-center gap-4 rounded-full bg-ink py-3 pr-3 pl-8 text-paper transition-colors hover:bg-accent hover:text-accent-ink"
+          >
+            <span className="font-medium">Book a call</span>
+            <span className="grid h-10 w-10 place-items-center rounded-full bg-paper/15">
+              &rarr;
             </span>
-          ))}
-        </h1>
-
-        <div className="mt-14 grid gap-10 md:grid-cols-12 md:items-end">
-          <div className="reveal md:col-span-4">
-            <a
-              ref={cta}
-              href="#contact"
-              data-cursor="TALK"
-              className="inline-flex items-center gap-4 rounded-full bg-ink py-3 pr-3 pl-8 text-paper transition-colors hover:bg-cobalt"
-            >
-              <span className="font-medium">Book a call</span>
-              <span className="grid h-10 w-10 place-items-center rounded-full bg-paper/15">
-                &rarr;
-              </span>
-            </a>
-          </div>
-
-          <p className="reveal max-w-md text-lg leading-relaxed text-graphite md:col-span-5 md:col-start-8">
-            I write every line of every site by hand. No page builders, no
-            recycled themes, no monthly platform fee. Most builds go live in
-            about a week.
-          </p>
+          </a>
         </div>
       </div>
     </section>
@@ -76,7 +97,7 @@ export function Hero({ ready }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Claims marquee                                                      */
+/* Claims marquee — inverted band so it cuts the page                  */
 /* ------------------------------------------------------------------ */
 const CLAIMS = [
   "No templates",
@@ -89,15 +110,15 @@ const CLAIMS = [
 export function Marquee() {
   const strip = [...CLAIMS, ...CLAIMS, ...CLAIMS, ...CLAIMS];
   return (
-    <div className="overflow-hidden border-y border-hairline py-4">
+    <div className="mt-16 overflow-hidden bg-ink py-4 md:mt-24">
       <div className="marquee-track">
         {strip.map((c, i) => (
           <span
             key={i}
-            className="eyebrow flex shrink-0 items-center gap-8 pr-8 whitespace-nowrap"
+            className="flex shrink-0 items-center gap-8 pr-8 font-mono text-[0.6875rem] tracking-[0.16em] whitespace-nowrap text-paper/70 uppercase"
           >
             {c}
-            <span className="text-cobalt">/</span>
+            <span className="text-accent">/</span>
           </span>
         ))}
       </div>
@@ -106,20 +127,34 @@ export function Marquee() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Statement                                                           */
+/* Statement — sticky section label, offset column, two column body    */
 /* ------------------------------------------------------------------ */
 export function Statement() {
   return (
-    <section className="px-6 py-24 md:px-10 md:py-36">
-      <div className="mx-auto max-w-[1600px] md:grid md:grid-cols-12 md:gap-8">
-        <p className="eyebrow reveal md:col-span-3">Why it matters</p>
-        <h2 className="display reveal text-big md:col-span-9">
-          A template costs the person selling it nothing, and it shows. Your
-          competitor down the road is running the same one.{" "}
-          <span className="text-cobalt">
-            Custom is the only thing they cannot copy.
-          </span>
-        </h2>
+    <section className="px-5 py-24 md:px-8 md:py-40">
+      <div className="grid gap-10 md:grid-cols-12 md:gap-8">
+        <div className="md:col-span-3">
+          <p className="eyebrow md:sticky md:top-28">02 / Why it matters</p>
+        </div>
+
+        <div className="md:col-span-8 md:col-start-5">
+          <h2 className="display reveal text-big">
+            A template costs the person selling it nothing, and it shows.
+          </h2>
+
+          <div className="rule my-10" />
+
+          <div className="grid gap-8 md:grid-cols-2">
+            <p className="reveal text-lg leading-snug text-graphite">
+              Your competitor down the road bought the same one. Same hero, same
+              three cards, same stock photo of a handshake.
+            </p>
+            <p className="reveal text-lg leading-snug">
+              Custom is the only thing they cannot copy off a shelf.{" "}
+              <span className="text-accent">That is the entire argument.</span>
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );

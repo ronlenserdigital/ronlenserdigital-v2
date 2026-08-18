@@ -1,22 +1,91 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #e9e5da;
-  --color-paper-deep: #ded9cb;
-  --color-ink: #12110f;
-  --color-ink-soft: #1c1a17;
-  --color-graphite: #6e6a61;
-  --color-hairline: #c9c3b4;
-  --color-cobalt: #2536ff;
+  /* Defaults are overridden per direction below. Keep the names stable so
+     every component keeps working when the direction changes. */
+  --color-ink: #0a0b0d;
+  --color-ink-soft: #16181c;
+  --color-paper: #ecebe6;
+  --color-paper-deep: #dedcd4;
+  --color-graphite: #7d7d76;
+  --color-hairline: #c6c4bb;
+  --color-accent: #d6ff3e;
+  --color-accent-ink: #0a0b0d;
 
-  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, monospace;
 
-  --text-mega: clamp(3.2rem, 11vw, 10rem);
-  --text-big: clamp(2.4rem, 6.5vw, 5.5rem);
-  --text-mid: clamp(1.7rem, 3.4vw, 3rem);
+  --text-mega: clamp(3rem, 12vw, 12rem);
+  --text-big: clamp(2.2rem, 6.5vw, 5.5rem);
+  --text-mid: clamp(1.6rem, 3.4vw, 3rem);
+
+  --display-weight: 800;
+  --display-tracking: -0.045em;
+  --display-wdth: 100;
 }
+
+/* ---------- DIRECTION 1: VOLT ---------- */
+/* Black, bone, acid lime. Syne. Loud, current, unmistakably a studio. */
+[data-dir="volt"] {
+  --color-ink: #0a0b0d;
+  --color-ink-soft: #16181c;
+  --color-paper: #ecebe6;
+  --color-paper-deep: #dedcd4;
+  --color-graphite: #7d7d76;
+  --color-hairline: #c6c4bb;
+  --color-accent: #d6ff3e;
+  --color-accent-ink: #0a0b0d;
+
+  --font-display: "Syne", sans-serif;
+  --font-sans: "Inter Tight", sans-serif;
+  --font-mono: "Martian Mono", monospace;
+
+  --display-weight: 800;
+  --display-tracking: -0.045em;
+}
+
+/* ---------- DIRECTION 2: STEEL ---------- */
+/* Concrete, charcoal, safety orange. Archivo pushed to full width. */
+[data-dir="steel"] {
+  --color-ink: #17171a;
+  --color-ink-soft: #232327;
+  --color-paper: #cfccc4;
+  --color-paper-deep: #bdb9b0;
+  --color-graphite: #6d6a64;
+  --color-hairline: #a5a199;
+  --color-accent: #ff5c00;
+  --color-accent-ink: #ffffff;
+
+  --font-display: "Archivo", sans-serif;
+  --font-sans: "Archivo", sans-serif;
+  --font-mono: "Roboto Mono", monospace;
+
+  --display-weight: 900;
+  --display-tracking: -0.03em;
+  --display-wdth: 118;
+}
+
+/* ---------- DIRECTION 3: OXBLOOD ---------- */
+/* Near black, warm bone, deep red. Fraunces. Expensive and editorial. */
+[data-dir="oxblood"] {
+  --color-ink: #12100e;
+  --color-ink-soft: #1e1b18;
+  --color-paper: #f4f1e9;
+  --color-paper-deep: #e6e1d5;
+  --color-graphite: #79726a;
+  --color-hairline: #cfc7b8;
+  --color-accent: #9b1b1b;
+  --color-accent-ink: #f4f1e9;
+
+  --font-display: "Fraunces", serif;
+  --font-sans: "Inter Tight", sans-serif;
+  --font-mono: "Martian Mono", monospace;
+
+  --display-weight: 700;
+  --display-tracking: -0.025em;
+}
+
 
 @layer base {
   html {
@@ -31,12 +100,12 @@
   }
 
   ::selection {
-    background: var(--color-cobalt);
-    color: var(--color-paper);
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-cobalt);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
   }
 }
@@ -52,10 +121,11 @@
 
   .display {
     font-family: var(--font-display);
-    font-weight: 700;
-    line-height: 0.92;
-    letter-spacing: -0.035em;
-    font-variation-settings: "wdth" 100;
+    font-weight: var(--display-weight);
+    line-height: 0.9;
+    letter-spacing: var(--display-tracking);
+    font-variation-settings: "wdth" var(--display-wdth, 100);
+    text-wrap: balance;
   }
 
   .rule {
@@ -110,6 +180,15 @@
 }
 
 /* Cursor disc */
+.bleed-left {
+  margin-left: calc(-1 * var(--pad));
+}
+
+.stroke-type {
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+}
+
 .cursor-disc {
   position: fixed;
   top: 0;
@@ -117,8 +196,8 @@
   z-index: 90;
   pointer-events: none;
   border-radius: 9999px;
-  background: var(--color-cobalt);
-  color: var(--color-paper);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
   display: grid;
   place-items: center;
   width: 92px;
@@ -147,7 +226,16 @@
   .marquee-track {
     animation: none;
   }
-  .cursor-disc {
+  .bleed-left {
+  margin-left: calc(-1 * var(--pad));
+}
+
+.stroke-type {
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+}
+
+.cursor-disc {
     display: none;
   }
   * {

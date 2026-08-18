@@ -33,9 +33,9 @@ export function MenuItem({
 }) {
   const shared = cn(
     "group relative flex h-16 w-16 items-center justify-center rounded-full outline-none",
-    "transition-colors focus-visible:ring-2 focus-visible:ring-cobalt focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
-    disabled ? "cursor-not-allowed text-graphite/50" : "text-paper hover:text-cobalt",
-    isActive && "text-cobalt"
+    "transition-colors focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper",
+    disabled ? "cursor-not-allowed text-graphite/50" : "text-paper hover:text-accent",
+    isActive && "text-accent"
   );
 
   const inner = (
@@ -144,8 +144,8 @@ export function MenuContainer({ children, label = "Quick actions" }) {
           className={cn(
             "relative z-50 flex h-16 w-16 cursor-pointer items-center justify-center rounded-full",
             "bg-ink shadow-lg shadow-ink/20 will-change-transform outline-none",
-            "transition-colors hover:bg-cobalt",
-            "focus-visible:ring-2 focus-visible:ring-cobalt focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
+            "transition-colors hover:bg-accent",
+            "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper"
           )}
         >
           {first}
