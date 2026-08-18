@@ -7,9 +7,10 @@ import { reduced } from "../../lib/motion.js";
  * Renders a source into a grid of monospace glyphs, brightness mapped onto a
  * density ramp, with a slight barrel curve so the grid bows like a CRT.
  *
- * The source is procedural by default: three drifting metaballs plus a
- * horizon band. Pass `src` (an image or video URL) to render real footage
- * through the same grid instead.
+ * The source is procedural by default: a lit head and shoulders figure that
+ * breathes and sways. Pass `src` (an image or video URL) to render a real
+ * photo or reel through the same grid instead, which is the intent once a
+ * headshot exists at /public/ron.jpg.
  *
  * Written from scratch. No gsap, no three, no shader library. It is a
  * downscaled offscreen draw, one getImageData per frame, and fillText.
@@ -47,6 +48,8 @@ export function AsciiCanvas({
     let visible = true;
     let t = 0;
 
+    let mediaFailed = false;
+
     if (src) {
       const isVideo = /\.(mp4|webm|mov)$/i.test(src);
       media = document.createElement(isVideo ? "video" : "img");
@@ -54,7 +57,9 @@ export function AsciiCanvas({
         Object.assign(media, { muted: true, loop: true, playsInline: true, autoplay: true });
         media.play?.().catch(() => {});
       }
-      media.crossOrigin = "anonymous";
+      // no headshot on disk yet, so keep drawing the figure rather than
+      // stalling on a broken frame
+      media.onerror = () => { mediaFailed = true; };
       media.src = src;
     }
 
@@ -75,43 +80,87 @@ export function AsciiCanvas({
       buf.height = rows;
     };
 
-    /* Procedural source: drifting metaballs over a horizon band. */
-    const paintProcedural = (time) => {
-      const img = bctx.createImageData(cols, rows);
+    /* Procedural source: a head and shoulders figure, lit from the upper
+       left, breathing slightly. Reads as a person once mapped onto the
+       character ramp. Replaced entirely the moment `src` is supplied. */
+    const paintPortrait = (time) => {
+      const w = cols;
+      const h = rows;
+      const breathe = Math.sin(time * 0.5) * 0.006;
+      const sway = Math.sin(time * 0.33) * 0.008;
+
+      bctx.fillStyle = "#000";
+      bctx.fillRect(0, 0, w, h);
+
+      const cx = w * (0.5 + sway);
+      const headR = h * (0.19 + breathe);
+      const headY = h * 0.36;
+
+      // key light from upper left
+      const key = bctx.createRadialGradient(
+        cx - headR * 0.75, headY - headR * 0.8, headR * 0.1,
+        cx, headY, headR * 3.4
+      );
+      key.addColorStop(0, "rgba(255,255,255,1)");
+      key.addColorStop(0.42, "rgba(190,190,190,1)");
+      key.addColorStop(1, "rgba(18,18,18,1)");
+
+      // shoulders
+      bctx.save();
+      bctx.beginPath();
+      const shoulderY = headY + headR * 1.9;
+      bctx.moveTo(cx - w * 0.34, h + 2);
+      bctx.quadraticCurveTo(cx - w * 0.2, shoulderY, cx - headR * 0.72, shoulderY + h * 0.03);
+      bctx.lineTo(cx + headR * 0.72, shoulderY + h * 0.03);
+      bctx.quadraticCurveTo(cx + w * 0.2, shoulderY, cx + w * 0.34, h + 2);
+      bctx.closePath();
+      bctx.fillStyle = key;
+      bctx.fill();
+      bctx.restore();
+
+      // neck
+      bctx.beginPath();
+      bctx.rect(cx - headR * 0.32, headY + headR * 0.6, headR * 0.64, headR * 1.4);
+      bctx.fillStyle = "rgba(120,120,120,1)";
+      bctx.fill();
+
+      // head
+      bctx.save();
+      bctx.beginPath();
+      bctx.ellipse(cx, headY, headR * 0.78, headR, 0, 0, Math.PI * 2);
+      bctx.closePath();
+      bctx.fillStyle = key;
+      bctx.fill();
+      bctx.restore();
+
+      // rim light down the right edge of the head
+      bctx.save();
+      bctx.beginPath();
+      bctx.ellipse(cx, headY, headR * 0.78, headR, 0, -Math.PI * 0.45, Math.PI * 0.4);
+      bctx.lineWidth = Math.max(1, h * 0.012);
+      bctx.strokeStyle = "rgba(255,255,255,0.85)";
+      bctx.stroke();
+      bctx.restore();
+
+      // shadow under the jaw so the head separates from the shoulders
+      bctx.save();
+      bctx.beginPath();
+      bctx.ellipse(cx, headY + headR * 1.15, headR * 0.7, headR * 0.34, 0, 0, Math.PI * 2);
+      bctx.fillStyle = "rgba(0,0,0,0.55)";
+      bctx.filter = "blur(1px)";
+      bctx.fill();
+      bctx.restore();
+
+      // scan shimmer, keeps flat areas alive in the ramp
+      const img = bctx.getImageData(0, 0, w, h);
       const d = img.data;
-
-      const balls = [
-        { x: 0.5 + Math.cos(time * 0.21) * 0.26, y: 0.5 + Math.sin(time * 0.17) * 0.2, r: 0.3 },
-        { x: 0.5 + Math.cos(time * 0.13 + 2) * 0.34, y: 0.5 + Math.sin(time * 0.24 + 1) * 0.24, r: 0.24 },
-        { x: 0.5 + Math.cos(time * 0.31 + 4) * 0.2, y: 0.5 + Math.sin(time * 0.11 + 3) * 0.3, r: 0.19 },
-      ];
-
-      for (let y = 0; y < rows; y++) {
-        const ny = y / rows;
-        for (let x = 0; x < cols; x++) {
-          const nx = x / cols;
-
-          let v = 0;
-          for (const b of balls) {
-            const dx = (nx - b.x) * 1.6;
-            const dy = ny - b.y;
-            v += (b.r * b.r) / (dx * dx + dy * dy + 0.008);
-          }
-
-          // horizon band keeps the mass centred instead of floating
-          const band = Math.exp(-Math.pow((ny - 0.52) * 3.4, 2)) * 0.5;
-          // fine grain so flat areas still read as texture
-          const grain = (Math.sin(x * 12.9898 + y * 78.233 + time) * 43758.5453) % 1;
-
-          let lum = Math.min(1, v * 0.12 + band + Math.abs(grain) * 0.06);
-          lum = Math.pow(lum, 1.5);
-
-          const i = (y * cols + x) * 4;
-          const c = lum * 255;
-          d[i] = c;
-          d[i + 1] = c;
-          d[i + 2] = c;
-          d[i + 3] = 255;
+      for (let y = 0; y < h; y++) {
+        const band = 1 + Math.sin(y * 0.55 + time * 1.6) * 0.05;
+        for (let x = 0; x < w; x++) {
+          const i = (y * w + x) * 4;
+          const grain = ((Math.sin(x * 12.9898 + y * 78.233 + time) * 43758.5453) % 1) * 10;
+          const v = Math.max(0, Math.min(255, d[i] * band + grain));
+          d[i] = d[i + 1] = d[i + 2] = v;
         }
       }
       bctx.putImageData(img, 0, 0);
@@ -131,10 +180,10 @@ export function AsciiCanvas({
       ctx.fillStyle = bg.trim();
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      if (src) {
-        if (!paintMedia()) return;
+      if (src && !mediaFailed) {
+        if (!paintMedia()) paintPortrait(time);
       } else {
-        paintProcedural(time);
+        paintPortrait(time);
       }
 
       const px = bctx.getImageData(0, 0, cols, rows).data;
@@ -163,7 +212,7 @@ export function AsciiCanvas({
             lum > 0.82
               ? `rgba(255,255,255,${a})`
               : lum > 0.55
-                ? `rgba(48,128,255,${a * 0.55})`
+                ? `rgba(252,187,0,${a * 0.5})`
                 : `rgba(210,210,210,${a * 0.5})`;
 
           ctx.fillText(ch, x * cell, y * cell * 1.05 + bow);

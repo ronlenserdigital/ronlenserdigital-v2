@@ -62,7 +62,7 @@ Matched to the live ronlenserdigital.com.
 | `paper-deep` | `#F5F5F7` | |
 | `graphite` | `#A1A1A1` | muted text |
 | `hairline` | `#262626` | borders |
-| `accent` | `#3080FF` | |
+| `accent` | `#FCBB00` | amber, from the live site CSS |
 
 Outfit (display and hero name), Geist (body), Geist Mono (labels).
 
@@ -70,8 +70,7 @@ The page is dark by default: `body` is `ink`, text is `paper`. Anything that
 needs to sit above the page uses `ink-soft`, never `paper`. Watch for
 `text-ink` on a dark surface, that is invisible text.
 
-Accent is one line in `src/index.css`. The live site also carries an amber
-`#FCBB00` if blue turns out to be wrong.
+Accent is one line in `src/index.css`. There is no blue anywhere in the site.
 
 ### Chrome
 
@@ -331,10 +330,25 @@ Written from scratch. No gsap, no three, no shader library: a downscaled
 offscreen draw, one `getImageData` per frame, and `fillText`.
 
 ```jsx
-<AsciiCanvas cols={140} />              // procedural, the default
-<AsciiCanvas src="/reel.mp4" />         // render real footage through the grid
-<AsciiCanvas src="/photo.jpg" />        // or a still
+<AsciiCanvas src="/ron.jpg" />          // what the hero uses
+<AsciiCanvas src="/reel.mp4" />         // video works the same way
+<AsciiCanvas />                         // procedural figure only
 ```
+
+The default source is a lit head and shoulders figure, drawn on canvas, that
+breathes and sways. When `src` is supplied it renders that instead. If the
+file is missing or fails to load it falls back to the figure rather than
+stalling on a broken frame, so the hero never looks broken.
+
+### Getting a good headshot into the grid
+
+Put it at `public/ron.jpg`. The grid reads contrast, not detail:
+
+- head and shoulders, centred
+- one strong light source, one side of the face clearly brighter
+- plain or blown out background
+- about 1200x900 landscape
+- high contrast beats high resolution every time
 
 | Prop | Default | Notes |
 |---|---|---|

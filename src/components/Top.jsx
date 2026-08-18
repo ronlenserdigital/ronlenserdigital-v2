@@ -44,7 +44,10 @@ export function Hero() {
       </div>
 
       {/* the grid */}
-      <AsciiCanvas className="absolute inset-0 h-full w-full" cols={140} />
+      {/* Drop a headshot at public/ron.jpg and it renders through the grid.
+          Until then the procedural figure stands in. Any video works too:
+          src="/reel.mp4" */}
+      <AsciiCanvas src="/ron.jpg" className="absolute inset-0 h-full w-full" cols={140} />
 
       {/* headline, bottom left */}
       <div className="relative z-20 mt-auto px-5 pb-16 md:px-8 md:pb-20">
