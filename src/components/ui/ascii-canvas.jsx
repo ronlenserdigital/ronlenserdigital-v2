@@ -21,7 +21,8 @@ import { reduced } from "../../lib/motion.js";
  * and fillText.
  */
 
-const RAMP = " .·:-=+*ozUMW%@";
+const RAMP =
+  " .'`^\",:;~-_+<>i!lI?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
 const NOISE_GLYPHS = "01#%&*+=-<>/\\|?zUMW@";
 
 export function AsciiCanvas({
@@ -76,24 +77,31 @@ export function AsciiCanvas({
     }
 
     const buildField = () => {
-      field = new Float32Array(cols * rows);
+      field = new Float32Array(grid * rows);
       for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          const dx = (x / cols - 0.5) * 2;
+        for (let x = 0; x < grid; x++) {
+          const dx = (x / grid - 0.5) * 2;
           const dy = (y / rows - 0.5) * 2;
           const dist = Math.sqrt(dx * dx + dy * dy) / 1.414;
           const rnd = Math.abs((Math.sin(x * 127.1 + y * 311.7) * 43758.5453) % 1);
           // centre resolves first, edges last, with jitter so it is not a circle
-          field[y * cols + x] = Math.min(1, dist * 0.62 + rnd * 0.5);
+          field[y * grid + x] = Math.min(1, dist * 0.62 + rnd * 0.5);
         }
       }
     };
+
+    let grid = cols;
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = wrap.clientWidth;
       const h = wrap.clientHeight;
-      cell = w / cols;
+
+      // keep cells around 6px wide. A phone gets fewer columns than a
+      // desktop rather than an unreadable smear at the requested count.
+      grid = Math.max(70, Math.min(cols, Math.round(w / 6)));
+
+      cell = w / grid;
       rows = Math.max(8, Math.floor(h / (cell * 1.05)));
 
       canvas.width = w * dpr;
@@ -102,7 +110,7 @@ export function AsciiCanvas({
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      buf.width = cols;
+      buf.width = grid;
       buf.height = rows;
       buildField();
     };
@@ -110,7 +118,7 @@ export function AsciiCanvas({
     /* Procedural stand in: a lit head and shoulders figure. Only used when
        no src is given, or the file is missing. */
     const paintPortrait = (time) => {
-      const w = cols;
+      const w = grid;
       const h = rows;
       const breathe = Math.sin(time * 0.5) * 0.006;
       const sway = Math.sin(time * 0.33) * 0.008;
@@ -152,7 +160,7 @@ export function AsciiCanvas({
       const mh = media.videoHeight || media.naturalHeight;
       if (!mw || !mh) return false;
 
-      const gridAspect = cols / (rows * 1.05);
+      const gridAspect = grid / (rows * 1.05);
       const mediaAspect = mw / mh;
 
       let sx = 0, sy = 0, sw = mw, sh = mh;
@@ -165,8 +173,8 @@ export function AsciiCanvas({
       }
 
       bctx.fillStyle = "#000";
-      bctx.fillRect(0, 0, cols, rows);
-      bctx.drawImage(media, sx, sy, sw, sh, 0, 0, cols, rows);
+      bctx.fillRect(0, 0, grid, rows);
+      bctx.drawImage(media, sx, sy, sw, sh, 0, 0, grid, rows);
       return true;
     };
 
@@ -187,16 +195,16 @@ export function AsciiCanvas({
         paintPortrait(time);
       }
 
-      const px = bctx.getImageData(0, 0, cols, rows).data;
+      const px = bctx.getImageData(0, 0, grid, rows).data;
 
       ctx.font = `${cell * 1.02}px "Geist Mono", ui-monospace, monospace`;
       ctx.textBaseline = "top";
 
-      const midX = cols / 2;
+      const midX = grid / 2;
 
       for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          const idx = y * cols + x;
+        for (let x = 0; x < grid; x++) {
+          const idx = y * grid + x;
           const i = idx * 4;
           const lum = (px[i] * 0.299 + px[i + 1] * 0.587 + px[i + 2] * 0.114) / 255;
 
@@ -233,12 +241,8 @@ export function AsciiCanvas({
           const age = Math.min(1, (reveal - threshold) * 7);
           const a = Math.min(1, 0.32 + l * 0.95) * age;
 
-          ctx.fillStyle =
-            l > 0.78
-              ? `rgba(255,255,255,${a})`
-              : l > 0.5
-                ? `rgba(252,187,0,${a * 0.8})`
-                : `rgba(200,200,200,${a * 0.72})`;
+          const g = l > 0.78 ? 255 : l > 0.5 ? 226 : 186;
+          ctx.fillStyle = `rgba(${g},${g},${g},${a})`;
 
           ctx.fillText(ch, x * cell, y * cell * 1.05 + bow);
         }

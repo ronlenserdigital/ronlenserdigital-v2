@@ -49,7 +49,7 @@ export function Hero() {
           src="/reel.mp4" */}
       <AsciiCanvas
         src="/ron.jpg"
-        cols={150}
+        cols={210}
         className="absolute inset-x-0 top-0 h-[74vh] w-full md:h-[78vh]"
       />
 

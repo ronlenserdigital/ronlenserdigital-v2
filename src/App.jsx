@@ -8,7 +8,6 @@ import { Testimonials, Clients, Pricing, ContactCard } from "./components/Social
 import { Quote } from "./components/Quote.jsx";
 import { QuickActions } from "./components/QuickActions.jsx";
 import { Footer } from "./components/ui/footer-section.jsx";
-import { ParallaxBreak } from "./components/ui/parallax-layers.jsx";
 
 export default function App() {
   const root = useRef(null);
@@ -66,7 +65,6 @@ export default function App() {
         <Hero />
         <Marquee />
         <Statement />
-        <ParallaxBreak />
         <Work />
         <Capabilities />
         <Process />
