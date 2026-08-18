@@ -9,6 +9,7 @@ import { Quote } from "./components/Quote.jsx";
 import { QuickActions } from "./components/QuickActions.jsx";
 import { SectionRail } from "./components/SectionRail.jsx";
 import { Footer } from "./components/ui/footer-section.jsx";
+import { ParallaxBreak } from "./components/ui/parallax-layers.jsx";
 
 export default function App() {
   const root = useRef(null);
@@ -71,6 +72,7 @@ export default function App() {
         <Hero ready={ready} />
         <Marquee />
         <Statement />
+        <ParallaxBreak />
         <Work />
         <Capabilities />
         <Process />

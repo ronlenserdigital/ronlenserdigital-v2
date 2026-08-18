@@ -210,3 +210,31 @@ then add the links.
 `Closing` in `Social.jsx` used to repeat phone, email, location and the
 copyright line. Those rows were trimmed. `Closing` is now the big CTA and the
 three routes; the footer owns contact details.
+
+## Parallax break
+
+`ui/parallax-layers.jsx`, mounted between Statement and Work. Four layers at
+different travel speeds: ghost wordmark furthest back, then a back plate, the
+message, then a front plate.
+
+Ported from the Osmo / 21st.dev parallax component. Zero new dependencies.
+
+| Original | Here | Why |
+|---|---|---|
+| `new Lenis()` inside the component | reads scroll, app's single Lenis drives it | **Two Lenis instances fight over scrollTop every frame and break scrolling site wide.** This was the real bug in that snippet. |
+| `gsap` + `ScrollTrigger` | `useParallax` in `lib/motion.js` | ~50 kB gzipped to translate four layers. It is a lerp and a transform. |
+| `@studio-freight/lenis` | already have `lenis` | Deprecated package name. Installing it ships two copies of the same library. |
+| Osmo CDN images | typography and plates | Someone else's artwork. This site sells original work. |
+| `.parallax__*` classes | Tailwind | Those classes were never included in the snippet, so it rendered unstyled as delivered. |
+
+### Only ever one Lenis
+
+`App.jsx` owns the single instance. Any scroll-driven component you add from
+here reads position with `useParallax` or a plain listener. If you paste
+something that calls `new Lenis()`, delete that line before anything else.
+
+### Swapping in real images
+
+Layer 2 is a wide plate, layer 4 is a smaller front crop. Both are marked in
+the file. Replace the `div` with an `img` at the same size and rotation and
+the parallax keeps working. Travel amounts live in the `LAYERS` array.

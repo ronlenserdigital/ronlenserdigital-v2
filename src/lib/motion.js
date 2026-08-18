@@ -158,3 +158,42 @@ export function useAvailability() {
 
   return open;
 }
+
+/**
+ * Scrub progress for a parallax rig. Returns 0..1 as the element travels
+ * from entering the viewport to leaving it.
+ *
+ * Reads scroll directly instead of spinning up its own smooth-scroll
+ * instance. The app already runs one Lenis in App.jsx and a second one
+ * would fight it for scrollTop every frame.
+ */
+export function useParallax(ref) {
+  const [p, setP] = useState(0);
+  const raf = useRef(0);
+
+  useEffect(() => {
+    if (reduced()) return setP(0.5);
+
+    const tick = () => {
+      cancelAnimationFrame(raf.current);
+      raf.current = requestAnimationFrame(() => {
+        const el = ref.current;
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        const span = r.height + window.innerHeight;
+        setP(Math.min(1, Math.max(0, (window.innerHeight - r.top) / span)));
+      });
+    };
+
+    tick();
+    window.addEventListener("scroll", tick, { passive: true });
+    window.addEventListener("resize", tick);
+    return () => {
+      cancelAnimationFrame(raf.current);
+      window.removeEventListener("scroll", tick);
+      window.removeEventListener("resize", tick);
+    };
+  }, [ref]);
+
+  return p;
+}
