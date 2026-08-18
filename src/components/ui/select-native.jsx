@@ -42,7 +42,7 @@ const SelectNative = React.forwardRef(({ className, children, ...props }, ref) =
         ref={ref}
         className={cn(
           "peer inline-flex w-full cursor-pointer appearance-none items-center rounded-lg",
-          "border border-hairline bg-paper text-sm text-ink",
+          "border border-hairline bg-ink text-sm text-paper",
           "transition-[border-color,box-shadow] outline-none",
           "focus-visible:border-accent focus-visible:ring-[3px] focus-visible:ring-accent/25",
           "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",

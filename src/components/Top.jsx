@@ -55,7 +55,7 @@ export function Hero({ ready }) {
     <section
       id="top"
       ref={ref}
-      className="relative flex min-h-screen flex-col justify-between overflow-hidden px-5 pt-28 pb-8 md:px-8 md:pt-32"
+      className="relative flex min-h-screen flex-col justify-between overflow-hidden px-5 pt-40 pb-10 md:px-8 md:pt-48"
     >
       {/* top meta rail */}
       <div className="flex items-start justify-between">
@@ -72,7 +72,7 @@ export function Hero({ ready }) {
         <h1 className="font-name leading-[0.75] font-bold tracking-tighter uppercase">
           <span className="line-mask block">
             <span
-              className="line-inner block text-[clamp(4rem,17vw,13rem)] text-accent"
+              className="line-inner block text-[clamp(3.4rem,15vw,11rem)]"
               style={{ animationDelay: ready ? "0.05s" : "1.1s" }}
             >
               Ron
@@ -80,7 +80,7 @@ export function Hero({ ready }) {
           </span>
           <span className="line-mask block">
             <span
-              className="line-inner block text-[clamp(4rem,17vw,13rem)] text-accent"
+              className="line-inner block text-[clamp(3.4rem,15vw,11rem)]"
               style={{ animationDelay: ready ? "0.16s" : "1.21s" }}
             >
               Lenser
@@ -105,10 +105,10 @@ export function Hero({ ready }) {
           ref={cta}
           href="#quote"
           data-cursor="TALK"
-          className="inline-flex items-center gap-4 rounded-full bg-ink py-3 pr-3 pl-8 text-paper transition-colors hover:bg-accent hover:text-accent-ink"
+          className="inline-flex items-center gap-4 rounded-full bg-ink py-3 pr-3 pl-8 text-ink transition-colors hover:bg-graphite"
         >
           <span className="font-medium">Book a call</span>
-          <span className="grid h-10 w-10 place-items-center rounded-full bg-paper/15">
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-ink/10">
             &rarr;
           </span>
         </a>
@@ -142,12 +142,12 @@ const CLAIMS = [
 export function Marquee() {
   const strip = [...CLAIMS, ...CLAIMS, ...CLAIMS, ...CLAIMS];
   return (
-    <div className="overflow-hidden bg-ink py-4">
+    <div className="overflow-hidden border-y border-hairline py-4">
       <div className="marquee-track">
         {strip.map((c, i) => (
           <span
             key={i}
-            className="flex shrink-0 items-center gap-8 pr-8 font-mono text-[0.6875rem] tracking-[0.16em] whitespace-nowrap text-paper/70 uppercase"
+            className="flex shrink-0 items-center gap-8 pr-8 font-mono text-[0.6875rem] tracking-[0.16em] whitespace-nowrap text-graphite uppercase"
           >
             {c}
             <span className="text-accent">/</span>
@@ -172,20 +172,14 @@ export function Statement() {
         </div>
 
         <div className="md:col-span-8 md:col-start-5">
-          <h2 className="display text-mega uppercase">
+          <h2 className="display text-big">
             <span className="line-mask block">
-              <span className="line-inner block">Everyone</span>
+              <span className="line-inner block">Everyone uses the</span>
             </span>
             <span className="line-mask block">
-              <span className="line-inner block whitespace-nowrap">
-                uses the <span className="stroke-type">same</span>
+              <span className="line-inner block">
+                same template. <span className="text-graphite">You won't.</span>
               </span>
-            </span>
-            <span className="line-mask block">
-              <span className="line-inner block">template.</span>
-            </span>
-            <span className="line-mask block">
-              <span className="line-inner block text-accent">You won't.</span>
             </span>
           </h2>
 

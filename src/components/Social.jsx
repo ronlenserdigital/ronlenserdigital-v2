@@ -51,14 +51,14 @@ export function Testimonials() {
               <button
                 onClick={() => go(-1)}
                 aria-label="Previous quote"
-                className="grid h-12 w-12 place-items-center rounded-full border border-hairline transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+                className="grid h-12 w-12 place-items-center rounded-full border border-hairline transition-colors hover:border-paper hover:bg-paper hover:text-paper"
               >
                 &larr;
               </button>
               <button
                 onClick={() => go(1)}
                 aria-label="Next quote"
-                className="grid h-12 w-12 place-items-center rounded-full border border-hairline transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+                className="grid h-12 w-12 place-items-center rounded-full border border-hairline transition-colors hover:border-paper hover:bg-paper hover:text-paper"
               >
                 &rarr;
               </button>
@@ -84,13 +84,13 @@ const CLIENTS = [
 export function Clients() {
   const strip = [...CLIENTS, ...CLIENTS, ...CLIENTS];
   return (
-    <section className="overflow-hidden border-t border-hairline bg-ink py-14 text-paper">
-      <p className="eyebrow mb-8 px-5 !text-paper/45 md:px-8">Recent clients</p>
+    <section className="overflow-hidden border-t border-hairline py-14">
+      <p className="eyebrow mb-8 px-5 !text-graphite md:px-8">Recent clients</p>
       <div className="marquee-track">
         {strip.map((c, i) => (
           <span
             key={i}
-            className="flex shrink-0 items-center gap-14 pr-14 font-display text-3xl whitespace-nowrap text-paper/35"
+            className="flex shrink-0 items-center gap-14 pr-14 font-display text-3xl whitespace-nowrap text-graphite"
           >
             {c}
           </span>
@@ -135,14 +135,14 @@ export function Pricing() {
             <div
               key={o.name}
               className={`reveal flex flex-col justify-between gap-12 p-8 md:p-10 ${
-                o.accent ? "bg-ink text-paper" : "bg-paper"
+                o.accent ? "bg-transparent text-paper" : "bg-ink"
               }`}
             >
               <div>
                 <h3 className="font-display text-2xl">{o.name}</h3>
                 <p
                   className={`mt-4 text-sm leading-relaxed ${
-                    o.accent ? "text-paper/55" : "text-graphite"
+                    o.accent ? "text-graphite" : "text-graphite"
                   }`}
                 >
                   {o.body}
@@ -152,7 +152,7 @@ export function Pricing() {
                 <span className={`display text-big ${o.accent ? "text-accent" : ""}`}>
                   {o.price}
                 </span>
-                <span className={`eyebrow ${o.accent ? "!text-paper/50" : ""}`}>{o.unit}</span>
+                <span className={`eyebrow ${o.accent ? "!text-graphite" : ""}`}>{o.unit}</span>
               </div>
             </div>
           ))}
@@ -204,7 +204,7 @@ export function Closing() {
   const cta = useMagnetic(0.22);
 
   return (
-    <section id="contact" className="bg-ink px-5 py-24 text-paper md:px-8 md:py-36">
+    <section id="contact" className="px-5 py-24 md:px-8 md:py-36">
       <div>
         <h2 className="display reveal text-mega">
           Let's build
@@ -212,14 +212,14 @@ export function Closing() {
           <span className="text-accent">something good.</span>
         </h2>
 
-        <div className="mt-16 grid gap-px border-t border-paper/15 md:grid-cols-3">
+        <div className="mt-16 grid gap-px border-t border-hairline md:grid-cols-3">
           {ROUTES.map(([label, href, cur], i) => (
             <a
               key={label}
               ref={i === 0 ? cta : undefined}
               href={href}
               data-cursor={cur}
-              className="group flex items-center justify-between border-b border-paper/15 py-8 pr-4 transition-colors hover:text-accent md:border-b-0 md:px-6 md:py-10"
+              className="group flex items-center justify-between border-b border-hairline py-8 pr-4 transition-colors hover:text-accent md:border-b-0 md:px-6 md:py-10"
             >
               <span className="font-display text-2xl">{label}</span>
               <span className="transition-transform group-hover:translate-x-1">&rarr;</span>

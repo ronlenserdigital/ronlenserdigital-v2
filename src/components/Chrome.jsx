@@ -39,7 +39,7 @@ export function Preloader({ onDone }) {
         gone ? "-translate-y-full" : ""
       }`}
     >
-      <span className="eyebrow !text-paper/40">Ron Lenser Digital</span>
+      <span className="eyebrow !text-graphite">Ron Lenser Digital</span>
       <span className="display text-big text-paper tabular-nums">
         {String(n).padStart(3, "0")}
       </span>
@@ -147,13 +147,13 @@ export function Nav() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-          solid && !menu ? "bg-paper/80 backdrop-blur-md" : ""
+          solid && !menu ? "bg-ink/85 backdrop-blur-md" : ""
         }`}
       >
         <div className="flex items-center justify-between px-5 py-5 md:px-8">
           <a
             href="#top"
-            className={`eyebrow transition-colors ${menu ? "!text-paper" : "!text-ink"}`}
+            className={`eyebrow transition-colors ${menu ? "!text-paper" : "!text-paper"}`}
           >
             Ron Lenser Digital
           </a>
@@ -164,8 +164,8 @@ export function Nav() {
               href="#contact"
               className={`hidden rounded-full px-5 py-2.5 text-sm font-medium transition-colors sm:block ${
                 menu
-                  ? "bg-paper text-ink"
-                  : "bg-ink text-paper hover:bg-accent"
+                  ? "bg-transparent text-paper"
+                  : "bg-ink text-ink hover:bg-graphite"
               }`}
             >
               Book a call
@@ -179,12 +179,12 @@ export function Nav() {
             >
               <span
                 className={`block h-px w-6 transition-all duration-300 ${
-                  menu ? "translate-y-[3.5px] rotate-45 bg-paper" : "bg-ink"
+                  menu ? "translate-y-[3.5px] rotate-45 bg-ink" : "bg-ink"
                 }`}
               />
               <span
                 className={`block h-px w-6 transition-all duration-300 ${
-                  menu ? "-translate-y-[3.5px] -rotate-45 bg-paper" : "bg-ink"
+                  menu ? "-translate-y-[3.5px] -rotate-45 bg-ink" : "bg-ink"
                 }`}
               />
             </button>
@@ -207,7 +207,7 @@ export function Nav() {
                 href={href}
                 onClick={() => setMenu(false)}
                 data-cursor="GO"
-                className="group flex items-baseline justify-between border-b border-paper/12 py-5 md:py-7"
+                className="group flex items-baseline justify-between border-b border-hairline py-5 md:py-7"
                 style={{
                   transitionDelay: `${menu ? 220 + i * 55 : 0}ms`,
                   opacity: menu ? 1 : 0,
@@ -219,14 +219,14 @@ export function Nav() {
                 <span className="display text-big text-paper transition-colors group-hover:text-accent">
                   {label}
                 </span>
-                <span className="eyebrow !text-paper/35">
+                <span className="eyebrow !text-graphite">
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </a>
             ))}
           </nav>
 
-          <div className="mt-12 flex w-full flex-col gap-2 text-paper/50 md:flex-row md:gap-10">
+          <div className="mt-12 flex w-full flex-col gap-2 text-graphite md:flex-row md:gap-10">
             <a href="tel:+15403956493" className="text-sm hover:text-paper">
               (540) 395-6493
             </a>

@@ -76,11 +76,11 @@ export function Work() {
   const active = Math.min(shown.length, Math.floor(p * shown.length) + 1);
 
   return (
-    <section id="work" ref={track} className="relative h-[360vh] bg-ink text-paper">
+    <section id="work" ref={track} className="relative h-[360vh] bg-transparent text-paper">
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
         <div className="flex flex-wrap items-end justify-between gap-4 px-5 pb-8 md:px-8">
           <div>
-            <p className="eyebrow !text-paper/45">
+            <p className="eyebrow !text-graphite">
               03 <span className="mx-1 text-accent">/</span> Selected work
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -91,7 +91,7 @@ export function Work() {
                   className={`rounded-full border px-4 py-1.5 font-mono text-[0.625rem] tracking-[0.14em] uppercase transition-colors ${
                     filter === f
                       ? "border-accent bg-accent text-accent-ink"
-                      : "border-paper/20 text-paper/50 hover:border-paper/50"
+                      : "border-hairline text-graphite hover:border-paper/50"
                   }`}
                 >
                   {f}
@@ -100,7 +100,7 @@ export function Work() {
             </div>
           </div>
 
-          <p className="font-mono text-[0.625rem] tracking-[0.14em] text-paper/45 tabular-nums uppercase">
+          <p className="font-mono text-[0.625rem] tracking-[0.14em] text-graphite tabular-nums uppercase">
             {String(active).padStart(2, "0")} / {String(shown.length).padStart(2, "0")}
           </p>
         </div>
@@ -119,18 +119,18 @@ export function Work() {
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-ink-soft">
                 {/* Swap for <img> or <video autoPlay muted loop playsInline> */}
-                <span className="absolute top-4 left-4 font-mono text-[0.625rem] tracking-[0.14em] text-paper/30">
+                <span className="absolute top-4 left-4 font-mono text-[0.625rem] tracking-[0.14em] text-graphite">
                   {proj.n}
                 </span>
                 <div className="absolute inset-0 bg-accent opacity-0 transition-opacity duration-500 group-hover:opacity-25" />
               </div>
 
-              <div className="mt-5 flex items-baseline justify-between border-t border-paper/15 pt-4">
+              <div className="mt-5 flex items-baseline justify-between border-t border-hairline pt-4">
                 <div>
                   <h3 className="display text-2xl">{proj.name}</h3>
-                  <p className="mt-1 text-sm text-paper/45">{proj.tags.join(" / ")}</p>
+                  <p className="mt-1 text-sm text-graphite">{proj.tags.join(" / ")}</p>
                 </div>
-                <span className="font-mono text-[0.625rem] tracking-[0.14em] text-paper/45">
+                <span className="font-mono text-[0.625rem] tracking-[0.14em] text-graphite">
                   {proj.year}
                 </span>
               </div>
@@ -139,7 +139,7 @@ export function Work() {
         </div>
 
         <div className="mt-10 px-5 md:px-8">
-          <div className="h-px w-full bg-paper/15">
+          <div className="h-px w-full bg-hairline">
             <div className="h-px bg-accent" style={{ width: `${Math.max(4, p * 100)}%` }} />
           </div>
         </div>
@@ -206,7 +206,7 @@ export function Process() {
         {STEPS.map(([n, title, body, dur]) => (
           <div
             key={n}
-            className="reveal group grid grid-cols-12 items-baseline gap-4 border-b border-hairline py-8 transition-colors hover:bg-paper-deep md:gap-8 md:py-12"
+            className="reveal group grid grid-cols-12 items-baseline gap-4 border-b border-hairline py-8 transition-colors hover:bg-ink-soft md:gap-8 md:py-12"
           >
             <span className="col-span-2 font-mono text-[0.625rem] tracking-[0.14em] text-accent md:col-span-1">
               {n}

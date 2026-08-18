@@ -45,7 +45,7 @@ export function ParallaxBreak() {
     <section
       ref={rig}
       aria-label="Hand built"
-      className="relative isolate overflow-hidden bg-ink py-32 text-paper md:py-48"
+      className="relative isolate overflow-hidden py-32 md:py-48"
     >
       {/* layer 1, furthest back: oversized ghost word */}
       <div
@@ -53,7 +53,7 @@ export function ParallaxBreak() {
         style={{ transform: shift(p, layer("1")) }}
         aria-hidden="true"
       >
-        <span className="display stroke-type text-[26vw] leading-none whitespace-nowrap text-paper/20">
+        <span className="display text-[26vw] leading-none whitespace-nowrap text-hairline">
           HAND BUILT
         </span>
       </div>
@@ -82,7 +82,7 @@ export function ParallaxBreak() {
           delay={26}
           className="display mt-5 justify-center text-big"
         />
-        <p className="mx-auto mt-5 max-w-[38ch] leading-snug text-paper/55">
+        <p className="mx-auto mt-5 max-w-[38ch] leading-snug text-graphite">
           Open the source on anything I have built. You will not find a page
           builder, a bloated theme, or forty plugins holding it together.
         </p>

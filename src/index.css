@@ -1,33 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #12100e;
-  --color-ink-soft: #1e1b18;
-  --color-paper: #f4f1e9;
-  --color-paper-deep: #e6e1d5;
-  --color-graphite: #79726a;
-  --color-hairline: #cfc7b8;
-  --color-accent: #9b1b1b;
-  --color-accent-ink: #f4f1e9;
+  /* Matches the live ronlenserdigital.com: pure black ground, white text,
+     neutral greys. No chromatic accent on that site, so accent is white. */
+  --color-ink: #000000;
+  --color-ink-soft: #0a0a0a;
+  --color-paper: #ffffff;
+  --color-paper-deep: #f5f5f7;
+  --color-graphite: #a1a1a1;
+  --color-hairline: #262626;
+  --color-accent: #ffffff;
+  --color-accent-ink: #000000;
 
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
-  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Martian Mono", ui-monospace, monospace;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+  --font-name: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-tagline: "Geist", ui-sans-serif, system-ui, sans-serif;
 
-  /* hero only, matching the source component */
-  --font-name: "Fira Code", ui-monospace, monospace;
-  --font-tagline: "Antic", ui-sans-serif, system-ui, sans-serif;
+  --text-mega: clamp(2.8rem, 10vw, 9rem);
+  --text-big: clamp(2rem, 5.4vw, 4.4rem);
+  --text-mid: clamp(1.5rem, 2.8vw, 2.4rem);
 
-  --text-mega: clamp(3rem, 11.5vw, 11rem);
-  --text-big: clamp(2.2rem, 6.2vw, 5.2rem);
-  --text-mid: clamp(1.6rem, 3.2vw, 2.8rem);
-
-  --display-weight: 700;
-  --display-tracking: -0.025em;
-  --display-wdth: 100;
+  --display-weight: 500;
+  --display-tracking: -0.04em;
 
   --pad: 1.25rem;
 }
+
 
 @media (min-width: 768px) {
   :root {
@@ -43,8 +43,8 @@
   }
 
   body {
-    background-color: var(--color-paper);
-    color: var(--color-ink);
+    background-color: var(--color-ink);
+    color: var(--color-paper);
     font-family: var(--font-sans);
     overflow-x: hidden;
   }
@@ -74,7 +74,6 @@
     font-weight: var(--display-weight);
     line-height: 0.9;
     letter-spacing: var(--display-tracking);
-    font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
     text-wrap: balance;
   }
 
@@ -134,11 +133,6 @@
   margin-left: calc(-1 * var(--pad));
 }
 
-.stroke-type {
-  -webkit-text-stroke: 1.5px currentColor;
-  color: transparent;
-}
-
 .cursor-disc {
   position: fixed;
   top: 0;
@@ -178,11 +172,6 @@
   }
   .bleed-left {
   margin-left: calc(-1 * var(--pad));
-}
-
-.stroke-type {
-  -webkit-text-stroke: 1.5px currentColor;
-  color: transparent;
 }
 
 .cursor-disc {

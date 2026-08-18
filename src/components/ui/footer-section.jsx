@@ -64,7 +64,7 @@ function Social({ name, href, Icon }) {
       rel="noopener noreferrer"
       className={cn(
         "group relative grid h-11 w-11 place-items-center rounded-full",
-        "border border-paper/20 text-paper/70 transition-colors",
+        "border border-hairline text-graphite transition-colors",
         "hover:border-accent hover:bg-accent hover:text-accent-ink",
         "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
       )}
@@ -75,7 +75,7 @@ function Social({ name, href, Icon }) {
       <span
         className={cn(
           "pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 rounded-full",
-          "bg-paper px-3 py-1.5 font-mono text-[0.625rem] tracking-[0.14em] whitespace-nowrap text-ink uppercase",
+          "bg-ink px-3 py-1.5 font-mono text-[0.625rem] tracking-[0.14em] whitespace-nowrap text-ink uppercase",
           "translate-y-1 opacity-0 transition-all duration-200",
           "group-hover:translate-y-0 group-hover:opacity-100",
           "group-focus-visible:translate-y-0 group-focus-visible:opacity-100"
@@ -92,7 +92,7 @@ export function Footer() {
   const time = useClock("America/New_York");
 
   return (
-    <footer className="relative overflow-hidden border-t border-paper/15 bg-ink text-paper">
+    <footer className="relative overflow-hidden border-t border-hairline bg-transparent text-paper">
       <div className="px-5 py-16 md:px-8 md:py-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* availability, replaces the newsletter box */}
@@ -101,17 +101,17 @@ export function Footer() {
 
             <h2 className="display text-mid">Still on the tools.</h2>
 
-            <p className="mt-4 flex items-center gap-2 font-mono text-[0.6875rem] tracking-[0.16em] text-paper/60 uppercase">
+            <p className="mt-4 flex items-center gap-2 font-mono text-[0.6875rem] tracking-[0.16em] text-graphite uppercase">
               <span
                 className={cn(
                   "inline-block h-1.5 w-1.5 rounded-full",
-                  open ? "animate-pulse bg-accent" : "bg-paper/40"
+                  open ? "animate-pulse bg-accent" : "bg-graphite"
                 )}
               />
               {open ? "Taking calls now" : "Closed, leave a message"}
             </p>
 
-            <p className="mt-1 font-mono text-[0.6875rem] tracking-[0.16em] text-paper/40 tabular-nums uppercase">
+            <p className="mt-1 font-mono text-[0.6875rem] tracking-[0.16em] text-graphite tabular-nums uppercase">
               Local time {time}
             </p>
 
@@ -129,7 +129,7 @@ export function Footer() {
 
           {/* links */}
           <div>
-            <h3 className="font-mono text-[0.6875rem] tracking-[0.16em] text-paper/40 uppercase">
+            <h3 className="font-mono text-[0.6875rem] tracking-[0.16em] text-graphite uppercase">
               Sections
             </h3>
             <nav className="mt-5 space-y-2.5 text-sm">
@@ -137,7 +137,7 @@ export function Footer() {
                 <a
                   key={href}
                   href={href}
-                  className="link-swap block w-fit text-paper/75 hover:text-accent"
+                  className="link-swap block w-fit text-paper hover:text-accent"
                 >
                   {label}
                 </a>
@@ -147,25 +147,25 @@ export function Footer() {
 
           {/* contact */}
           <div>
-            <h3 className="font-mono text-[0.6875rem] tracking-[0.16em] text-paper/40 uppercase">
+            <h3 className="font-mono text-[0.6875rem] tracking-[0.16em] text-graphite uppercase">
               Contact
             </h3>
             <address className="mt-5 space-y-3 text-sm not-italic">
               <a
                 href={PHONE_HREF}
-                className="flex items-center gap-3 text-paper/75 hover:text-accent"
+                className="flex items-center gap-3 text-paper hover:text-accent"
               >
                 <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
                 {PHONE}
               </a>
               <a
                 href={`mailto:${EMAIL}`}
-                className="flex items-center gap-3 break-all text-paper/75 hover:text-accent"
+                className="flex items-center gap-3 break-all text-paper hover:text-accent"
               >
                 <Mail className="h-4 w-4 shrink-0" aria-hidden="true" />
                 {EMAIL}
               </a>
-              <p className="flex items-center gap-3 text-paper/75">
+              <p className="flex items-center gap-3 text-paper">
                 <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
                 Fredericksburg, Virginia
               </p>
@@ -174,7 +174,7 @@ export function Footer() {
 
           {/* social */}
           <div>
-            <h3 className="font-mono text-[0.6875rem] tracking-[0.16em] text-paper/40 uppercase">
+            <h3 className="font-mono text-[0.6875rem] tracking-[0.16em] text-graphite uppercase">
               Elsewhere
             </h3>
             <div className="mt-5 flex gap-3">
@@ -182,18 +182,18 @@ export function Footer() {
                 <Social key={s.name} {...s} />
               ))}
             </div>
-            <p className="mt-6 max-w-[26ch] text-sm leading-snug text-paper/45">
+            <p className="mt-6 max-w-[26ch] text-sm leading-snug text-graphite">
               One person, one phone. You get me, not a queue.
             </p>
           </div>
         </div>
 
         {/* legal row */}
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-paper/15 pt-8 md:flex-row md:items-center">
-          <p className="font-mono text-[0.6875rem] tracking-[0.16em] text-paper/40 uppercase">
+        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-hairline pt-8 md:flex-row md:items-center">
+          <p className="font-mono text-[0.6875rem] tracking-[0.16em] text-graphite uppercase">
             &copy; {new Date().getFullYear()} Ron Lenser Digital
           </p>
-          <p className="font-mono text-[0.6875rem] tracking-[0.16em] text-paper/40 uppercase">
+          <p className="font-mono text-[0.6875rem] tracking-[0.16em] text-graphite uppercase">
             Written by hand in Fredericksburg
           </p>
         </div>

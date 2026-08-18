@@ -9,7 +9,7 @@ import { cn } from "../../lib/utils.js";
  *   - the lamp glide is a measured sliding indicator, not framer-motion
  *     layoutId. Saves ~35 kB gzipped and looks the same.
  *   - shadcn tokens mapped to ours: bg-primary -> bg-accent,
- *     text-foreground -> text-paper, bg-muted -> bg-paper/10
+ *     text-foreground -> text-paper, bg-muted -> bg-hairline
  *   - scroll spy, so the active pill follows the section in view instead
  *     of only updating on click
  *   - aria-current on the active link
@@ -82,13 +82,13 @@ export function NavBar({ items, className }) {
       <nav
         ref={wrap}
         aria-label="Sections"
-        className="relative flex items-center gap-1 rounded-full border border-paper/15 bg-ink/70 p-1 shadow-lg shadow-ink/25 backdrop-blur-lg"
+        className="relative flex items-center gap-1 rounded-full border border-hairline bg-ink/70 p-1 shadow-lg shadow-ink/25 backdrop-blur-lg"
       >
         {/* the lamp */}
         <span
           aria-hidden="true"
           className={cn(
-            "pointer-events-none absolute top-1 bottom-1 rounded-full bg-paper/10",
+            "pointer-events-none absolute top-1 bottom-1 rounded-full bg-hairline",
             armed && "motion-safe:transition-all motion-safe:duration-500",
             "motion-safe:ease-[cubic-bezier(.34,1.56,.64,1)]"
           )}
@@ -114,7 +114,7 @@ export function NavBar({ items, className }) {
               className={cn(
                 "relative rounded-full px-4 py-2 text-sm font-medium transition-colors md:px-6",
                 "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
-                isActive ? "text-paper" : "text-paper/55 hover:text-paper"
+                isActive ? "text-paper" : "text-graphite hover:text-paper"
               )}
             >
               <span className="hidden md:inline">{item.name}</span>
