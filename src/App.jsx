@@ -5,6 +5,7 @@ import { Preloader, StatusBar, CursorDisc, Nav } from "./components/Chrome.jsx";
 import { Hero, Marquee, Statement } from "./components/Top.jsx";
 import { Work, Capabilities, Process, Results } from "./components/Work.jsx";
 import { Testimonials, Clients, Pricing, ContactCard, Closing } from "./components/Social.jsx";
+import { Quote } from "./components/Quote.jsx";
 
 export default function App() {
   const root = useRef(null);
@@ -73,6 +74,7 @@ export default function App() {
         <Clients />
         <Pricing />
         <ContactCard />
+        <Quote />
         <Closing />
       </main>
     </div>

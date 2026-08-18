@@ -58,3 +58,48 @@ Bricolage Grotesque / Instrument Sans / IBM Plex Mono.
 ## Deploy
 
 Vercel auto-detects Vite. Build `npm run build`, output `dist`.
+
+## UI primitives
+
+`src/components/ui/` holds reusable form primitives. Ported from shadcn /
+originui, but mapped onto our own tokens with no external dependencies.
+
+| File | Exports |
+|---|---|
+| `ui/select-native.jsx` | `SelectNative` |
+| `ui/label.jsx` | `Label` |
+| `ui/field.jsx` | `Input`, `Textarea` |
+| `lib/utils.js` | `cn()` |
+
+Why `components/ui/` and not just `components/`: it separates dumb reusable
+primitives from page sections that hold copy and layout. When you need a
+button or an input in a future section you look in one folder, not through
+five section files. It is also where shadcn expects components to live, so
+anything you pull from 21st.dev drops in without changing its imports.
+
+### Token mapping
+
+Any shadcn component you paste in uses these variable names. Swap them:
+
+| shadcn | ours |
+|---|---|
+| `bg-background` | `bg-paper` |
+| `text-foreground` | `text-ink` |
+| `border-input` | `border-hairline` |
+| `text-muted-foreground` | `text-graphite` |
+| `ring-ring` | `ring-cobalt` |
+| `bg-accent` | `bg-paper-deep` |
+
+## Quote form
+
+`components/Quote.jsx` posts to Web3Forms. Set your key:
+
+```
+cp .env.example .env
+# paste your key into VITE_WEB3FORMS_KEY
+```
+
+Also add `VITE_WEB3FORMS_KEY` in Vercel under Settings, Environment Variables.
+Without it the form renders but submissions fail.
+
+Service options live in the `SERVICES` array at the top of the file.
