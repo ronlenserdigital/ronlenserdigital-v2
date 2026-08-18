@@ -103,3 +103,35 @@ Also add `VITE_WEB3FORMS_KEY` in Vercel under Settings, Environment Variables.
 Without it the form renders but submissions fail.
 
 Service options live in the `SERVICES` array at the top of the file.
+
+## Quick actions dock
+
+`components/QuickActions.jsx` mounts a fixed circular menu bottom right that
+fades in after half a viewport of scroll. Call, text, email, quote.
+
+Phone and email live in the `PHONE` and `EMAIL` constants at the top of that
+file. Change them in one place.
+
+Built on `ui/fluid-menu.jsx`, ported from 21st.dev. Changes on the way in:
+
+- JSX, RLD tokens, no dark mode variants
+- dropped the unused `Menu` dropdown export, the Nav already covers that
+- removed the dead `useRef` / `useEffect` imports in the original
+- click outside to close, Escape to close with focus returned to the toggle
+- icon-only buttons carry a real `aria-label`
+- labels slide out on hover and on keyboard focus
+- collapsed items are `tabIndex={-1}` so tabbing does not land on invisible buttons
+- container height animates so it never traps clicks under it
+- `MenuItem` takes `href` and renders an anchor, so `tel:` and `sms:` work
+
+### Using it elsewhere
+
+```jsx
+<MenuContainer label="Quick actions">
+  <MenuItem label="Menu" icon={<MenuIcon size={24} strokeWidth={1.5} />} />
+  <MenuItem label="Call" href="tel:+15403956493" icon={<Phone size={22} />} />
+  <MenuItem label="Do a thing" onClick={fn} icon={<Star size={22} />} />
+</MenuContainer>
+```
+
+First child is always the toggle. The rest fan out below it.

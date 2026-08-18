@@ -6,6 +6,7 @@ import { Hero, Marquee, Statement } from "./components/Top.jsx";
 import { Work, Capabilities, Process, Results } from "./components/Work.jsx";
 import { Testimonials, Clients, Pricing, ContactCard, Closing } from "./components/Social.jsx";
 import { Quote } from "./components/Quote.jsx";
+import { QuickActions } from "./components/QuickActions.jsx";
 
 export default function App() {
   const root = useRef(null);
@@ -62,6 +63,7 @@ export default function App() {
       <CursorDisc />
       <Nav />
       <StatusBar />
+      <QuickActions />
       <main>
         <Hero ready={ready} />
         <Marquee />
