@@ -608,3 +608,34 @@ Everything else those components asked for was declined and rebuilt: radix
 accordion, radix slot, radix tooltip, radix label, radix switch, radix icons,
 class-variance-authority, clsx, tailwind-merge, framer-motion, gsap,
 @studio-freight/lenis, dicons, next-themes, tw-animate-css.
+
+
+## Process (how-it-works)
+
+`ui/how-it-works.jsx`. Four step cards with an icon, a duration, a
+description and three bullets each.
+
+Ported from the 21st.dev how-it-works. Changes:
+
+- shadcn theme variables mapped to ours: `bg-card` to `bg-ink-soft`,
+  `text-primary` to `text-paper`, `bg-muted` to `bg-ink`, `border` to hairline
+- **generalised from hardcoded three columns to N.** The connector line and the
+  number row are computed from `STEPS.length`, so a fifth step will not break
+  the alignment. The original hardcodes `left-[16.6667%] w-[66.6667%]`, which
+  is only correct for exactly three.
+- four across on desktop, two on tablet, one on phone. The connector only
+  draws where all four sit on one row; below that each card carries its own
+  number instead.
+- a duration chip per card, since "how long does this take" is the question
+  the section exists to answer.
+
+Steps live in `STEPS` at the top of the file.
+
+## Removed
+
+`Testimonials` in `Social.jsx` was dead code, exported but unmounted since the
+placeholder quotes were pulled. Deleted.
+
+Sections now run `01` Statement, `02` Capabilities, Process (its own card
+layout, unnumbered), `03` Results, FAQ (centred, unnumbered), `04` Pricing,
+`05` Contact, `06` Quote.

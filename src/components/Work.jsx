@@ -65,40 +65,6 @@ export function Capabilities() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Process                                                             */
-/* ------------------------------------------------------------------ */
-const STEPS = [
-  ["01", "Call", "Fifteen minutes. Tell me the problem, not the solution you think you need.", "1 day"],
-  ["02", "Quote", "Fixed price, fixed date, in writing. No hourly, no surprises.", "1 day"],
-  ["03", "Build", "You get a live preview link on day one and watch it fill in.", "3 to 10 days"],
-  ["04", "Hand off", "Deployed, connected, documented. The repo and the accounts are yours.", "1 day"],
-];
-
-export function Process() {
-  return (
-    <Section id="process" num="03" label="How a build runs" bare>
-      <div className="border-t border-hairline">
-        {STEPS.map(([n, title, body, dur]) => (
-          <div
-            key={n}
-            className="reveal group grid grid-cols-12 items-baseline gap-4 border-b border-hairline py-8 transition-colors hover:bg-ink-soft md:gap-8 md:py-12"
-          >
-            <span className="col-span-2 font-mono text-[0.625rem] tracking-[0.14em] text-accent md:col-span-1">
-              {n}
-            </span>
-            <h3 className="display col-span-10 text-mid md:col-span-3">{title}</h3>
-            <p className="col-span-12 leading-snug text-graphite md:col-span-6 md:text-lg">
-              {body}
-            </p>
-            <span className="eyebrow col-span-12 md:col-span-2 md:text-right">{dur}</span>
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /* Results — count-up, uneven grid                                     */
 /* ------------------------------------------------------------------ */
 const RESULTS = [
@@ -132,7 +98,7 @@ function ResultTile({ item, i }) {
 
 export function Results() {
   return (
-    <Section id="results" num="04" label="The numbers" bare>
+    <Section id="results" num="03" label="The numbers" bare>
       <h2 className="display reveal max-w-[18ch] text-big">
         What you actually get for the money.
       </h2>

@@ -1,76 +1,5 @@
-import { useState } from "react";
 import { Section } from "./Work.jsx";
 
-/* ------------------------------------------------------------------ */
-/* Testimonials — carousel with counter                                */
-/* REPLACE THESE WITH REAL QUOTES BEFORE LAUNCH.                       */
-/* ------------------------------------------------------------------ */
-const QUOTES = [
-  {
-    body: "Placeholder. Swap for a real quote before this goes live.",
-    name: "Client name",
-    role: "Owner, Business — Fredericksburg, VA",
-  },
-  {
-    body: "Placeholder. Swap for a real quote before this goes live.",
-    name: "Client name",
-    role: "Owner, Business — Stafford, VA",
-  },
-  {
-    body: "Placeholder. Swap for a real quote before this goes live.",
-    name: "Client name",
-    role: "Owner, Business — Spotsylvania, VA",
-  },
-];
-
-export function Testimonials() {
-  const [i, setI] = useState(0);
-  const q = QUOTES[i];
-  const go = (d) => setI((v) => (v + d + QUOTES.length) % QUOTES.length);
-
-  return (
-    <Section num="05" label="What clients say">
-      <div className="flex justify-end">
-        <p className="eyebrow tabular-nums">
-          {String(i + 1).padStart(2, "0")} / {String(QUOTES.length).padStart(2, "0")}
-        </p>
-      </div>
-
-      <div className="rule mt-4 mb-10" />
-
-      <blockquote key={i} className="reveal is-in">
-          <p className="display max-w-[22ch] text-big">{q.body}</p>
-          <footer className="mt-10 flex items-end justify-between">
-            <div>
-              <p className="font-medium">{q.name}</p>
-              <p className="mt-1 text-sm text-graphite">{q.role}</p>
-            </div>
-
-            <div className="flex gap-2">
-              <button
-                onClick={() => go(-1)}
-                aria-label="Previous quote"
-                className="grid h-12 w-12 place-items-center rounded-full border border-hairline transition-colors hover:border-paper hover:bg-paper hover:text-ink"
-              >
-                &larr;
-              </button>
-              <button
-                onClick={() => go(1)}
-                aria-label="Next quote"
-                className="grid h-12 w-12 place-items-center rounded-full border border-hairline transition-colors hover:border-paper hover:bg-paper hover:text-ink"
-              >
-                &rarr;
-              </button>
-            </div>
-          </footer>
-      </blockquote>
-    </Section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Pricing                                                             */
-/* ------------------------------------------------------------------ */
 /* No numbers on the page. Every quote is scoped on a call and priced in
    writing, so a price list here would be wrong more often than right. */
 const HOW = [
@@ -91,7 +20,7 @@ const HOW = [
 
 export function Pricing() {
   return (
-    <Section id="pricing" num="05" label="What it costs" bare>
+    <Section id="pricing" num="04" label="What it costs" bare>
       <h2 className="display reveal max-w-[18ch] text-big">
         One number. In writing. Before I start.
       </h2>
@@ -162,7 +91,7 @@ export function ContactCard() {
         </div>
 
         <div className="md:col-span-8 md:col-start-5">
-          <p className="eyebrow reveal">06 <span className="mx-1 text-accent">/</span> Want to talk?</p>
+          <p className="eyebrow reveal">05 <span className="mx-1 text-accent">/</span> Want to talk?</p>
           <h2 className="display reveal mt-6 text-mid">
             Call me and tell me what is actually slowing the business down. If
             software is not the answer, I will say so on that call.
