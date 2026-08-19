@@ -13,7 +13,7 @@ import { BlurText } from "./ui/blur-text.jsx";
 /* ------------------------------------------------------------------ */
 
 const LINKS = [
-  ["Work", "#work"],
+  ["What I do", "#capabilities"],
   ["Process", "#process"],
   ["Pricing", "#pricing"],
   ["Quote", "#quote"],

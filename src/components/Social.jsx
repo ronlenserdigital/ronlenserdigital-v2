@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useMagnetic } from "../lib/motion.js";
 import { Section } from "./Work.jsx";
 
 /* ------------------------------------------------------------------ */
@@ -30,7 +29,7 @@ export function Testimonials() {
   const go = (d) => setI((v) => (v + d + QUOTES.length) % QUOTES.length);
 
   return (
-    <Section num="07" label="What clients say">
+    <Section num="05" label="What clients say">
       <div className="flex justify-end">
         <p className="eyebrow tabular-nums">
           {String(i + 1).padStart(2, "0")} / {String(QUOTES.length).padStart(2, "0")}
@@ -127,7 +126,7 @@ const OFFERS = [
 
 export function Pricing() {
   return (
-    <Section id="pricing" num="08" label="What it costs" bare>
+    <Section id="pricing" num="07" label="What it costs" bare>
       <h2 className="display reveal max-w-[16ch] text-big">One price. Written down. Before I start.</h2>
 
       <div className="mt-14 grid gap-px bg-hairline md:grid-cols-3">
@@ -180,53 +179,12 @@ export function ContactCard() {
         </div>
 
         <div className="md:col-span-8 md:col-start-5">
-          <p className="eyebrow reveal">09 <span className="mx-1 text-accent">/</span> Want to talk?</p>
+          <p className="eyebrow reveal">08 <span className="mx-1 text-accent">/</span> Want to talk?</p>
           <h2 className="display reveal mt-6 text-mid">
             Call me and tell me what is actually slowing the business down. If
             software is not the answer, I will say so on that call.
           </h2>
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Closing CTA + footer                                                */
-/* ------------------------------------------------------------------ */
-const ROUTES = [
-  ["Get a quote", "tel:+15403956493", "QUOTE"],
-  ["See the work", "#work", "WORK"],
-  ["Just say hello", "mailto:ron@ronlenserdigital.com", "HELLO"],
-];
-
-export function Closing() {
-  const cta = useMagnetic(0.22);
-
-  return (
-    <section id="contact" className="px-5 py-24 md:px-8 md:py-36">
-      <div>
-        <h2 className="display reveal text-mega">
-          Let's build
-          <br />
-          <span className="text-accent">something good.</span>
-        </h2>
-
-        <div className="mt-16 grid gap-px border-t border-hairline md:grid-cols-3">
-          {ROUTES.map(([label, href, cur], i) => (
-            <a
-              key={label}
-              ref={i === 0 ? cta : undefined}
-              href={href}
-              data-cursor={cur}
-              className="group flex items-center justify-between border-b border-hairline py-8 pr-4 transition-colors hover:text-accent md:border-b-0 md:px-6 md:py-10"
-            >
-              <span className="font-display text-2xl">{label}</span>
-              <span className="transition-transform group-hover:translate-x-1">&rarr;</span>
-            </a>
-          ))}
-        </div>
-
       </div>
     </section>
   );

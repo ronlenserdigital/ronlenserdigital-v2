@@ -25,7 +25,7 @@ const PHONE = "(540) 395-6493";
 const EMAIL = "ron@ronlenserdigital.com";
 
 const LINKS = [
-  ["Work", "#work"],
+  ["What I do", "#capabilities"],
   ["Capabilities", "#capabilities"],
   ["Process", "#process"],
   ["Results", "#results"],

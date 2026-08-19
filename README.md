@@ -415,3 +415,33 @@ handles sections, the dock at top right handles contact.
 
 The technique is reproduced, not the page. The grid content is procedural and
 ours. Do not paste in their copy, their layout proportions, or their assets.
+
+
+## FAQ
+
+`ui/faq-section.jsx`, two columns, one open item per column.
+
+Ported from the 21st.dev faqsection with **zero new dependencies**. The
+original wants `@radix-ui/react-accordion`, `@radix-ui/react-slot`,
+`@radix-ui/react-icons`, `class-variance-authority` and `tw-animate-css`,
+plus the shadcn Button and Accordion files, to open and close a panel.
+
+The open/close is a `grid-template-rows` transition from `0fr` to `1fr`,
+which animates to auto height in pure CSS with no measurement, no keyframes
+and no library. The plus icon rotates 45 degrees into a minus.
+
+Questions live in the `LEFT` and `RIGHT` arrays at the top of the file. They
+are the real objections that come up on a call, including the AI one head on.
+Keep them that way: an FAQ full of questions nobody asks is filler.
+
+## Removed: portfolio
+
+The Work filmstrip is gone. It was five placeholder cards and a filter bar
+with nothing behind it, which read worse than having no work section at all.
+When there are real projects with real screenshots, it can come back from
+git history.
+
+Section numbers now run 01 to 09 with no gaps:
+
+`01` Statement · `02` Capabilities · `03` Process · `04` Results ·
+`05` Testimonials · `06` FAQ · `07` Pricing · `08` Contact · `09` Quote

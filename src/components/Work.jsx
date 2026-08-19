@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { useInView, useCountUp } from "../lib/motion.js";
 
 /* Shared shell: sticky numbered label in a narrow left column, content offset
@@ -25,130 +24,6 @@ export function Section({ id, num, label, children, className = "", bare }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Work — pinned horizontal filmstrip                                  */
-/* ------------------------------------------------------------------ */
-const PROJECTS = [
-  { n: "01", name: "Project one", tags: ["Site"], year: "2026" },
-  { n: "02", name: "Project two", tags: ["App"], year: "2026" },
-  { n: "03", name: "Project three", tags: ["Site", "Brand"], year: "2025" },
-  { n: "04", name: "Project four", tags: ["Automation"], year: "2025" },
-  { n: "05", name: "Project five", tags: ["App", "Automation"], year: "2025" },
-];
-
-const FILTERS = ["All", "Site", "App", "Automation", "Brand"];
-
-function useHorizontalScroll(ref) {
-  const [p, setP] = useState(0);
-  const frame = useRef(0);
-
-  useEffect(() => {
-    const handler = () => {
-      cancelAnimationFrame(frame.current);
-      frame.current = requestAnimationFrame(() => {
-        const el = ref.current;
-        if (!el) return;
-        const r = el.getBoundingClientRect();
-        const total = r.height - window.innerHeight;
-        setP(total <= 0 ? 0 : Math.min(1, Math.max(0, -r.top / total)));
-      });
-    };
-    handler();
-    window.addEventListener("scroll", handler, { passive: true });
-    window.addEventListener("resize", handler);
-    return () => {
-      cancelAnimationFrame(frame.current);
-      window.removeEventListener("scroll", handler);
-      window.removeEventListener("resize", handler);
-    };
-  }, [ref]);
-
-  return p;
-}
-
-export function Work() {
-  const track = useRef(null);
-  const p = useHorizontalScroll(track);
-  const [filter, setFilter] = useState("All");
-
-  const shown =
-    filter === "All" ? PROJECTS : PROJECTS.filter((x) => x.tags.includes(filter));
-  const shift = p * Math.max(0, (shown.length - 1.5) * 30);
-  const active = Math.min(shown.length, Math.floor(p * shown.length) + 1);
-
-  return (
-    <section id="work" ref={track} className="relative h-[360vh] bg-transparent text-paper">
-      <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
-        <div className="flex flex-wrap items-end justify-between gap-4 px-5 pb-8 md:px-8">
-          <div>
-            <p className="eyebrow !text-graphite">
-              03 <span className="mx-1 text-accent">/</span> Selected work
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {FILTERS.map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setFilter(f)}
-                  className={`rounded-full border px-4 py-1.5 font-mono text-[0.625rem] tracking-[0.14em] uppercase transition-colors ${
-                    filter === f
-                      ? "border-accent bg-accent text-accent-ink"
-                      : "border-hairline text-graphite hover:border-paper/50"
-                  }`}
-                >
-                  {f}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <p className="font-mono text-[0.625rem] tracking-[0.14em] text-graphite tabular-nums uppercase">
-            {String(active).padStart(2, "0")} / {String(shown.length).padStart(2, "0")}
-          </p>
-        </div>
-
-        <div
-          className="flex items-end gap-6 px-5 transition-transform duration-500 ease-out will-change-transform md:gap-10 md:px-8"
-          style={{ transform: `translate3d(-${shift}%, 0, 0)` }}
-        >
-          {shown.map((proj, i) => (
-            <article
-              key={proj.n}
-              data-cursor="VIEW"
-              className="group w-[80vw] shrink-0 md:w-[40vw]"
-              /* alternating heights so the strip is not a row of equal boxes */
-              style={{ marginBottom: i % 2 ? "3.5rem" : 0 }}
-            >
-              <div className="relative aspect-[4/3] overflow-hidden bg-ink-soft">
-                {/* Swap for <img> or <video autoPlay muted loop playsInline> */}
-                <span className="absolute top-4 left-4 font-mono text-[0.625rem] tracking-[0.14em] text-graphite">
-                  {proj.n}
-                </span>
-                <div className="absolute inset-0 bg-accent opacity-0 transition-opacity duration-500 group-hover:opacity-25" />
-              </div>
-
-              <div className="mt-5 flex items-baseline justify-between border-t border-hairline pt-4">
-                <div>
-                  <h3 className="display text-2xl">{proj.name}</h3>
-                  <p className="mt-1 text-sm text-graphite">{proj.tags.join(" / ")}</p>
-                </div>
-                <span className="font-mono text-[0.625rem] tracking-[0.14em] text-graphite">
-                  {proj.year}
-                </span>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-10 px-5 md:px-8">
-          <div className="h-px w-full bg-hairline">
-            <div className="h-px bg-accent" style={{ width: `${Math.max(4, p * 100)}%` }} />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /* Capabilities — staggered columns, not an even four up               */
 /* ------------------------------------------------------------------ */
 const CAPS = [
@@ -160,7 +35,7 @@ const CAPS = [
 
 export function Capabilities() {
   return (
-    <Section id="capabilities" num="04" label="What I do">
+    <Section id="capabilities" num="02" label="What I do">
       <h2 className="display reveal max-w-[18ch] text-big">
         Not a website guy. A build guy.
       </h2>
@@ -201,7 +76,7 @@ const STEPS = [
 
 export function Process() {
   return (
-    <Section id="process" num="05" label="How a build runs" bare>
+    <Section id="process" num="03" label="How a build runs" bare>
       <div className="border-t border-hairline">
         {STEPS.map(([n, title, body, dur]) => (
           <div
@@ -257,7 +132,7 @@ function ResultTile({ item, i }) {
 
 export function Results() {
   return (
-    <Section id="results" num="06" label="The numbers" bare>
+    <Section id="results" num="04" label="The numbers" bare>
       <h2 className="display reveal max-w-[18ch] text-big">
         What you actually get for the money.
       </h2>
