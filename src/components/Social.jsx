@@ -6,15 +6,18 @@ const HOW = [
   {
     name: "Fixed, not hourly",
     body: "You get one number and one date, in writing, before I start. It does not move because something took me longer than I thought.",
+    note: "If I underestimate the job, that is my problem, not your invoice.",
     accent: true,
   },
   {
     name: "Priced per project",
     body: "A one page site and a scheduling app are not the same job. I scope yours on a fifteen minute call and quote that, not a package you have to squeeze into.",
+    note: "No tiers, no bronze silver gold, nothing you pay for and never use.",
   },
   {
     name: "Nothing monthly to me",
     body: "The build is a one time cost. Ongoing services are optional and separate, and you can stop them any time without losing the thing I built.",
+    note: "You pay your own domain and hosting, in your name, a few dollars a month.",
   },
 ];
 
@@ -29,8 +32,8 @@ export function Pricing() {
         {HOW.map((o) => (
           <div
             key={o.name}
-            className={`reveal flex flex-col justify-between gap-10 p-8 md:p-10 ${
-              o.accent ? "bg-ink-soft text-paper" : "bg-ink"
+            className={`reveal flex flex-col gap-4 p-8 transition-colors md:p-10 ${
+              o.accent ? "bg-ink-soft text-paper" : "bg-ink hover:bg-ink-soft"
             }`}
           >
             <h3 className="font-display text-2xl">{o.name}</h3>
@@ -40,6 +43,9 @@ export function Pricing() {
               }`}
             >
               {o.body}
+            </p>
+            <p className="mt-auto border-t border-hairline pt-4 text-sm leading-snug text-paper/70">
+              {o.note}
             </p>
           </div>
         ))}

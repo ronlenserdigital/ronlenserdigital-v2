@@ -11,8 +11,8 @@ const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY ?? "";
 const SERVICES = [
   { value: "", label: "Pick one", disabled: true },
   { value: "website", label: "Website" },
-  { value: "app", label: "App, portal or internal tool — quoted" },
-  { value: "automation", label: "Automation or integration — quoted" },
+  { value: "app", label: "App, portal or internal tool" },
+  { value: "automation", label: "Automation or integration" },
   { value: "ai-answering", label: "AI chat or phone answering" },
   { value: "seo", label: "Local SEO and Google Business Profile" },
   { value: "logo", label: "Logo and brand marks" },
