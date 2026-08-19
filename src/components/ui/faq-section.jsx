@@ -31,21 +31,27 @@ function Item({ q, a, open, onToggle }) {
         >
           {q}
         </span>
-        <span
+        {/* One SVG, two strokes on a shared 16 grid. The previous version
+            stacked an absolutely positioned span inside a span that was not
+            relative, so the horizontal bar anchored to the wrong ancestor and
+            drifted per row. */}
+        <svg
           aria-hidden="true"
+          viewBox="0 0 16 16"
           className={cn(
-            "mt-1 grid h-5 w-5 shrink-0 place-items-center transition-transform duration-300",
-            open && "rotate-45"
+            "mt-1 h-5 w-5 shrink-0 transition-[transform,color] duration-300",
+            open ? "rotate-45 text-paper" : "text-graphite"
           )}
         >
-          <span className="absolute h-px w-4 bg-graphite" />
-          <span
-            className={cn(
-              "h-4 w-px transition-colors",
-              open ? "bg-accent" : "bg-graphite"
-            )}
+          <line
+            x1="1.5" y1="8" x2="14.5" y2="8"
+            stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"
           />
-        </span>
+          <line
+            x1="8" y1="1.5" x2="8" y2="14.5"
+            stroke="currentColor" strokeWidth="1.25" strokeLinecap="round"
+          />
+        </svg>
       </button>
 
       <div
