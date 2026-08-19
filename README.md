@@ -475,6 +475,69 @@ re-export every time the page changes, and nothing to go stale.
 
 ### Stack strip
 
+`ui/stack-strip.jsx` renders `BRANDS` from `ui/brand-marks.js`.
+
+Real brand marks. Path data comes from **Simple Icons**, which is CC0. The
+trademarks stay with their owners; using them to say "these are the tools I
+build with" is nominative use, which is exactly what this strip is.
+
+Paths are **inlined, not hotlinked**. Nothing breaks when a company
+redesigns, and the page makes no third party request on load. `simple-icons`
+is a devDependency only and is never shipped.
+
+Everything renders in `currentColor` so the strip stays monochrome: grey at
+rest, white on hover. Each entry keeps its official `hex` in case the strip
+ever goes full colour.
+
+Current marks: Claude, Claude Code, Grok, GitHub, Vercel, Supabase,
+Cloudflare, React, Tailwind, Figma, Stripe, Resend.
+
+**Two notes on what is missing.** OpenAI and ChatGPT are not in the CC0 set,
+OpenAI asked to be removed from it, so there is no official mark to inline and
+ChatGPT is not in the strip. Grok uses the X mark, since xAI ships Grok and
+there is no separate Grok icon in the set.
+
+To regenerate or add one:
+
+```
+npm i -D simple-icons
+node -e "const si=require('simple-icons'); ..."   // pull path and hex by title
+```
+
+## Removed: portfolio
+
+The Work filmstrip is gone. It was five placeholder cards and a filter bar
+with nothing behind it, which read worse than having no work section at all.
+When there are real projects with real screenshots, it can come back from
+git history.
+
+Section numbers now run 01 to 09 with no gaps:
+
+`01` Statement · `02` Capabilities · `03` Process · `04` Results ·
+`05` Testimonials · `06` FAQ · `07` Pricing · `08` Contact · `09` Quote
+
+
+## Hero (hero-section-9)
+
+Centred headline, subhead, two CTAs, then a tilted plate. Ported from the
+21st.dev hero-section-9.
+
+| Original | Here |
+|---|---|
+| `next/link` | `<a>`, this is Vite |
+| shadcn `Button` + radix slot + cva | plain anchors. Three packages to style a link. |
+| `bg-white` with `dark:` variants | our tokens |
+| Two `<img>` from the Tailark CDN | **a live browser frame rendering this site** |
+| "Your favorite companies are our partners" + 11 scraped customer logos | "The tools I build with" + the actual stack |
+
+### The plate is not a screenshot
+
+`SiteFrame` in `Top.jsx` is browser chrome with `ronlenserdigital.com` in the
+URL bar and a real `AsciiCanvas` running inside it. There is no image to
+re-export every time the page changes, and nothing to go stale.
+
+### Stack strip
+
 `ui/stack-strip.jsx`. Claude, Claude Code, Grok, ChatGPT, GitHub, Vercel,
 Supabase, Cloudflare, Figma, Stripe, Resend, Tailwind.
 
