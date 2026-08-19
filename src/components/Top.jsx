@@ -336,26 +336,6 @@ export function Statement() {
             </div>
           ))}
         </div>
-
-        {/* the stack, named */}
-        <div className="mt-20 grid gap-10 md:grid-cols-12 md:gap-12">
-          <div className="md:col-span-5">
-            <h3 className="display text-mid">I am not hiding the tools.</h3>
-          </div>
-          <div className="md:col-span-7">
-            <p className="reveal text-lg leading-relaxed text-graphite">
-              Claude and Claude Code do most of the writing. Grok for research
-              and second opinions. Vercel runs it, Supabase holds the data.
-              Some agencies use the same stack and will not admit it, because
-              they are still billing you for the hours it saves.
-            </p>
-            <p className="reveal mt-6 text-lg leading-relaxed">
-              I would rather tell you and charge you for the result. You are
-              not paying for hours. You are paying for the thing to exist and
-              work.
-            </p>
-          </div>
-        </div>
       </div>
     </section>
   );
