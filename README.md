@@ -548,3 +548,31 @@ Sections now run `01` Statement, `02` Capabilities, `03` Process,
 The cursor disc is gone: the component, the CSS, and every `data-cursor`
 attribute. Do not reintroduce it. Buttons show state through their own
 background and border, which is enough.
+
+
+## No prices on the page
+
+Deliberate. There is no price list anywhere on the site and no dollar figure
+in any section, FAQ answer, form option or stat tile. The form is the only
+route to a number.
+
+If you reintroduce a price, you have to keep it true in five places at once:
+the pricing section, the FAQ, the quote form dropdown, the results grid and
+the meta description. That is why they are all gone instead.
+
+`Pricing` in `Social.jsx` now explains *how* pricing works (fixed not hourly,
+scoped per project, nothing monthly for the build) and sends people to the
+form.
+
+## Domain and hosting
+
+The client buys and owns their own domain and hosting, in their name, on their
+card. Ron sets it up and connects it, but the accounts stay theirs. This is
+answered directly in the FAQ, because it is the thing that causes arguments
+later if it is left vague.
+
+## FAQ layout
+
+Centred heading, no numbered section label, two balanced columns of six and
+five underneath. Sections either side are numbered `05` Pricing, `06` Contact,
+`07` Quote.

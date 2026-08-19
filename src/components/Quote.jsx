@@ -10,12 +10,12 @@ const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY ?? "";
 /* What Ron Lenser Digital actually sells. Keep this list honest. */
 const SERVICES = [
   { value: "", label: "Pick one", disabled: true },
-  { value: "website", label: "Website — $1,000 one time" },
+  { value: "website", label: "Website" },
   { value: "app", label: "App, portal or internal tool — quoted" },
   { value: "automation", label: "Automation or integration — quoted" },
-  { value: "ai-answering", label: "AI chat or phone answering — from $49/mo" },
+  { value: "ai-answering", label: "AI chat or phone answering" },
   { value: "seo", label: "Local SEO and Google Business Profile" },
-  { value: "logo", label: "Logo and brand marks — $150" },
+  { value: "logo", label: "Logo and brand marks" },
   { value: "rescue", label: "Fix or rebuild something I already have" },
   { value: "unsure", label: "Not sure yet, I want advice" },
 ];
@@ -25,7 +25,7 @@ const TIMELINES = [
   { value: "asap", label: "As soon as you can start" },
   { value: "month", label: "Within a month" },
   { value: "quarter", label: "Next couple of months" },
-  { value: "looking", label: "Just getting prices" },
+  { value: "looking", label: "Getting a number before I commit" },
 ];
 
 export function Quote() {
@@ -66,14 +66,14 @@ export function Quote() {
       <div className="grid gap-12 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-4">
           <p className="eyebrow reveal md:sticky md:top-28">
-            08 <span className="mx-1 text-accent">/</span> Start a project
+            07 <span className="mx-1 text-accent">/</span> Start a project
           </p>
           <h2 className="display reveal mt-6 max-w-[14ch] text-big">
             Tell me what you need.
           </h2>
           <p className="reveal mt-6 max-w-sm text-graphite">
-            Two minutes to fill out. I reply the same day, usually within an
-            hour. If you would rather talk, call{" "}
+            This is how you get a number. Two minutes to fill out, I reply the
+            same day, usually within an hour. If you would rather talk, call{" "}
             <a href="tel:+15403956493" className="text-ink underline underline-offset-4">
               (540) 395-6493
             </a>

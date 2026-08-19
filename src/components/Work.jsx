@@ -104,7 +104,7 @@ export function Process() {
 const RESULTS = [
   { v: 7, suffix: "", pre: "", label: "Days from signed quote to shipped, typical." },
   { v: 1, suffix: "", pre: "", label: "Person you talk to. Same one who builds it." },
-  { v: 0, suffix: "", pre: "$", label: "Monthly platform fee. No lock in, no rented software." },
+  { v: 0, suffix: "", pre: "", label: "Monthly fees to me for the build. You own it outright." },
   { v: 24, suffix: "h", pre: "", label: "Longest you wait on a reply during a build." },
   { v: 100, suffix: "%", pre: "", label: "Yours at hand off. Repo, accounts, domain, all of it." },
   { v: 0, suffix: "", pre: "", label: "Meetings you sit through that could have been a text." },

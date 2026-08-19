@@ -82,12 +82,16 @@ function Column({ items }) {
 /* The questions people actually ask on the phone. */
 const LEFT = [
   {
-    q: "What does a thousand dollars actually get me?",
-    a: "A real website built around your business, not a theme with your logo dropped in. Copy, pages, forms, mobile, Google setup, and it goes live. One payment, no monthly fee to me for the site itself.",
+    q: "What does a build actually include?",
+    a: "The thing itself. Pages, copy, forms, mobile, the code, and getting it live. One fixed number agreed before I start, and no monthly fee to me afterwards. Fill out the form and you get your number, usually the same day.",
   },
   {
     q: "How fast is fast?",
     a: "A straightforward site is usually about a week from the day you say go. Apps and custom tools run longer depending on what they have to do. You get a date in writing before I start and I hold to it.",
+  },
+  {
+    q: "Do you handle the domain and hosting?",
+    a: "You buy and own those yourself, in your name, on your card. I set everything up and connect it, but the accounts stay yours. It is a few dollars a month and it means nobody, including me, can hold your website hostage. If you do not have a domain yet I will tell you exactly what to buy.",
   },
   {
     q: "Who owns it when we are done?",
@@ -97,13 +101,13 @@ const LEFT = [
     q: "What if I need changes later?",
     a: "Small tweaks are usually free for the first month. After that you can pay per change or keep me on retainer. You are never stuck waiting on me though, because you own the code.",
   },
+];
+
+const RIGHT = [
   {
     q: "Do I need to know what I want before I call?",
     a: "No. Most people call knowing what is annoying them, not what to build. Tell me the annoying part. If software is not the fix I will tell you that on the call and it costs you nothing.",
   },
-];
-
-const RIGHT = [
   {
     q: "You build with AI. Does that mean it is generic?",
     a: "The opposite. AI is what lets one person build something custom for your business instead of selling you a template because custom would take too long. The tools are AI, the decisions are mine, and the thing gets built for you specifically.",
@@ -132,24 +136,22 @@ export function FAQ() {
       id="faq"
       className="border-t border-hairline px-5 py-20 md:px-8 md:py-32"
     >
-      <div className="grid gap-10 md:grid-cols-12 md:gap-8">
-        <div className="md:col-span-3">
-          <p className="eyebrow md:sticky md:top-28">
-            05 <span className="mx-1 text-accent">/</span> Questions
+      <div className="mx-auto max-w-5xl">
+        <div className="text-center">
+          <h2 className="display reveal mx-auto max-w-[18ch] text-big">
+            The things people ask me on the phone.
+          </h2>
+          <p className="reveal mx-auto mt-5 max-w-[46ch] text-graphite">
+            If yours is not here, ask it. I answer the same day.
           </p>
         </div>
 
-        <div className="md:col-span-9">
-          <h2 className="display reveal max-w-[16ch] text-big">
-            The things people ask me on the phone.
-          </h2>
+        <div className="mt-14 grid gap-x-12 text-left md:grid-cols-2">
+          <Column items={LEFT} />
+          <Column items={RIGHT} />
+        </div>
 
-          <div className="mt-12 grid gap-x-12 md:grid-cols-2">
-            <Column items={LEFT} />
-            <Column items={RIGHT} />
-          </div>
-
-          <div className="mt-12 flex flex-wrap items-center gap-5">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-5">
             <a
               href="#quote"
               className="inline-flex items-center gap-4 rounded-full bg-paper py-3 pr-3 pl-8 text-ink transition-colors hover:bg-paper-deep"
@@ -159,13 +161,12 @@ export function FAQ() {
                 &rarr;
               </span>
             </a>
-            <a
-              href="tel:+15403956493"
-              className="text-sm text-graphite transition-colors hover:text-paper"
-            >
-              Or just call. (540) 395-6493
-            </a>
-          </div>
+          <a
+            href="tel:+15403956493"
+            className="text-sm text-graphite transition-colors hover:text-paper"
+          >
+            Or just call. (540) 395-6493
+          </a>
         </div>
       </div>
     </section>

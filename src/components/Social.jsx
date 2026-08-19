@@ -71,59 +71,69 @@ export function Testimonials() {
 /* ------------------------------------------------------------------ */
 /* Pricing                                                             */
 /* ------------------------------------------------------------------ */
-const OFFERS = [
+/* No numbers on the page. Every quote is scoped on a call and priced in
+   writing, so a price list here would be wrong more often than right. */
+const HOW = [
   {
-    name: "Website",
-    price: "$1,000",
-    unit: "one time",
-    body: "Built around your business, not a theme. Live in about a week. Repo, domain and accounts are yours at hand off.",
+    name: "Fixed, not hourly",
+    body: "You get one number and one date, in writing, before I start. It does not move because something took me longer than I thought.",
     accent: true,
   },
   {
-    name: "Custom build",
-    price: "Quoted",
-    unit: "per project",
-    body: "Apps, portals, dashboards, internal tools, automations. Tell me the problem and I will price the fix, fixed, in writing.",
+    name: "Priced per project",
+    body: "A one page site and a scheduling app are not the same job. I scope yours on a fifteen minute call and quote that, not a package you have to squeeze into.",
   },
   {
-    name: "AI answering",
-    price: "$49",
-    unit: "per month",
-    body: "Chat on your site from $49. Phone answering that books the job from $99. Both catch what you miss.",
+    name: "Nothing monthly to me",
+    body: "The build is a one time cost. Ongoing services are optional and separate, and you can stop them any time without losing the thing I built.",
   },
 ];
 
 export function Pricing() {
   return (
-    <Section id="pricing" num="06" label="What it costs" bare>
-      <h2 className="display reveal max-w-[16ch] text-big">One price. Written down. Before I start.</h2>
+    <Section id="pricing" num="05" label="What it costs" bare>
+      <h2 className="display reveal max-w-[18ch] text-big">
+        One number. In writing. Before I start.
+      </h2>
+      <p className="reveal mt-6 max-w-[52ch] text-lg text-graphite">
+        I do not publish a price list, because the honest number depends on
+        what the thing has to do. Tell me the problem and you will have a
+        fixed quote, usually the same day.
+      </p>
 
       <div className="mt-14 grid gap-px bg-hairline md:grid-cols-3">
-          {OFFERS.map((o) => (
-            <div
-              key={o.name}
-              className={`reveal flex flex-col justify-between gap-12 p-8 md:p-10 ${
-                o.accent ? "bg-transparent text-paper" : "bg-ink"
+        {HOW.map((o) => (
+          <div
+            key={o.name}
+            className={`reveal flex flex-col justify-between gap-10 p-8 md:p-10 ${
+              o.accent ? "bg-ink-soft text-paper" : "bg-ink"
+            }`}
+          >
+            <h3 className="font-display text-2xl">{o.name}</h3>
+            <p
+              className={`text-sm leading-relaxed ${
+                o.accent ? "text-paper/60" : "text-graphite"
               }`}
             >
-              <div>
-                <h3 className="font-display text-2xl">{o.name}</h3>
-                <p
-                  className={`mt-4 text-sm leading-relaxed ${
-                    o.accent ? "text-graphite" : "text-graphite"
-                  }`}
-                >
-                  {o.body}
-                </p>
-              </div>
-              <div className="flex items-baseline gap-3">
-                <span className={`display text-big ${o.accent ? "text-accent" : ""}`}>
-                  {o.price}
-                </span>
-                <span className={`eyebrow ${o.accent ? "!text-graphite" : ""}`}>{o.unit}</span>
-              </div>
-            </div>
-          ))}
+              {o.body}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-12 flex flex-wrap items-center gap-5">
+        <a
+          href="#quote"
+          className="inline-flex items-center gap-4 rounded-full bg-paper py-3 pr-3 pl-8 text-ink transition-colors hover:bg-paper-deep"
+        >
+          <span className="font-medium">Get your number</span>
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-ink/15">
+            &rarr;
+          </span>
+        </a>
+        <p className="text-sm text-graphite">
+          Two minutes to fill out. No obligation, no follow up sequence.
+        </p>
       </div>
     </Section>
   );
@@ -152,7 +162,7 @@ export function ContactCard() {
         </div>
 
         <div className="md:col-span-8 md:col-start-5">
-          <p className="eyebrow reveal">07 <span className="mx-1 text-accent">/</span> Want to talk?</p>
+          <p className="eyebrow reveal">06 <span className="mx-1 text-accent">/</span> Want to talk?</p>
           <h2 className="display reveal mt-6 text-mid">
             Call me and tell me what is actually slowing the business down. If
             software is not the answer, I will say so on that call.
