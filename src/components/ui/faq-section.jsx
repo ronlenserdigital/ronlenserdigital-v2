@@ -135,7 +135,7 @@ export function FAQ() {
       <div className="grid gap-10 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-3">
           <p className="eyebrow md:sticky md:top-28">
-            06 <span className="mx-1 text-accent">/</span> Questions
+            05 <span className="mx-1 text-accent">/</span> Questions
           </p>
         </div>
 

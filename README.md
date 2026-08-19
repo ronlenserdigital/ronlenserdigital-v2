@@ -445,3 +445,43 @@ Section numbers now run 01 to 09 with no gaps:
 
 `01` Statement · `02` Capabilities · `03` Process · `04` Results ·
 `05` Testimonials · `06` FAQ · `07` Pricing · `08` Contact · `09` Quote
+
+
+## Hero (hero-section-9)
+
+Centred headline, subhead, two CTAs, then a tilted plate. Ported from the
+21st.dev hero-section-9.
+
+| Original | Here |
+|---|---|
+| `next/link` | `<a>`, this is Vite |
+| shadcn `Button` + radix slot + cva | plain anchors. Three packages to style a link. |
+| `bg-white` with `dark:` variants | our tokens |
+| Two `<img>` from the Tailark CDN | **a live browser frame rendering this site** |
+| "Your favorite companies are our partners" + 11 scraped customer logos | "The tools I build with" + the actual stack |
+
+### The plate is not a screenshot
+
+`SiteFrame` in `Top.jsx` is browser chrome with `ronlenserdigital.com` in the
+URL bar and a real `AsciiCanvas` running inside it. There is no image to
+re-export every time the page changes, and nothing to go stale.
+
+### Stack strip
+
+`ui/stack-strip.jsx`. Claude, Claude Code, Grok, ChatGPT, GitHub, Vercel,
+Supabase, Cloudflare, Figma, Stripe, Resend, Tailwind.
+
+Original geometric glyphs at one size with the wordmark in mono, not scraped
+brand SVGs. Hotlinking eleven companies' logo files gives eleven different
+visual weights, dead links when any of them redesigns, and reproduced
+trademarks on a commercial page. Add a tool by pushing to `TOOLS`.
+
+## Removed
+
+- **QuickActions dock.** The new nav carries Call and Get a quote in the same
+  corner. Two controls for one job.
+- **Clients marquee.** It listed six invented businesses.
+- **Testimonials.** Every quote read "Placeholder".
+
+Sections now run `01` Statement, `02` Capabilities, `03` Process,
+`04` Results, `05` FAQ, `06` Pricing, `07` Contact, `08` Quote.

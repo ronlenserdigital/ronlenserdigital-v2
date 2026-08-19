@@ -66,7 +66,7 @@ export function Quote() {
       <div className="grid gap-12 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-4">
           <p className="eyebrow reveal md:sticky md:top-28">
-            09 <span className="mx-1 text-accent">/</span> Start a project
+            08 <span className="mx-1 text-accent">/</span> Start a project
           </p>
           <h2 className="display reveal mt-6 max-w-[14ch] text-big">
             Tell me what you need.

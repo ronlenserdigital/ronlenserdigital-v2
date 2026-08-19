@@ -4,10 +4,10 @@ import { reduced } from "./lib/motion.js";
 import { CursorDisc } from "./components/Chrome.jsx";
 import { Hero, Marquee, Statement } from "./components/Top.jsx";
 import { Capabilities, Process, Results } from "./components/Work.jsx";
-import { Testimonials, Clients, Pricing, ContactCard } from "./components/Social.jsx";
+import { Pricing, ContactCard } from "./components/Social.jsx";
 import { FAQ } from "./components/ui/faq-section.jsx";
+import { StackStrip } from "./components/ui/stack-strip.jsx";
 import { Quote } from "./components/Quote.jsx";
-import { QuickActions } from "./components/QuickActions.jsx";
 import { Footer } from "./components/ui/footer-section.jsx";
 
 export default function App() {
@@ -61,16 +61,14 @@ export default function App() {
   return (
     <div ref={root}>
       <CursorDisc />
-      <QuickActions />
       <main>
         <Hero />
+        <StackStrip />
         <Marquee />
         <Statement />
         <Capabilities />
         <Process />
         <Results />
-        <Testimonials />
-        <Clients />
         <FAQ />
         <Pricing />
         <ContactCard />

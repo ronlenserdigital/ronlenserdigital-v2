@@ -69,37 +69,6 @@ export function Testimonials() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Client logo marquee                                                 */
-/* ------------------------------------------------------------------ */
-const CLIENTS = [
-  "Abbots Lane",
-  "Casablanca House",
-  "Riverbend Co.",
-  "Northside Trades",
-  "Falmouth Auto",
-  "Rappahannock Supply",
-];
-
-export function Clients() {
-  const strip = [...CLIENTS, ...CLIENTS, ...CLIENTS];
-  return (
-    <section className="overflow-hidden border-t border-hairline py-14">
-      <p className="eyebrow mb-8 px-5 !text-graphite md:px-8">Recent clients</p>
-      <div className="marquee-track">
-        {strip.map((c, i) => (
-          <span
-            key={i}
-            className="flex shrink-0 items-center gap-14 pr-14 font-display text-3xl whitespace-nowrap text-graphite"
-          >
-            {c}
-          </span>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /* Pricing                                                             */
 /* ------------------------------------------------------------------ */
 const OFFERS = [
@@ -126,7 +95,7 @@ const OFFERS = [
 
 export function Pricing() {
   return (
-    <Section id="pricing" num="07" label="What it costs" bare>
+    <Section id="pricing" num="06" label="What it costs" bare>
       <h2 className="display reveal max-w-[16ch] text-big">One price. Written down. Before I start.</h2>
 
       <div className="mt-14 grid gap-px bg-hairline md:grid-cols-3">
@@ -179,7 +148,7 @@ export function ContactCard() {
         </div>
 
         <div className="md:col-span-8 md:col-start-5">
-          <p className="eyebrow reveal">08 <span className="mx-1 text-accent">/</span> Want to talk?</p>
+          <p className="eyebrow reveal">07 <span className="mx-1 text-accent">/</span> Want to talk?</p>
           <h2 className="display reveal mt-6 text-mid">
             Call me and tell me what is actually slowing the business down. If
             software is not the answer, I will say so on that call.
