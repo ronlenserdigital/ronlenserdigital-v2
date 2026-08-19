@@ -63,15 +63,13 @@ export function Quote() {
       id="quote"
       className="border-t border-hairline px-5 py-20 md:px-8 md:py-32"
     >
-      <div className="grid gap-12 md:grid-cols-12 md:gap-8">
-        <div className="md:col-span-4">
-          <p className="eyebrow reveal md:sticky md:top-28">
-            06 <span className="mx-1 text-accent">/</span> Start a project
-          </p>
-          <h2 className="display reveal mt-6 max-w-[14ch] text-big">
+      <div className="mx-auto max-w-3xl">
+        <div className="mb-12 text-center">
+          <p className="eyebrow reveal">Start a project</p>
+          <h2 className="display reveal mt-4 text-big">
             Tell me what you need.
           </h2>
-          <p className="reveal mt-6 max-w-sm text-graphite">
+          <p className="reveal mx-auto mt-5 max-w-[52ch] text-graphite">
             This is how you get a number. Two minutes to fill out, I reply the
             same day, usually within an hour. If you would rather talk, call{" "}
             <a href="tel:+15403956493" className="text-ink underline underline-offset-4">
@@ -81,10 +79,7 @@ export function Quote() {
           </p>
         </div>
 
-        <form
-          onSubmit={onSubmit}
-          className="reveal space-y-6 md:col-span-7 md:col-start-6"
-        >
+        <form onSubmit={onSubmit} className="reveal space-y-6">
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor={`${uid}-name`}>Your name</Label>

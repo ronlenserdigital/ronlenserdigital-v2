@@ -645,3 +645,36 @@ most of the time the site is not the thing costing you money.
 `components/Work.jsx` is now `components/Sections.jsx`. It has held no work
 section since the portfolio was removed; what is left is the shared `Section`
 shell and `Results`.
+
+
+## No section numbers
+
+The `01 / WHY IT MATTERS` labels are gone from every section. Do not
+reintroduce them.
+
+They existed to justify a narrow left column that held nothing else, which
+meant a quarter of the width on most sections was empty. With the numbers
+removed, the shell was rebuilt.
+
+## Section shell
+
+`Section` in `Sections.jsx` is now a centred header over full width content:
+
+```jsx
+<Section id="results" title="..." intro="...">{children}</Section>
+```
+
+`eyebrow`, `title` and `intro` are all optional; pass none and you get a plain
+centred container. There is no label column and no `bare` flag any more.
+
+Sections rebuilt to remove dead space:
+
+- **Statement** — centred, rule under the headline, two columns of body text
+  instead of one column offset right
+- **Results** — even three across on a hairline grid, filled cells. The old
+  version staggered every second tile down with a margin, which left holes.
+- **Pricing** — centred header, cards edge to edge, CTA centred
+- **Contact** — photo column widened and the empty gutter column between it
+  and the copy removed, then filled with call and form buttons
+- **Quote** — centred header over a single column form rather than a sticky
+  label beside it

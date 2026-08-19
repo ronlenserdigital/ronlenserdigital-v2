@@ -20,17 +20,12 @@ const HOW = [
 
 export function Pricing() {
   return (
-    <Section id="pricing" num="04" label="What it costs" bare>
-      <h2 className="display reveal max-w-[18ch] text-big">
-        One number. In writing. Before I start.
-      </h2>
-      <p className="reveal mt-6 max-w-[52ch] text-lg text-graphite">
-        I do not publish a price list, because the honest number depends on
-        what the thing has to do. Tell me the problem and you will have a
-        fixed quote, usually the same day.
-      </p>
-
-      <div className="mt-14 grid gap-px bg-hairline md:grid-cols-3">
+    <Section
+      id="pricing"
+      title="One number. In writing. Before I start."
+      intro="I do not publish a price list, because the honest number depends on what the thing has to do. Tell me the problem and you will have a fixed quote, usually the same day."
+    >
+      <div className="grid gap-px bg-hairline md:grid-cols-3">
         {HOW.map((o) => (
           <div
             key={o.name}
@@ -50,7 +45,7 @@ export function Pricing() {
         ))}
       </div>
 
-      <div className="mt-12 flex flex-wrap items-center gap-5">
+      <div className="mt-12 flex flex-wrap items-center justify-center gap-5">
         <a
           href="#quote"
           className="inline-flex items-center gap-4 rounded-full bg-paper py-3 pr-3 pl-8 text-ink transition-colors hover:bg-paper-deep"
@@ -74,9 +69,9 @@ export function Pricing() {
 export function ContactCard() {
   return (
     <section className="border-t border-hairline px-5 py-20 md:px-8 md:py-32">
-      <div className="grid items-center gap-10 md:grid-cols-12">
-        <div className="md:col-span-3">
-          <div className="w-full max-w-[260px] overflow-hidden rounded-lg border border-hairline bg-ink-soft">
+      <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-12 md:gap-12">
+        <div className="md:col-span-4">
+          <div className="w-full max-w-[280px] overflow-hidden rounded-lg border border-hairline bg-ink-soft">
             <img
               src="/ron-portrait.jpg"
               alt="Ron Lenser"
@@ -90,12 +85,26 @@ export function ContactCard() {
           <p className="text-sm text-graphite">Founder. The one who builds it.</p>
         </div>
 
-        <div className="md:col-span-8 md:col-start-5">
-          <p className="eyebrow reveal">05 <span className="mx-1 text-accent">/</span> Want to talk?</p>
-          <h2 className="display reveal mt-6 text-mid">
+        <div className="md:col-span-8">
+          <p className="eyebrow reveal">Want to talk?</p>
+          <h2 className="display reveal mt-4 text-mid">
             Call me and tell me what is actually slowing the business down. If
             software is not the answer, I will say so on that call.
           </h2>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <a
+              href="tel:+15403956493"
+              className="rounded-full bg-paper px-7 py-3 text-sm font-medium text-ink transition-colors hover:bg-paper-deep"
+            >
+              (540) 395-6493
+            </a>
+            <a
+              href="#quote"
+              className="rounded-full border border-hairline px-7 py-3 text-sm transition-colors hover:border-paper/40"
+            >
+              Or send the form
+            </a>
+          </div>
         </div>
       </div>
     </section>

@@ -236,49 +236,40 @@ export function Marquee() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Statement                                                           */
+/* Statement — centred, no label column                                */
 /* ------------------------------------------------------------------ */
 export function Statement() {
   return (
-    <section className="px-5 py-24 md:px-8 md:py-40">
-      <div className="grid gap-10 md:grid-cols-12 md:gap-8">
-        <div className="md:col-span-3">
-          <p className="eyebrow md:sticky md:top-28">
-            01 <span className="mx-1 text-accent">/</span> Why it matters
+    <section className="border-t border-hairline px-5 py-24 md:px-8 md:py-36">
+      <div className="mx-auto max-w-5xl text-center">
+        <h2 className="display text-mega">
+          <span className="line-mask block">
+            <span className="line-inner block">A shop of ten</span>
+          </span>
+          <span className="line-mask block">
+            <span className="line-inner block">
+              quotes <span className="stroke-type">months.</span>
+            </span>
+          </span>
+          <span className="line-mask block">
+            <span className="line-inner block">I quote days.</span>
+          </span>
+        </h2>
+
+        <div className="rule mx-auto my-12 max-w-md" />
+
+        <div className="mx-auto grid max-w-4xl gap-8 text-left md:grid-cols-2">
+          <BlurText
+            as="p"
+            text="I build with AI. Claude, Claude Code, Grok, Vercel, Supabase. That is not a shortcut, it is the reason one person can do the work of a room."
+            animateBy="words"
+            delay={20}
+            className="text-lg leading-snug text-graphite"
+          />
+          <p className="reveal text-lg leading-snug">
+            You are not paying for hours. You are paying for the thing to exist
+            and work. That is the entire argument.
           </p>
-        </div>
-
-        <div className="md:col-span-8 md:col-start-5">
-          <h2 className="display text-mega">
-            <span className="line-mask block">
-              <span className="line-inner block">A shop of ten</span>
-            </span>
-            <span className="line-mask block">
-              <span className="line-inner block">
-                quotes <span className="stroke-type">months.</span>
-              </span>
-            </span>
-            <span className="line-mask block">
-              <span className="line-inner block text-accent">I quote days.</span>
-            </span>
-          </h2>
-
-          <div className="rule my-10" />
-
-          <div className="grid gap-8 md:grid-cols-2">
-            <BlurText
-              as="p"
-              text="I build with AI. Claude, Claude Code, Grok, Vercel, Supabase. That is not a shortcut, it is the reason one person can do the work of a room."
-              animateBy="words"
-              delay={20}
-              className="text-lg leading-snug text-graphite"
-            />
-            <p className="reveal text-lg leading-snug">
-              You are not paying for hours. You are paying for the thing to
-              exist and work.{" "}
-              <span className="text-accent">That is the entire argument.</span>
-            </p>
-          </div>
         </div>
       </div>
     </section>

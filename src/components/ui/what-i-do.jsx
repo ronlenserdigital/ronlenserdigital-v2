@@ -86,9 +86,7 @@ export function WhatIDo() {
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-12 md:grid-cols-3 md:gap-10 lg:gap-16">
         {/* left */}
         <div className="flex flex-col items-start justify-center md:col-span-1">
-          <span className="eyebrow mb-3">
-            02 <span className="mx-1 text-accent">/</span> What I do
-          </span>
+          <span className="eyebrow mb-3">What I do</span>
           <h2 className="display reveal mb-5 text-big">Not a website guy.</h2>
           <p className="reveal mb-8 text-base leading-relaxed text-graphite">
             Websites are the common ask, but the job is whatever the business
