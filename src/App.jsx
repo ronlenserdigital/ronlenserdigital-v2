@@ -2,11 +2,12 @@ import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { reduced } from "./lib/motion.js";
 import { Hero, Marquee, Statement } from "./components/Top.jsx";
-import { Capabilities, Results } from "./components/Work.jsx";
+import { Results } from "./components/Sections.jsx";
 import { Pricing, ContactCard } from "./components/Social.jsx";
 import { FAQ } from "./components/ui/faq-section.jsx";
 import { StackStrip } from "./components/ui/stack-strip.jsx";
 import { HowItWorks } from "./components/ui/how-it-works.jsx";
+import { WhatIDo } from "./components/ui/what-i-do.jsx";
 import { Quote } from "./components/Quote.jsx";
 import { Footer } from "./components/ui/footer-section.jsx";
 
@@ -65,7 +66,7 @@ export default function App() {
         <StackStrip />
         <Marquee />
         <Statement />
-        <Capabilities />
+        <WhatIDo />
         <HowItWorks />
         <Results />
         <FAQ />

@@ -1,4 +1,4 @@
-import { Section } from "./Work.jsx";
+import { Section } from "./Sections.jsx";
 
 /* No numbers on the page. Every quote is scoped on a call and priced in
    writing, so a price list here would be wrong more often than right. */

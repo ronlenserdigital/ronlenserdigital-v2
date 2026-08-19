@@ -618,3 +618,30 @@ placeholder quotes were pulled. Deleted.
 Sections now run `01` Statement, `02` Capabilities, Process (its own card
 layout, unnumbered), `03` Results, FAQ (centred, unnumbered), `04` Pricing,
 `05` Contact, `06` Quote.
+
+
+## What I do (process overview)
+
+`ui/what-i-do.jsx`. Pitch column on the left, six capability cards on the
+right in two columns.
+
+Ported from the 21st.dev how-we-do-it process overview. Changes:
+
+- no shadcn `Button`, so no `@radix-ui/react-slot` and no
+  `class-variance-authority`. Three packages to style one link.
+- shadcn theme variables mapped to ours: `bg-card` to `bg-ink-soft`,
+  `text-primary` to `text-paper`, `border` to hairline
+- the decorative rule is sized to the card instead of hanging a pixel outside
+  it, which the original does with `-left-[1px]`
+
+Cards live in `ITEMS`: Websites, Web apps, Internal tools, Automations, AI
+answering, Getting found.
+
+The left column leads with "Not a website guy" and the line that matters:
+most of the time the site is not the thing costing you money.
+
+## File rename
+
+`components/Work.jsx` is now `components/Sections.jsx`. It has held no work
+section since the portfolio was removed; what is left is the shared `Section`
+shell and `Results`.

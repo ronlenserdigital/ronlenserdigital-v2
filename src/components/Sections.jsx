@@ -24,47 +24,6 @@ export function Section({ id, num, label, children, className = "", bare }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Capabilities — staggered columns, not an even four up               */
-/* ------------------------------------------------------------------ */
-const CAPS = [
-  ["Websites", ["Custom marketing sites", "Landing pages", "Multi location pages", "Booking and quote flows", "Rebuilds and rescues", "Speed and Core Web Vitals"]],
-  ["Found on Google", ["Local SEO setup", "Google Business Profile", "Service area pages", "Schema markup", "Review generation", "Rank tracking"]],
-  ["Answering", ["AI chatbot on site", "AI phone receptionist", "Missed call text back", "Lead routing to your phone", "After hours coverage", "Booking handoff"]],
-  ["Brand", ["Logo and marks", "Type and color systems", "Vehicle and signage art", "Print and business cards", "Photo direction", "Social templates"]],
-];
-
-export function Capabilities() {
-  return (
-    <Section id="capabilities" num="02" label="What I do">
-      <h2 className="display reveal max-w-[18ch] text-big">
-        Not a website guy. A build guy.
-      </h2>
-
-      <div className="mt-14 grid gap-x-8 gap-y-14 sm:grid-cols-2">
-        {CAPS.map(([title, items], i) => (
-          <div key={title} className="reveal" style={{ marginTop: i % 2 ? "2.5rem" : 0 }}>
-            <div className="flex items-baseline gap-3">
-              <span className="font-mono text-[0.625rem] tracking-[0.14em] text-accent">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="display text-xl">{title}</h3>
-            </div>
-            <div className="rule mt-4 mb-4" />
-            <ul className="space-y-2.5">
-              {items.map((it) => (
-                <li key={it} className="text-[0.95rem] leading-snug text-graphite">
-                  {it}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /* Results — count-up, uneven grid                                     */
 /* ------------------------------------------------------------------ */
 const RESULTS = [
