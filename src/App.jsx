@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { reduced } from "./lib/motion.js";
 import { Hero, Marquee, Statement } from "./components/Top.jsx";
-import { Results } from "./components/Sections.jsx";
 import { Pricing, ContactCard } from "./components/Social.jsx";
 import { FAQ } from "./components/ui/faq-section.jsx";
 import { StackStrip } from "./components/ui/stack-strip.jsx";
@@ -68,7 +67,6 @@ export default function App() {
         <Statement />
         <WhatIDo />
         <HowItWorks />
-        <Results />
         <FAQ />
         <Pricing />
         <ContactCard />
