@@ -187,43 +187,29 @@ about the ceiling before pills get cramped on a small phone. Deep links
 
 ## Footer
 
-`ui/footer-section.jsx`. Ported from 21st.dev with **zero new dependencies**.
-
-The original wanted six: `@radix-ui/react-slot`, `class-variance-authority`,
-`@radix-ui/react-label`, `@radix-ui/react-switch`, `@radix-ui/react-tooltip`,
-plus the shadcn Button / Input / Label / Switch / Textarea files. All of that
-for a footer. Skipped every one.
-
-What changed and why:
+`ui/footer-section.jsx`. Ported from the 21st.dev designali footer with
+**zero new dependencies**.
 
 | Original | Here | Why |
 |---|---|---|
-| Dark mode `Switch` | removed | This site themes off `data-dir`, not a `.dark` class. That toggle would have fought the direction system. |
-| Newsletter form | live availability panel + Call now | There is no newsletter. A subscribe box that goes nowhere is a dead CTA. |
-| Facebook, Twitter, Instagram, LinkedIn | Facebook, LinkedIn | Only the accounts that exist. |
-| Radix `Tooltip` | CSS hover label | Same pattern as `fluid-menu.jsx`. One dependency saved. |
-| Placeholder address and phone | real ones | |
-| `Textarea` imported, never used | removed | Dead import in the source. |
+| `dicons` package | lucide (already installed) + the brand paths already inlined in `brand-marks.js` | one less dependency for four icons |
+| `next-themes` light/dark toggle | removed | this site is black. The sun and moon buttons had nothing to switch. |
+| `next/link` | `<a>` | Vite, not Next |
+| Six columns of invented pages | four columns of things that exist on this page | every link resolves to a real anchor |
+| "Made with heart by Ali Imam" | Ron's credit line | |
+| Placeholder agency blurb | Ron's actual positioning | |
 
-### Brand icons
+Kept from the original: the dotted borders, the centre pill, and the
+lift-on-hover social row, which is the character of that footer.
 
-`lucide-react` v1 dropped all brand icons (Facebook, LinkedIn, Twitter, etc)
-for trademark reasons. They are inlined as SVG in `footer-section.jsx` rather
-than adding a second icon package. If you add another social account, write
-its mark the same way.
+### Socials
 
-### No legal links yet
+Email, phone, Facebook, LinkedIn, GitHub. Only accounts that exist.
 
-The original footer links Privacy Policy, Terms of Service and Cookie
-Settings. Those are not linked here because those pages do not exist. Linking
-to 404s on a site selling web work is worse than omitting them. Add the pages,
-then add the links.
-
-### Duplicate rows removed
-
-`Closing` in `Social.jsx` used to repeat phone, email, location and the
-copyright line. Those rows were trimmed. `Closing` is now the big CTA and the
-three routes; the footer owns contact details.
+LinkedIn renders as a mono `in` pill rather than an icon. Like OpenAI,
+LinkedIn asked to be removed from the Simple Icons CC0 set, so there is no
+official path to inline, and redrawing a mark a company specifically asked
+not to have redistributed is not worth it for a footer icon.
 
 ## Parallax break
 
