@@ -152,8 +152,7 @@ export function FAQ() {
           <div className="mt-12 flex flex-wrap items-center gap-5">
             <a
               href="#quote"
-              data-cursor="ASK"
-              className="inline-flex items-center gap-4 rounded-full bg-paper py-3 pr-3 pl-8 text-ink transition-colors hover:bg-accent hover:text-accent-ink"
+              className="inline-flex items-center gap-4 rounded-full bg-paper py-3 pr-3 pl-8 text-ink transition-colors hover:bg-paper-deep"
             >
               <span className="font-medium">Ask me something else</span>
               <span className="grid h-10 w-10 place-items-center rounded-full bg-ink/15">

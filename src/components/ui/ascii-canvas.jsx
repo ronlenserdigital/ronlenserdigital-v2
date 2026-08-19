@@ -220,7 +220,7 @@ export function AsciiCanvas({
             if (flick < 0.55) continue;
             const ch = NOISE_GLYPHS[Math.floor(flick * NOISE_GLYPHS.length)];
             const dx0 = (x - midX) / midX;
-            ctx.fillStyle = `rgba(190,160,140,${0.12 + flick * 0.16})`;
+            ctx.fillStyle = `rgba(170,170,170,${0.12 + flick * 0.16})`;
             ctx.fillText(ch, x * cell, y * cell * 1.05 + dx0 * dx0 * curve * cell * rows * 0.06);
             continue;
           }

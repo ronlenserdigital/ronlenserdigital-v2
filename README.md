@@ -73,7 +73,7 @@ Matched to the live ronlenserdigital.com.
 | `paper-deep` | `#F5F5F7` | |
 | `graphite` | `#A1A1A1` | muted text |
 | `hairline` | `#262626` | borders |
-| `accent` | `#FCBB00` | amber, from the live site CSS |
+| `accent` | `#FFFFFF` | the site is monochrome, there is no colour accent |
 
 Outfit (display and hero name), Geist (body), Geist Mono (labels).
 
@@ -81,7 +81,14 @@ The page is dark by default: `body` is `ink`, text is `paper`. Anything that
 needs to sit above the page uses `ink-soft`, never `paper`. Watch for
 `text-ink` on a dark surface, that is invisible text.
 
-Accent is one line in `src/index.css`. There is no blue anywhere in the site.
+The site is monochrome: black, white, and the greys between. The only colour
+on the page is Ron's skin tone in the ASCII grid, which comes from the photo
+itself. There is no yellow, no amber, no blue.
+
+`--color-accent` still exists as a token so a colour can be reintroduced in
+one line, but it is currently white. If you set it to a real colour, check
+the buttons that use `hover:bg-paper-deep`, since those were switched off
+`hover:bg-accent` when white made that hover invisible.
 
 ### Chrome
 
@@ -485,3 +492,10 @@ trademarks on a commercial page. Add a tool by pushing to `TOOLS`.
 
 Sections now run `01` Statement, `02` Capabilities, `03` Process,
 `04` Results, `05` FAQ, `06` Pricing, `07` Contact, `08` Quote.
+
+
+## No hover cursor
+
+The cursor disc is gone: the component, the CSS, and every `data-cursor`
+attribute. Do not reintroduce it. Buttons show state through their own
+background and border, which is enough.

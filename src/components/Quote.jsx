@@ -194,8 +194,7 @@ function SubmitButton({ status }) {
       ref={ref}
       type="submit"
       disabled={sending}
-      data-cursor="SEND"
-      className="inline-flex items-center gap-4 rounded-full bg-ink py-3 pr-3 pl-8 text-paper transition-colors hover:bg-accent disabled:opacity-60"
+      className="inline-flex items-center gap-4 rounded-full bg-ink py-3 pr-3 pl-8 text-paper transition-colors hover:bg-paper hover:text-ink disabled:opacity-60"
     >
       <span className="font-medium">{sending ? "Sending" : "Send it"}</span>
       <span className="grid h-10 w-10 place-items-center rounded-full bg-hairline">

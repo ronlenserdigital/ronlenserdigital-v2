@@ -82,7 +82,7 @@ export function Hero() {
                   </a>
                   <a
                     href="#quote"
-                    className="rounded-lg bg-paper px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-accent hover:text-accent-ink"
+                    className="rounded-lg bg-paper px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-paper-deep"
                   >
                     Get a quote
                   </a>
@@ -127,8 +127,7 @@ export function Hero() {
               <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
                 <a
                   href="#quote"
-                  data-cursor="TALK"
-                  className="inline-flex items-center gap-4 rounded-full bg-paper py-3 pr-3 pl-8 text-ink transition-colors hover:bg-accent hover:text-accent-ink"
+                  className="inline-flex items-center gap-4 rounded-full bg-paper py-3 pr-3 pl-8 text-ink transition-colors hover:bg-paper-deep"
                 >
                   <span className="font-medium">Start a project</span>
                   <span className="grid h-10 w-10 place-items-center rounded-full bg-ink/15">

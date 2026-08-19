@@ -65,7 +65,7 @@ function Social({ name, href, Icon }) {
       className={cn(
         "group relative grid h-11 w-11 place-items-center rounded-full",
         "border border-hairline text-graphite transition-colors",
-        "hover:border-accent hover:bg-accent hover:text-accent-ink",
+        "hover:border-paper hover:bg-paper hover:text-ink",
         "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
       )}
     >
@@ -117,7 +117,6 @@ export function Footer() {
 
             <a
               href={PHONE_HREF}
-              data-cursor="CALL"
               className="mt-6 inline-flex items-center gap-3 rounded-full bg-accent py-2.5 pr-3 pl-6 text-accent-ink transition-transform hover:scale-[1.03]"
             >
               <span className="text-sm font-medium">Call now</span>
