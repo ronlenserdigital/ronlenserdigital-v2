@@ -137,11 +137,15 @@ export function ContactCard() {
     <section className="border-t border-hairline px-5 py-20 md:px-8 md:py-32">
       <div className="grid items-center gap-10 md:grid-cols-12">
         <div className="md:col-span-3">
-          {/* Drop a real headshot at /public/ron.jpg */}
-          <div className="aspect-[4/5] w-full max-w-[260px] border border-hairline bg-ink-soft">
-            <div className="grid h-full place-items-center">
-              <span className="eyebrow">Photo of Ron</span>
-            </div>
+          <div className="w-full max-w-[260px] overflow-hidden rounded-lg border border-hairline bg-ink-soft">
+            <img
+              src="/ron-portrait.jpg"
+              alt="Ron Lenser"
+              width="720"
+              height="900"
+              loading="lazy"
+              className="aspect-[4/5] h-full w-full object-cover"
+            />
           </div>
           <p className="mt-4 font-medium">Ron Lenser</p>
           <p className="text-sm text-graphite">Founder. The one who builds it.</p>

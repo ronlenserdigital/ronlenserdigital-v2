@@ -1,16 +1,14 @@
-ron.jpg  — the hero portrait
+Images used by the site
 
-Drop a headshot here as ron.jpg and it renders through the ASCII grid.
+ron.jpg
+  Source for the ASCII grid in the hero frame. Greyscale-ish, masked to
+  isolate the subject, tone curved so the character ramp has mid-tones to
+  read. Not meant to be looked at directly.
 
-What works best:
-  - head and shoulders, centred
-  - strong single light source, one side of the face brighter
-  - plain or blown out background, the grid reads contrast not detail
-  - roughly 1200x900, landscape
-  - high contrast beats high resolution every time
+ron-portrait.jpg
+  Straight photo, 4:5, used in the founder block next to "Ron Lenser,
+  Founder". This one is seen as a normal photo, so it stays natural.
 
-Until this file exists the hero draws a procedural figure instead, so
-nothing looks broken.
-
-A video works the same way: put reel.mp4 here and change src in
-src/components/Top.jsx.
+Both are generated from the same original shot. If you swap the original,
+regenerate both: the ASCII source needs contrast and a clean background,
+the portrait needs to just look like you.
