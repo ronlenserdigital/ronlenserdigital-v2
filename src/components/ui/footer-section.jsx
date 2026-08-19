@@ -1,6 +1,5 @@
 import { Mail, ArrowUp, Phone } from "lucide-react";
 import { SOCIAL_PATHS } from "./brand-marks.js";
-import { LocationMap } from "./location-map.jsx";
 
 /**
  * Footer.
@@ -147,23 +146,15 @@ export function Footer() {
                 </a>
               </li>
               <li className="text-sm text-graphite md:text-xs">
-                Mon to Sat, 8 to 7
+                Fredericksburg, VA
               </li>
               <li className="text-sm text-graphite md:text-xs">
-                Serving the Fredericksburg area
+                Mon to Sat, 8 to 7
               </li>
             </ul>
           </div>
         </div>
         <div className="border-b border-dotted border-hairline" />
-      </div>
-
-      {/* where I am */}
-      <div className="mb-14 flex flex-col items-center gap-4">
-        <p className="font-mono text-[0.625rem] tracking-[0.16em] text-graphite uppercase">
-          Based in
-        </p>
-        <LocationMap />
       </div>
 
       {/* socials + top */}
