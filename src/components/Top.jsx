@@ -236,40 +236,125 @@ export function Marquee() {
 }
 
 /* ------------------------------------------------------------------ */
-/* Statement — centred, no label column                                */
+/* Statement — the argument, in full                                   */
 /* ------------------------------------------------------------------ */
+
+/* Where the months actually go at a ten person shop, and what happens to
+   each one when there is one person and an AI stack. */
+const COMPARE = [
+  {
+    them: "Two weeks of discovery calls and a deck",
+    me: "One fifteen minute call. I already know what a business like yours needs.",
+  },
+  {
+    them: "A designer mocks it up, you wait, you give notes, you wait again",
+    me: "You get a working preview link on day one and give notes on the real thing.",
+  },
+  {
+    them: "The build gets handed to whoever is free that sprint",
+    me: "The person who took your call is the person building it.",
+  },
+  {
+    them: "Every change goes through a project manager and a change order",
+    me: "You text me. It is usually done that day.",
+  },
+];
+
+const HONEST = [
+  {
+    title: "What AI actually changes",
+    body: "Typing. The slow, expensive, repetitive part of building software is now fast. A screen that took two days takes an afternoon, and a change that took a week takes an hour.",
+  },
+  {
+    title: "What it does not change",
+    body: "Judgement. AI will happily build the wrong thing beautifully. Knowing what your business needs, what to leave out, and when the answer is not software at all, is still the job.",
+  },
+  {
+    title: "Why that matters to you",
+    body: "You are not getting a cheaper version of an agency build. You are getting the same thing sooner, from the person who understood the problem, without paying for the payroll in between.",
+  },
+];
+
 export function Statement() {
   return (
     <section className="border-t border-hairline px-5 py-24 md:px-8 md:py-36">
-      <div className="mx-auto max-w-5xl text-center">
-        <h2 className="display text-mega">
-          <span className="line-mask block">
-            <span className="line-inner block">A shop of ten</span>
-          </span>
-          <span className="line-mask block">
-            <span className="line-inner block">
-              quotes <span className="stroke-type">months.</span>
+      <div className="mx-auto max-w-6xl">
+        {/* the claim */}
+        <div className="mx-auto max-w-5xl text-center">
+          <h2 className="display text-mega">
+            <span className="line-mask block">
+              <span className="line-inner block">A shop of ten</span>
             </span>
-          </span>
-          <span className="line-mask block">
-            <span className="line-inner block">I quote days.</span>
-          </span>
-        </h2>
+            <span className="line-mask block">
+              <span className="line-inner block">
+                quotes <span className="stroke-type">months.</span>
+              </span>
+            </span>
+            <span className="line-mask block">
+              <span className="line-inner block">I quote days.</span>
+            </span>
+          </h2>
 
-        <div className="rule mx-auto my-12 max-w-md" />
-
-        <div className="mx-auto grid max-w-4xl gap-8 text-left md:grid-cols-2">
           <BlurText
             as="p"
-            text="I build with AI. Claude, Claude Code, Grok, Vercel, Supabase. That is not a shortcut, it is the reason one person can do the work of a room."
+            text="Not because I cut corners. Because most of those months are not spent building."
             animateBy="words"
-            delay={20}
-            className="text-lg leading-snug text-graphite"
+            delay={26}
+            className="mx-auto mt-10 max-w-[46ch] justify-center text-center text-xl leading-snug md:text-2xl"
           />
-          <p className="reveal text-lg leading-snug">
-            You are not paying for hours. You are paying for the thing to exist
-            and work. That is the entire argument.
-          </p>
+        </div>
+
+        {/* where the months go */}
+        <div className="mt-20 border-t border-hairline">
+          <div className="hidden grid-cols-2 gap-8 border-b border-hairline py-4 md:grid">
+            <p className="eyebrow">A ten person shop</p>
+            <p className="eyebrow">Me</p>
+          </div>
+
+          {COMPARE.map((row) => (
+            <div
+              key={row.them}
+              className="reveal grid gap-3 border-b border-hairline py-7 md:grid-cols-2 md:gap-8"
+            >
+              <p className="text-base leading-snug text-graphite line-through decoration-graphite/40">
+                {row.them}
+              </p>
+              <p className="text-base leading-snug text-paper">{row.me}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* the honest part */}
+        <div className="mt-20 grid gap-px bg-hairline md:grid-cols-3">
+          {HONEST.map((h) => (
+            <div
+              key={h.title}
+              className="reveal bg-ink p-8 transition-colors hover:bg-ink-soft md:p-10"
+            >
+              <h3 className="font-display text-xl">{h.title}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-graphite">{h.body}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* the stack, named */}
+        <div className="mt-20 grid gap-10 md:grid-cols-12 md:gap-12">
+          <div className="md:col-span-5">
+            <h3 className="display text-mid">I am not hiding the tools.</h3>
+          </div>
+          <div className="md:col-span-7">
+            <p className="reveal text-lg leading-relaxed text-graphite">
+              Claude and Claude Code do most of the writing. Grok for research
+              and second opinions. Vercel runs it, Supabase holds the data.
+              Some agencies use the same stack and will not admit it, because
+              they are still billing you for the hours it saves.
+            </p>
+            <p className="reveal mt-6 text-lg leading-relaxed">
+              I would rather tell you and charge you for the result. You are
+              not paying for hours. You are paying for the thing to exist and
+              work.
+            </p>
+          </div>
         </div>
       </div>
     </section>
