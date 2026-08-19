@@ -576,3 +576,35 @@ later if it is left vague.
 Centred heading, no numbered section label, two balanced columns of six and
 five underneath. Sections either side are numbered `05` Pricing, `06` Contact,
 `07` Quote.
+
+
+## Location map
+
+`ui/location-map.jsx`, in the footer above the socials. Collapsed it is a
+240x140 card that tilts toward the cursor; click and it grows to 360x280 and a
+street plan draws in under a pin.
+
+Ported from the 21st.dev expand-map with **no framer-motion**:
+
+| Original | Here |
+|---|---|
+| `useMotionValue` + `useSpring` for tilt | pointer position written to a CSS transform |
+| `animate={{ width, height }}` | a width and height transition |
+| `pathLength` on motion lines | `stroke-dasharray` and `stroke-dashoffset` |
+| `AnimatePresence` | opacity and max-height transitions |
+| Emerald `#34D399` accents | paper on ink, the site is monochrome |
+| San Francisco | Fredericksburg, 38.3032 N 77.4605 W |
+
+That is about 35 kB gzipped saved on a footer ornament. Keyboard accessible:
+it is a button, Enter and Space toggle it, and the tilt is skipped under
+`prefers-reduced-motion`.
+
+## Runtime dependencies
+
+Four, after fourteen component ports: `react`, `react-dom`, `lenis`,
+`lucide-react`.
+
+Everything else those components asked for was declined and rebuilt: radix
+accordion, radix slot, radix tooltip, radix label, radix switch, radix icons,
+class-variance-authority, clsx, tailwind-merge, framer-motion, gsap,
+@studio-freight/lenis, dicons, next-themes, tw-animate-css.
