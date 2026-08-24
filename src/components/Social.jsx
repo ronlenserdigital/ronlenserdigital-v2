@@ -78,14 +78,18 @@ export function ContactCard() {
       <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-12 md:gap-12">
         <div className="md:col-span-4">
           <div className="w-full max-w-[280px] overflow-hidden rounded-lg border border-hairline bg-ink-soft">
-            <img
-              src="/ron-portrait.jpg"
-              alt="Ron Lenser"
-              width="720"
-              height="900"
-              loading="lazy"
-              className="aspect-[4/5] h-full w-full object-cover"
-            />
+            <picture>
+              <source srcSet="/ron-portrait.webp" type="image/webp" />
+              <img
+                src="/ron-portrait.jpg"
+                alt="Ron Lenser, founder of Ron Lenser Digital, in Fredericksburg, Virginia"
+                width="720"
+                height="900"
+                loading="lazy"
+                decoding="async"
+                className="aspect-[4/5] h-full w-full object-cover"
+              />
+            </picture>
           </div>
           <p className="mt-4 font-medium">Ron Lenser</p>
           <p className="text-sm text-graphite">Founder. The one who builds it.</p>

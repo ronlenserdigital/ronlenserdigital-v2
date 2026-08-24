@@ -28,16 +28,45 @@ const TIMELINES = [
   { value: "looking", label: "Getting a number before I commit" },
 ];
 
+/* Field level checks. Runs on submit, and again per field once that field
+   has already shown an error, so the message clears as soon as it is fixed. */
+function validate(data) {
+  const errors = {};
+  if (!data.name?.trim()) errors.name = "I need a name to reply to.";
+  const digits = (data.phone || "").replace(/\D/g, "");
+  if (digits.length < 10) errors.phone = "That does not look like a full phone number.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || ""))
+    errors.email = "That email will bounce. Check it.";
+  if (!data.service) errors.service = "Pick the closest one.";
+  if (!data.timeline) errors.timeline = "Rough is fine.";
+  return errors;
+}
+
 export function Quote() {
   const uid = useId();
   const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [errors, setErrors] = useState({});
+
+  function onChange(e) {
+    if (!errors[e.target.name]) return;
+    const data = Object.fromEntries(new FormData(e.currentTarget));
+    setErrors(validate(data));
+  }
 
   async function onSubmit(e) {
     e.preventDefault();
-    setStatus("sending");
-
     const data = Object.fromEntries(new FormData(e.currentTarget));
     if (data.company) return setStatus("sent"); // honeypot tripped, silently drop
+
+    const errs = validate(data);
+    setErrors(errs);
+    if (Object.keys(errs).length) {
+      const first = e.currentTarget.querySelector("[aria-invalid='true']");
+      first?.focus();
+      return;
+    }
+
+    setStatus("sending");
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -72,18 +101,26 @@ export function Quote() {
           <p className="reveal mx-auto mt-5 max-w-[52ch] text-graphite">
             This is how you get a number. Two minutes to fill out, I reply the
             same day, usually within an hour. If you would rather talk, call{" "}
-            <a href="tel:+15403956493" className="text-ink underline underline-offset-4">
+            <a href="tel:+15403956493" className="text-paper underline underline-offset-4">
               (540) 395-6493
             </a>
             .
           </p>
         </div>
 
-        <form onSubmit={onSubmit} className="reveal space-y-6">
+        <form onSubmit={onSubmit} onChange={onChange} noValidate className="reveal space-y-6">
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor={`${uid}-name`}>Your name</Label>
-              <Input id={`${uid}-name`} name="name" required autoComplete="name" />
+              <Input
+                id={`${uid}-name`}
+                name="name"
+                required
+                autoComplete="name"
+                aria-invalid={!!errors.name}
+                aria-describedby={errors.name ? `${uid}-name-err` : undefined}
+              />
+              <Err id={`${uid}-name-err`} msg={errors.name} />
             </div>
 
             <div className="space-y-2">
@@ -94,8 +131,12 @@ export function Quote() {
                 type="tel"
                 required
                 autoComplete="tel"
+                inputMode="tel"
                 placeholder="(540) 000-0000"
+                aria-invalid={!!errors.phone}
+                aria-describedby={errors.phone ? `${uid}-phone-err` : undefined}
               />
+              <Err id={`${uid}-phone-err`} msg={errors.phone} />
             </div>
           </div>
 
@@ -113,31 +154,51 @@ export function Quote() {
                 type="email"
                 required
                 autoComplete="email"
+                inputMode="email"
+                aria-invalid={!!errors.email}
+                aria-describedby={errors.email ? `${uid}-email-err` : undefined}
               />
+              <Err id={`${uid}-email-err`} msg={errors.email} />
             </div>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor={`${uid}-service`}>What you need</Label>
-              <SelectNative id={`${uid}-service`} name="service" defaultValue="" required>
+              <SelectNative
+                id={`${uid}-service`}
+                name="service"
+                defaultValue=""
+                required
+                aria-invalid={!!errors.service}
+                aria-describedby={errors.service ? `${uid}-service-err` : undefined}
+              >
                 {SERVICES.map((o) => (
                   <option key={o.value} value={o.value} disabled={o.disabled}>
                     {o.label}
                   </option>
                 ))}
               </SelectNative>
+              <Err id={`${uid}-service-err`} msg={errors.service} />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor={`${uid}-timeline`}>How soon</Label>
-              <SelectNative id={`${uid}-timeline`} name="timeline" defaultValue="" required>
+              <SelectNative
+                id={`${uid}-timeline`}
+                name="timeline"
+                defaultValue=""
+                required
+                aria-invalid={!!errors.timeline}
+                aria-describedby={errors.timeline ? `${uid}-timeline-err` : undefined}
+              >
                 {TIMELINES.map((o) => (
                   <option key={o.value} value={o.value} disabled={o.disabled}>
                     {o.label}
                   </option>
                 ))}
               </SelectNative>
+              <Err id={`${uid}-timeline-err`} msg={errors.timeline} />
             </div>
           </div>
 
@@ -163,7 +224,10 @@ export function Quote() {
           <div className="flex flex-wrap items-center gap-5 pt-2">
             <SubmitButton status={status} />
 
-            <p aria-live="polite" className="text-sm">
+            <p role="status" aria-live="polite" className="text-sm">
+              {Object.keys(errors).length > 0 && status !== "sent" && (
+                <span className="text-graphite">Fix the marked fields and send again.</span>
+              )}
               {status === "sent" && (
                 <span className="text-accent">Got it. I will get back to you today.</span>
               )}
@@ -180,6 +244,15 @@ export function Quote() {
   );
 }
 
+function Err({ id, msg }) {
+  if (!msg) return null;
+  return (
+    <p id={id} className="text-xs text-[#ff6b6b]">
+      {msg}
+    </p>
+  );
+}
+
 function SubmitButton({ status }) {
   const ref = useMagnetic(0.24);
   const sending = status === "sending";
@@ -189,11 +262,12 @@ function SubmitButton({ status }) {
       ref={ref}
       type="submit"
       disabled={sending}
-      className="inline-flex items-center gap-4 rounded-full bg-ink py-3 pr-3 pl-8 text-paper transition-colors hover:bg-paper hover:text-ink disabled:opacity-60"
+      aria-busy={sending}
+      className="inline-flex items-center gap-4 rounded-full bg-paper py-3 pr-3 pl-8 text-ink transition-colors hover:bg-paper-deep disabled:opacity-60"
     >
       <span className="font-medium">{sending ? "Sending" : "Send it"}</span>
-      <span className="grid h-10 w-10 place-items-center rounded-full bg-hairline">
-        &rarr;
+      <span className="grid h-10 w-10 place-items-center rounded-full bg-ink/15">
+        {sending ? <span className="spinner" aria-hidden="true" /> : <>&rarr;</>}
       </span>
     </button>
   );

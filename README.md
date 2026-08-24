@@ -678,3 +678,22 @@ Sections rebuilt to remove dead space:
   and the copy removed, then filled with call and form buttons
 - **Quote** — centred header over a single column form rather than a sticky
   label beside it
+
+## SEO and AEO layer
+
+Everything a crawler or AI engine needs is baked into static HTML at build
+time. `npm run build` runs Vite, then `scripts/prerender.mjs`, which renders
+every route to HTML with its own head tags and writes `sitemap.xml` and
+`404.html`. React hydrates on top in the browser.
+
+- `src/seo.js` is the only place business facts, titles, descriptions and
+  JSON-LD live. Change it once.
+- Schema on the home page: ProfessionalService + LocalBusiness, Person,
+  WebSite, WebPage, FAQPage (fed from the visible FAQ so they cannot drift).
+- `public/robots.txt` allows every search and AI crawler by name.
+- `public/llms.txt` is a plain text fact sheet for AI engines.
+- `vercel.json` sets security headers, long cache on hashed assets, clean URLs.
+- Analytics: Vercel Web Analytics and Speed Insights, cookieless, production only,
+  visible only in the Vercel dashboard.
+
+Routes: `/`, `/privacy`, `/terms`. Anything else is the custom 404.

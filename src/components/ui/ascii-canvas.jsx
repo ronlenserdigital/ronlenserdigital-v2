@@ -31,6 +31,7 @@ export function AsciiCanvas({
   fps = 24,
   curve = 0.16,
   intro = 1900,
+  label = "",
   className = "",
 }) {
   const canvasRef = useRef(null);
@@ -72,7 +73,9 @@ export function AsciiCanvas({
       }
       media.onerror = () => {
         mediaFailed = true;
+        wrap.classList.add("is-painted");
       };
+      media.onload = media.onloadeddata = () => wrap.classList.add("is-painted");
       media.src = src;
     }
 

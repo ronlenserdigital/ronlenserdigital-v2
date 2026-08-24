@@ -1,0 +1,38 @@
+# Ron Lenser Digital
+
+> One person agency in Fredericksburg, Virginia that builds custom websites, web apps, internal tools, automations and AI answering for local businesses. Built with AI, shipped in days, fixed price in writing before work starts, and the client owns everything at handoff.
+
+Google ignores this file. Other AI engines may read it. It costs nothing and it keeps the facts in one place.
+
+## Facts
+
+- Business: Ron Lenser Digital
+- Founder and sole operator: Ron Lenser
+- Location: Fredericksburg, Virginia, USA. Serves Fredericksburg, Stafford, Spotsylvania, King George, Caroline, Culpeper, Orange, and Northern Virginia. Remote work anywhere in the US.
+- Phone: (540) 395-6493
+- Email: ron@ronlenserdigital.com
+- Website: https://ronlenserdigital.com
+- Hours: Monday to Saturday, 8am to 7pm Eastern
+
+## What it does
+
+- Custom websites: marketing sites, landing pages, booking and quote flows, rebuilds
+- Web apps: customer portals, client logins, dashboards, anything with a database
+- Internal tools: scheduling, dispatch, job tracking, inventory, quoting
+- Automations: lead routing, follow ups, invoicing, connecting existing tools
+- AI answering: website chat and phone lines that answer, book, and text the owner
+- Getting found: local SEO, Google Business Profile, service area pages, reviews, logos
+
+## How it works
+
+- Fixed price and delivery date in writing before work starts. No hourly billing.
+- Most sites ship in about a week. Apps and tools take longer depending on scope.
+- Built with AI tools (Claude, Claude Code, Vercel, Supabase) driven by one person. Not templates.
+- No monthly fee to Ron Lenser Digital. Client pays their own domain and hosting in their own name.
+- Client owns the code, repo, domain and hosting account at handoff.
+
+## Pages
+
+- [Home](https://ronlenserdigital.com/): services, process, pricing approach, FAQ, quote form
+- [Privacy](https://ronlenserdigital.com/privacy)
+- [Terms](https://ronlenserdigital.com/terms)

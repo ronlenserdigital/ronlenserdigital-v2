@@ -5,7 +5,8 @@ const base =
   "w-full rounded-lg border border-hairline bg-ink-soft px-3 text-sm text-paper " +
   "placeholder:text-graphite/60 outline-none transition-[border-color,box-shadow] " +
   "focus-visible:border-accent focus-visible:ring-[3px] focus-visible:ring-accent/25 " +
-  "disabled:pointer-events-none disabled:opacity-50";
+  "disabled:pointer-events-none disabled:opacity-50 " +
+  "aria-[invalid=true]:border-[#ff6b6b] aria-[invalid=true]:focus-visible:ring-[#ff6b6b]/25";
 
 const Input = React.forwardRef(({ className, ...props }, ref) => (
   <input ref={ref} className={cn(base, "h-11", className)} {...props} />

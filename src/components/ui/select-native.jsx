@@ -47,6 +47,7 @@ const SelectNative = React.forwardRef(({ className, children, ...props }, ref) =
           "focus-visible:border-accent focus-visible:ring-[3px] focus-visible:ring-accent/25",
           "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
           "has-[option[disabled]:checked]:text-graphite",
+          "aria-[invalid=true]:border-[#ff6b6b]",
           props.multiple
             ? "py-1 [&>*]:px-3 [&>*]:py-1.5 [&_option:checked]:bg-ink"
             : "h-11 pe-9 ps-3",

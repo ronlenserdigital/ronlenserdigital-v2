@@ -77,12 +77,13 @@ function handleScrollTop() {
   window.scroll({ top: 0, behavior: "smooth" });
 }
 
-export function Footer() {
+export function Footer({ home = true }) {
+  const h = (href) => (home || !href.startsWith("#") ? href : `/${href}`);
   return (
-    <footer className="mx-auto w-full border-t border-hairline px-2 md:px-4">
+    <footer className="mx-auto w-full border-t border-hairline px-2 pb-20 md:px-4 md:pb-0">
       {/* intro */}
       <div className="relative mx-auto grid max-w-7xl items-center justify-center gap-6 p-10 pb-0 md:flex">
-        <a href="#top" aria-label="Home" className="flex justify-center">
+        <a href="/" aria-label="Home" className="flex justify-center">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-dotted border-hairline font-mono text-sm font-semibold">
             R
           </span>
@@ -113,7 +114,7 @@ export function Footer() {
                 {col.items.map(([label, href]) => (
                   <li key={label} className="flow-root">
                     <a
-                      href={href}
+                      href={h(href)}
                       className="text-sm text-graphite transition-colors hover:text-paper md:text-xs"
                     >
                       {label}
@@ -146,7 +147,7 @@ export function Footer() {
                 </a>
               </li>
               <li className="text-sm text-graphite md:text-xs">
-                Fredericksburg, VA
+                Fredericksburg, Virginia 22401
               </li>
               <li className="text-sm text-graphite md:text-xs">
                 Mon to Sat, 8 to 7
@@ -214,6 +215,17 @@ export function Footer() {
             Ron Lenser
           </a>
         </div>
+        <nav aria-label="Legal" className="mt-3 flex justify-center gap-5 text-graphite">
+          <a href="/privacy" className="transition-colors hover:text-paper">
+            Privacy
+          </a>
+          <a href="/terms" className="transition-colors hover:text-paper">
+            Terms
+          </a>
+          <a href="/sitemap.xml" className="transition-colors hover:text-paper">
+            Sitemap
+          </a>
+        </nav>
       </div>
     </footer>
   );

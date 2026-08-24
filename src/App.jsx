@@ -1,16 +1,29 @@
 import { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { reduced } from "./lib/motion.js";
-import { Hero, Marquee, Statement } from "./components/Top.jsx";
-import { Pricing, ContactCard } from "./components/Social.jsx";
-import { FAQ } from "./components/ui/faq-section.jsx";
-import { StackStrip } from "./components/ui/stack-strip.jsx";
-import { HowItWorks } from "./components/ui/how-it-works.jsx";
-import { WhatIDo } from "./components/ui/what-i-do.jsx";
-import { Quote } from "./components/Quote.jsx";
+import { pageFor } from "./seo.js";
+import { Home } from "./pages/Home.jsx";
+import { Privacy } from "./pages/Privacy.jsx";
+import { Terms } from "./pages/Terms.jsx";
+import { NotFound } from "./pages/NotFound.jsx";
+import { Nav } from "./components/Top.jsx";
 import { Footer } from "./components/ui/footer-section.jsx";
+import { StickyCta } from "./components/StickyCta.jsx";
+import { CookieNotice } from "./components/CookieNotice.jsx";
 
-export default function App() {
+/* Path based routing with no router dependency. Four routes, that is it.
+   `path` is passed in by the prerender script at build time and read from
+   window in the browser. */
+const ROUTES = {
+  "/": Home,
+  "/privacy": Privacy,
+  "/terms": Terms,
+};
+
+export default function App({ path }) {
+  const p = pageFor(path).path;
+  const Page = ROUTES[p] ?? NotFound;
+  const isHome = p === "/";
   const root = useRef(null);
 
   // smooth scroll
@@ -60,19 +73,16 @@ export default function App() {
 
   return (
     <div ref={root}>
-      <main>
-        <Hero />
-        <StackStrip />
-        <Marquee />
-        <Statement />
-        <WhatIDo />
-        <HowItWorks />
-        <FAQ />
-        <Pricing />
-        <ContactCard />
-        <Quote />
+      <a href="#content" className="skip-link">
+        Skip to content
+      </a>
+      <Nav home={isHome} />
+      <main id="content">
+        <Page />
       </main>
-      <Footer />
+      <Footer home={isHome} />
+      <StickyCta />
+      <CookieNotice />
     </div>
   );
 }

@@ -26,6 +26,7 @@ export function BlurText({
   blur = 10,
   className = "",
   style,
+  ...rest
 }) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -61,7 +62,7 @@ export function BlurText({
   const still = reduced();
 
   return (
-    <Tag ref={ref} className={`inline-flex flex-wrap ${className}`} style={style}>
+    <Tag ref={ref} className={`inline-flex flex-wrap ${className}`} style={style} {...rest}>
       {segments.map((seg, i) => (
         <span
           key={`${seg}-${i}`}

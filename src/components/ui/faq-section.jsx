@@ -86,7 +86,7 @@ function Column({ items }) {
 }
 
 /* The questions people actually ask on the phone. */
-const LEFT = [
+export const LEFT = [
   {
     q: "What does a build actually include?",
     a: "The thing itself. Pages, copy, forms, mobile, the code, and getting it live. One fixed number agreed before I start, and no monthly fee to me afterwards. Fill out the form and you get your number, usually the same day.",
@@ -109,7 +109,7 @@ const LEFT = [
   },
 ];
 
-const RIGHT = [
+export const RIGHT = [
   {
     q: "Do I need to know what I want before I call?",
     a: "No. Most people call knowing what is annoying them, not what to build. Tell me the annoying part. If software is not the fix I will tell you that on the call and it costs you nothing.",

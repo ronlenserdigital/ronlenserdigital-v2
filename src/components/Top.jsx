@@ -22,140 +22,150 @@ const MENU = [
   ["FAQ", "#faq"],
 ];
 
-export function Hero() {
+export function Nav({ home = true }) {
   const [open, setOpen] = useState(false);
+  const h = (hash) => (home ? hash : `/${hash}`);
 
   return (
-    <div>
-      <header>
-        <nav className="fixed inset-x-0 top-0 z-30 border-b border-hairline bg-ink/70 backdrop-blur-md">
-          <div className="mx-auto max-w-6xl px-5 md:px-8">
-            <div className="flex flex-wrap items-center justify-between gap-4 py-3">
-              <div className="flex w-full items-center justify-between lg:w-auto">
-                <a href="#top" aria-label="Home" className="flex items-center gap-2.5">
-                  <span
-                    aria-hidden="true"
-                    className="grid h-7 w-7 place-items-center rounded-md bg-paper font-mono text-[0.6875rem] font-semibold text-ink"
-                  >
-                    R
-                  </span>
-                  <span className="font-mono text-[0.6875rem] tracking-[0.16em] uppercase">
-                    Ron Lenser Digital
-                  </span>
-                </a>
-
-                <button
-                  onClick={() => setOpen(!open)}
-                  aria-expanded={open}
-                  aria-label={open ? "Close menu" : "Open menu"}
-                  className="-mr-2 p-2 lg:hidden"
+    <header>
+      <nav
+        aria-label="Main"
+        className="fixed inset-x-0 top-0 z-30 border-b border-hairline bg-ink/70 backdrop-blur-md"
+      >
+        <div className="mx-auto max-w-6xl px-5 md:px-8">
+          <div className="flex flex-wrap items-center justify-between gap-4 py-3">
+            <div className="flex w-full items-center justify-between lg:w-auto">
+              <a href="/" aria-label="Ron Lenser Digital home" className="flex items-center gap-2.5">
+                <span
+                  aria-hidden="true"
+                  className="grid h-7 w-7 place-items-center rounded-md bg-paper font-mono text-[0.6875rem] font-semibold text-ink"
                 >
-                  {open ? <X className="size-5" /> : <Menu className="size-5" />}
-                </button>
-              </div>
+                  R
+                </span>
+                <span className="font-mono text-[0.6875rem] tracking-[0.16em] uppercase">
+                  Ron Lenser Digital
+                </span>
+              </a>
 
-              <div
-                className={`${
-                  open ? "block" : "hidden"
-                } w-full pb-4 lg:flex lg:w-fit lg:items-center lg:gap-8 lg:pb-0`}
+              <button
+                onClick={() => setOpen(!open)}
+                aria-expanded={open}
+                aria-controls="site-menu"
+                aria-label={open ? "Close menu" : "Open menu"}
+                className="-mr-2 p-2 lg:hidden"
               >
-                <ul className="space-y-3 lg:flex lg:gap-7 lg:space-y-0">
-                  {MENU.map(([label, href]) => (
-                    <li key={href}>
-                      <a
-                        href={href}
-                        onClick={() => setOpen(false)}
-                        className="block text-sm text-graphite transition-colors hover:text-paper"
-                      >
-                        {label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-4 flex gap-3 lg:mt-0 lg:border-l lg:border-hairline lg:pl-7">
-                  <a
-                    href="tel:+15403956493"
-                    className="rounded-lg border border-hairline px-4 py-2 text-sm transition-colors hover:border-paper/40"
-                  >
-                    Call
-                  </a>
-                  <a
-                    href="#quote"
-                    className="rounded-lg bg-paper px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-paper-deep"
-                  >
-                    Get a quote
-                  </a>
-                </div>
-              </div>
+                {open ? <X className="size-5" /> : <Menu className="size-5" />}
+              </button>
             </div>
-          </div>
-        </nav>
-      </header>
 
-      <main id="top">
-        {/* light rakes, ours rather than the original's hardcoded hsl greys */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 isolate z-[2] hidden opacity-60 lg:block"
-        >
-          <div className="absolute top-0 left-0 h-[80rem] w-[35rem] -translate-y-[87.5%] -rotate-45 rounded-full bg-[radial-gradient(68%_68%_at_55%_31%,rgba(255,255,255,.07)_0,rgba(255,255,255,.02)_50%,transparent_80%)]" />
-          <div className="absolute top-0 left-0 h-[80rem] w-56 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,.05)_0,rgba(255,255,255,.02)_80%,transparent_100%)] [translate:5%_-50%]" />
-        </div>
+            <div
+              id="site-menu"
+              className={`${
+                open ? "block" : "hidden"
+              } w-full pb-4 lg:flex lg:w-fit lg:items-center lg:gap-8 lg:pb-0`}
+            >
+              <ul className="space-y-3 lg:flex lg:gap-7 lg:space-y-0">
+                {MENU.map(([label, hash]) => (
+                  <li key={hash}>
+                    <a
+                      href={h(hash)}
+                      onClick={() => setOpen(false)}
+                      className="block text-sm text-graphite transition-colors hover:text-paper"
+                    >
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
 
-        <section className="overflow-hidden">
-          <div className="relative mx-auto max-w-5xl px-5 pt-32 pb-16 md:px-8 md:pt-36">
-            <div className="relative z-10 mx-auto max-w-3xl text-center">
-              <p className="eyebrow">Fredericksburg, Virginia</p>
-
-              <BlurText
-                as="h1"
-                text="Websites, apps and automations. Built in days."
-                animateBy="words"
-                delay={70}
-                className="display mt-6 justify-center text-balance text-big"
-              />
-
-              <BlurText
-                as="p"
-                text="One person with an AI stack, building the thing your business actually needs. Not a template with your logo on it."
-                animateBy="words"
-                delay={16}
-                className="mx-auto mt-7 max-w-2xl justify-center text-lg text-graphite"
-              />
-
-              <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-                <a
-                  href="#quote"
-                  className="inline-flex items-center gap-4 rounded-full bg-paper py-3 pr-3 pl-8 text-ink transition-colors hover:bg-paper-deep"
-                >
-                  <span className="font-medium">Start a project</span>
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-ink/15">
-                    &rarr;
-                  </span>
-                </a>
+              <div className="mt-4 flex gap-3 lg:mt-0 lg:border-l lg:border-hairline lg:pl-7">
                 <a
                   href="tel:+15403956493"
-                  className="rounded-full border border-hairline px-7 py-3.5 text-sm transition-colors hover:border-paper/40"
+                  className="rounded-lg border border-hairline px-4 py-2 text-sm transition-colors hover:border-paper/40"
                 >
-                  (540) 395-6493
+                  Call
+                </a>
+                <a
+                  href={h("#quote")}
+                  className="rounded-lg bg-paper px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-paper-deep"
+                >
+                  Get a quote
                 </a>
               </div>
             </div>
           </div>
+        </div>
+      </nav>
+    </header>
+  );
+}
 
-          {/* The tilted plate. Not a screenshot: it renders this site. */}
-          <div className="mx-auto -mt-4 max-w-7xl [mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)]">
-            <div className="-mr-16 pl-16 [mask-image:linear-gradient(to_right,black_55%,transparent_100%)] [perspective:1200px] lg:-mr-56 lg:pl-56">
-              <div className="[transform:rotateX(18deg)]">
-                <div className="relative skew-x-[.28rad] lg:h-[40rem]">
-                  <SiteFrame />
-                </div>
+export function Hero() {
+  return (
+    <div id="top" className="relative">
+      {/* light rakes, ours rather than the original's hardcoded hsl greys */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 isolate z-[2] hidden opacity-60 lg:block"
+      >
+        <div className="absolute top-0 left-0 h-[80rem] w-[35rem] -translate-y-[87.5%] -rotate-45 rounded-full bg-[radial-gradient(68%_68%_at_55%_31%,rgba(255,255,255,.07)_0,rgba(255,255,255,.02)_50%,transparent_80%)]" />
+        <div className="absolute top-0 left-0 h-[80rem] w-56 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,rgba(255,255,255,.05)_0,rgba(255,255,255,.02)_80%,transparent_100%)] [translate:5%_-50%]" />
+      </div>
+
+      <section aria-labelledby="hero-title" className="overflow-hidden">
+        <div className="relative mx-auto max-w-5xl px-5 pt-32 pb-16 md:px-8 md:pt-36">
+          <div className="relative z-10 mx-auto max-w-3xl text-center">
+            <p className="eyebrow">Fredericksburg, Virginia</p>
+
+            <BlurText
+              as="h1"
+              id="hero-title"
+              text="Websites, apps and automations. Built in days."
+              animateBy="words"
+              delay={70}
+              className="display mt-6 justify-center text-balance text-big"
+            />
+
+            <BlurText
+              as="p"
+              text="One person with an AI stack, building the thing your business actually needs. Not a template with your logo on it."
+              animateBy="words"
+              delay={16}
+              className="mx-auto mt-7 max-w-2xl justify-center text-lg text-graphite"
+            />
+
+            {/* Primary CTA. Above the fold on every viewport. */}
+            <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="#quote"
+                className="inline-flex items-center gap-4 rounded-full bg-paper py-3 pr-3 pl-8 text-ink transition-colors hover:bg-paper-deep"
+              >
+                <span className="font-medium">Start a project</span>
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-ink/15">
+                  &rarr;
+                </span>
+              </a>
+              <a
+                href="tel:+15403956493"
+                className="rounded-full border border-hairline px-7 py-3.5 text-sm transition-colors hover:border-paper/40"
+              >
+                (540) 395-6493
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* The tilted plate. Not a screenshot: it renders this site. */}
+        <div className="mx-auto -mt-4 max-w-7xl [mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)]">
+          <div className="-mr-16 pl-16 [mask-image:linear-gradient(to_right,black_55%,transparent_100%)] [perspective:1200px] lg:-mr-56 lg:pl-56">
+            <div className="[transform:rotateX(18deg)]">
+              <div className="relative skew-x-[.28rad] lg:h-[40rem]">
+                <SiteFrame />
               </div>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
     </div>
   );
 }
@@ -178,7 +188,14 @@ function SiteFrame() {
 
       {/* viewport */}
       <div className="relative h-[22rem] lg:h-[34rem]">
-        <AsciiCanvas src="/ron.jpg" cols={170} className="absolute inset-0 h-full w-full" />
+        {/* loading state: shimmer until the canvas has painted */}
+        <div aria-hidden="true" className="skeleton absolute inset-0" />
+        <AsciiCanvas
+          src="/ron.jpg"
+          cols={170}
+          label="ASCII character portrait of Ron Lenser, founder of Ron Lenser Digital"
+          className="absolute inset-0 h-full w-full"
+        />
 
         <div className="absolute top-5 left-5 z-10 flex items-center gap-1 rounded-full border border-hairline bg-ink/60 p-1 backdrop-blur-md">
           <span className="grid h-6 w-6 place-items-center rounded-full bg-paper font-mono text-[0.5rem] font-semibold text-ink">
