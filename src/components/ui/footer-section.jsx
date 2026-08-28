@@ -174,7 +174,7 @@ export function Footer({ home = true }) {
           </a>
           <BrandLink
             label="Facebook"
-            href="https://facebook.com/remakerony"
+            href="https://www.facebook.com/ronlenserdigital"
             path={SOCIAL_PATHS.facebook}
           />
           <a

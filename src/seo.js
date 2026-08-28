@@ -26,7 +26,7 @@ export const SITE = {
   ogImage: "/og.png",
   logo: "/icon-512.png",
   social: [
-    "https://facebook.com/remakerony",
+    "https://www.facebook.com/ronlenserdigital",
     "https://linkedin.com/in/ronlenser",
     "https://github.com/ronlenserdigital",
   ],
