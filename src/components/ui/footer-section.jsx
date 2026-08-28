@@ -1,5 +1,6 @@
 import { Mail, ArrowUp, Phone } from "lucide-react";
 import { SOCIAL_PATHS } from "./brand-marks.js";
+import { AREAS } from "../../areas.js";
 
 /**
  * Footer.
@@ -39,6 +40,10 @@ const COLUMNS = [
       ["Pricing", "#pricing"],
       ["Questions", "#faq"],
     ],
+  },
+  {
+    heading: "Areas served",
+    items: AREAS.map((a) => [`${a.city}, VA`, `/${a.slug}`]),
   },
   {
     heading: "Get started",

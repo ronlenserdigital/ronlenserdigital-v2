@@ -6,6 +6,8 @@ import { Home } from "./pages/Home.jsx";
 import { Privacy } from "./pages/Privacy.jsx";
 import { Terms } from "./pages/Terms.jsx";
 import { NotFound } from "./pages/NotFound.jsx";
+import { ServiceArea } from "./pages/ServiceArea.jsx";
+import { AREAS } from "./areas.js";
 import { Nav } from "./components/Top.jsx";
 import { Footer } from "./components/ui/footer-section.jsx";
 import { StickyCta } from "./components/StickyCta.jsx";
@@ -19,6 +21,9 @@ const ROUTES = {
   "/privacy": Privacy,
   "/terms": Terms,
 };
+for (const a of AREAS) {
+  ROUTES[`/${a.slug}`] = () => <ServiceArea area={a} />;
+}
 
 export default function App({ path }) {
   const p = pageFor(path).path;

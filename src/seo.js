@@ -82,6 +82,16 @@ export const PAGES = {
   },
 };
 
+import { AREAS } from "./areas.js";
+for (const a of AREAS) {
+  PAGES[`/${a.slug}`] = {
+    title: a.title,
+    description: a.description,
+    type: "website",
+    area: a,
+  };
+}
+
 export function pageFor(path) {
   const clean = path.replace(/\/+$/, "") || "/";
   return { path: clean, ...(PAGES[clean] ?? PAGES["/404"]) };
@@ -187,6 +197,26 @@ export function jsonLd(path) {
         acceptedAnswer: { "@type": "Answer", text: f.a },
       })),
     });
+  } else if (page.area) {
+    const a = page.area;
+    graph.push(
+      {
+        "@type": "Service",
+        "@id": abs(page.path + "#service"),
+        name: `Web design and software development in ${a.city}, Virginia`,
+        serviceType: "Web design",
+        provider: { "@id": abs("/#business") },
+        areaServed: { "@type": "Place", name: `${a.city}, Virginia` },
+        description: a.description,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE.url + "/" },
+          { "@type": "ListItem", position: 2, name: `${a.city}, VA`, item: abs(page.path) },
+        ],
+      }
+    );
   } else {
     graph.push({
       "@type": "BreadcrumbList",

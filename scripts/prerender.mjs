@@ -44,7 +44,8 @@ for (const route of routes) {
   await writeFile(path.join(dist, file), html);
 
   if (PAGES[route].index !== false) {
-    urls.push({ loc: SITE.url + (route === "/" ? "/" : route), priority: route === "/" ? "1.0" : "0.3" });
+    const pr = route === "/" ? "1.0" : PAGES[route].area ? "0.7" : "0.3";
+    urls.push({ loc: SITE.url + (route === "/" ? "/" : route), priority: pr });
   }
   console.log("prerendered", file);
 }
@@ -56,7 +57,7 @@ ${urls
     (u) => `  <url>
     <loc>${u.loc}</loc>
     <lastmod>${today}</lastmod>
-    <changefreq>${u.priority === "1.0" ? "weekly" : "yearly"}</changefreq>
+    <changefreq>${u.priority === "1.0" ? "weekly" : u.priority === "0.7" ? "monthly" : "yearly"}</changefreq>
     <priority>${u.priority}</priority>${
       u.priority === "1.0"
         ? `
