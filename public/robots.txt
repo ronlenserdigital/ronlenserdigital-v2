@@ -38,4 +38,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://ronlenserdigital.com/sitemap.xml
+Sitemap: https://www.ronlenserdigital.com/sitemap.xml

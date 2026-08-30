@@ -58,17 +58,6 @@
   ],
   "redirects": [
     {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.ronlenserdigital.com"
-        }
-      ],
-      "destination": "https://ronlenserdigital.com/:path*",
-      "permanent": true
-    },
-    {
       "source": "/services/web-design",
       "destination": "/web-design-fredericksburg-va",
       "permanent": true

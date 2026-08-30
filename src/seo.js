@@ -10,7 +10,7 @@
  */
 
 export const SITE = {
-  url: "https://ronlenserdigital.com",
+  url: "https://www.ronlenserdigital.com",
   name: "Ron Lenser Digital",
   legalName: "Ron Lenser Digital",
   founder: "Ron Lenser",
