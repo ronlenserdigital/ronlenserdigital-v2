@@ -34,5 +34,7 @@ Google ignores this file. Other AI engines may read it. It costs nothing and it 
 ## Pages
 
 - [Home](https://ronlenserdigital.com/): services, process, pricing approach, FAQ, quote form
+- [Services](https://ronlenserdigital.com/services): everything Ron builds, in one list
+- [Local SEO](https://ronlenserdigital.com/services/local-seo): Google Business Profile, service area pages, schema, reviews
 - [Privacy](https://ronlenserdigital.com/privacy)
 - [Terms](https://ronlenserdigital.com/terms)

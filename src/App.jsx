@@ -7,6 +7,8 @@ import { Privacy } from "./pages/Privacy.jsx";
 import { Terms } from "./pages/Terms.jsx";
 import { NotFound } from "./pages/NotFound.jsx";
 import { ServiceArea } from "./pages/ServiceArea.jsx";
+import { Services } from "./pages/Services.jsx";
+import { LocalSeo } from "./pages/LocalSeo.jsx";
 import { AREAS } from "./areas.js";
 import { Nav } from "./components/Top.jsx";
 import { Footer } from "./components/ui/footer-section.jsx";
@@ -20,6 +22,8 @@ const ROUTES = {
   "/": Home,
   "/privacy": Privacy,
   "/terms": Terms,
+  "/services": Services,
+  "/services/local-seo": LocalSeo,
 };
 for (const a of AREAS) {
   ROUTES[`/${a.slug}`] = () => <ServiceArea area={a} />;

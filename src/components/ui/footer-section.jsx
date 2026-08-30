@@ -26,10 +26,10 @@ const COLUMNS = [
   {
     heading: "What I build",
     items: [
+      ["All services", "/services"],
       ["Websites", "#capabilities"],
       ["Apps and tools", "#capabilities"],
-      ["Automations", "#capabilities"],
-      ["AI answering", "#pricing"],
+      ["Local SEO", "/services/local-seo"],
     ],
   },
   {

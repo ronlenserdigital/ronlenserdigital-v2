@@ -41,10 +41,11 @@ for (const route of routes) {
 
   const file =
     route === "/" ? "index.html" : route === "/404" ? "404.html" : `${route.slice(1)}.html`;
+  await mkdir(path.dirname(path.join(dist, file)), { recursive: true });
   await writeFile(path.join(dist, file), html);
 
   if (PAGES[route].index !== false) {
-    const pr = route === "/" ? "1.0" : PAGES[route].area ? "0.7" : "0.3";
+    const pr = PAGES[route].priority ?? (route === "/" ? "1.0" : PAGES[route].area ? "0.7" : "0.3");
     urls.push({ loc: SITE.url + (route === "/" ? "/" : route), priority: pr });
   }
   console.log("prerendered", file);

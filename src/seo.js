@@ -74,6 +74,20 @@ export const PAGES = {
     type: "article",
     index: true,
   },
+  "/services": {
+    title: "Services | Websites, Apps, Automations and Local SEO | Ron Lenser Digital",
+    description:
+      "Everything Ron Lenser Digital builds for Fredericksburg area businesses: websites, web apps, internal tools, automations, AI answering and local SEO. Fixed quotes in writing, no retainers.",
+    type: "website",
+    priority: "0.8",
+  },
+  "/services/local-seo": {
+    title: "Local SEO Fredericksburg VA | Get Found on Google | Ron Lenser Digital",
+    description:
+      "Local SEO for Fredericksburg businesses: Google Business Profile, service area pages, schema markup and reviews. One fixed quote in writing, no retainer, no ranking promises.",
+    type: "website",
+    priority: "0.8",
+  },
   "/404": {
     title: "Page not found | Ron Lenser Digital",
     description: "That page does not exist. The site is one page, so everything is a scroll away.",
@@ -100,6 +114,7 @@ export function pageFor(path) {
 /* The FAQ answers live in faq-section.jsx. They are imported here so the
    FAQPage schema and the visible accordion can never drift apart. */
 import { LEFT, RIGHT } from "./components/ui/faq-section.jsx";
+import { LOCAL_SEO_FAQ } from "./pages/LocalSeo.jsx";
 
 export function jsonLd(path) {
   const page = pageFor(path);
@@ -197,6 +212,35 @@ export function jsonLd(path) {
         acceptedAnswer: { "@type": "Answer", text: f.a },
       })),
     });
+  } else if (page.path === "/services/local-seo") {
+    graph.push(
+      {
+        "@type": "Service",
+        "@id": abs(page.path + "#service"),
+        name: "Local SEO in Fredericksburg, Virginia",
+        serviceType: "Local search engine optimization",
+        provider: { "@id": abs("/#business") },
+        areaServed: SITE.areaServed.map((name) => ({ "@type": "Place", name })),
+        description: page.description,
+      },
+      {
+        "@type": "FAQPage",
+        "@id": abs(page.path + "#faq"),
+        mainEntity: LOCAL_SEO_FAQ.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE.url + "/" },
+          { "@type": "ListItem", position: 2, name: "Services", item: abs("/services") },
+          { "@type": "ListItem", position: 3, name: "Local SEO", item: abs(page.path) },
+        ],
+      }
+    );
   } else if (page.area) {
     const a = page.area;
     graph.push(
