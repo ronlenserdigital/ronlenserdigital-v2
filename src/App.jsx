@@ -9,7 +9,9 @@ import { NotFound } from "./pages/NotFound.jsx";
 import { ServiceArea } from "./pages/ServiceArea.jsx";
 import { Services } from "./pages/Services.jsx";
 import { LocalSeo } from "./pages/LocalSeo.jsx";
+import { Answer, AnswersIndex } from "./pages/Answer.jsx";
 import { AREAS } from "./areas.js";
+import { ANSWERS } from "./answers.js";
 import { Nav } from "./components/Top.jsx";
 import { Footer } from "./components/ui/footer-section.jsx";
 import { StickyCta } from "./components/StickyCta.jsx";
@@ -24,7 +26,11 @@ const ROUTES = {
   "/terms": Terms,
   "/services": Services,
   "/services/local-seo": LocalSeo,
+  "/answers": AnswersIndex,
 };
+for (const a of ANSWERS) {
+  ROUTES[`/answers/${a.slug}`] = () => <Answer answer={a} />;
+}
 for (const a of AREAS) {
   ROUTES[`/${a.slug}`] = () => <ServiceArea area={a} />;
 }

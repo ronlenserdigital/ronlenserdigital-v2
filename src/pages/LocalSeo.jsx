@@ -176,6 +176,27 @@ export function LocalSeo() {
             person doing the work, and everything created belongs to you when
             it is done, including the accounts.
           </p>
+          <p className="mt-5 text-[1.02rem] leading-relaxed text-graphite">
+            Related:{" "}
+            <a href="/services" className="text-paper underline underline-offset-4">
+              everything I build
+            </a>
+            ,{" "}
+            <a
+              href="/answers/what-a-build-includes"
+              className="text-paper underline underline-offset-4"
+            >
+              what a build includes
+            </a>
+            , and{" "}
+            <a
+              href="/answers/who-owns-my-website"
+              className="text-paper underline underline-offset-4"
+            >
+              who owns the site when it is done
+            </a>
+            .
+          </p>
           <a
             href="/#quote"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-paper px-8 py-3.5 font-medium text-ink transition-colors hover:bg-paper-deep"

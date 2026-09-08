@@ -97,6 +97,24 @@ export const PAGES = {
 };
 
 import { AREAS } from "./areas.js";
+import { ANSWERS } from "./answers.js";
+PAGES["/answers"] = {
+  title: "Answers | Questions People Ask Before Hiring Me | Ron Lenser Digital",
+  description:
+    "Straight answers on cost, timelines, ownership and building with AI. The same answers Ron gives on the phone, from a one person build shop in Fredericksburg VA.",
+  type: "website",
+  priority: "0.7",
+};
+for (const a of ANSWERS) {
+  PAGES[`/answers/${a.slug}`] = {
+    title: a.title,
+    description: a.description,
+    type: "article",
+    answer: a,
+    priority: "0.7",
+  };
+}
+
 for (const a of AREAS) {
   PAGES[`/${a.slug}`] = {
     title: a.title,
@@ -210,6 +228,45 @@ export function jsonLd(path) {
         "@type": "Question",
         name: f.q,
         acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    });
+  } else if (page.answer) {
+    // QAPage so an assistant can lift the short answer verbatim. The text
+    // here is the same string the page renders, so schema and page can
+    // never disagree.
+    graph.push(
+      {
+        "@type": "QAPage",
+        "@id": abs(page.path + "#qa"),
+        mainEntity: {
+          "@type": "Question",
+          name: page.answer.question,
+          text: page.answer.question,
+          answerCount: 1,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: page.answer.short,
+            url: abs(page.path),
+          },
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: SITE.url + "/" },
+          { "@type": "ListItem", position: 2, name: "Answers", item: abs("/answers") },
+          { "@type": "ListItem", position: 3, name: page.answer.question, item: abs(page.path) },
+        ],
+      }
+    );
+  } else if (page.path === "/answers") {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": abs("/answers#faq"),
+      mainEntity: ANSWERS.map((a) => ({
+        "@type": "Question",
+        name: a.question,
+        acceptedAnswer: { "@type": "Answer", text: a.short, url: abs(`/answers/${a.slug}`) },
       })),
     });
   } else if (page.path === "/services/local-seo") {

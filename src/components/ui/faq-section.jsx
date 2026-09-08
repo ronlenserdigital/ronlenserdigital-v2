@@ -174,6 +174,39 @@ export function FAQ() {
             Or just call. (540) 395-6493
           </a>
         </div>
+
+        {/* hub routes out to the question layer instead of ending here */}
+        <p className="reveal mt-10 text-center text-sm leading-relaxed text-graphite">
+          Longer answers on{" "}
+          <a
+            href="/answers/how-long-does-a-website-take"
+            className="text-paper underline underline-offset-4"
+          >
+            how long a build takes
+          </a>
+          ,{" "}
+          <a
+            href="/answers/what-a-build-includes"
+            className="text-paper underline underline-offset-4"
+          >
+            what a build includes
+          </a>
+          ,{" "}
+          <a
+            href="/answers/who-owns-my-website"
+            className="text-paper underline underline-offset-4"
+          >
+            who owns it
+          </a>{" "}
+          and{" "}
+          <a
+            href="/answers/is-ai-built-software-worse"
+            className="text-paper underline underline-offset-4"
+          >
+            whether AI built software is worse
+          </a>
+          .
+        </p>
       </div>
     </section>
   );

@@ -36,8 +36,8 @@ const COLUMNS = [
     heading: "How it works",
     items: [
       ["Process", "#process"],
-      ["What I do", "#capabilities"],
       ["Pricing", "#pricing"],
+      ["Answers", "/answers"],
       ["Questions", "#faq"],
     ],
   },

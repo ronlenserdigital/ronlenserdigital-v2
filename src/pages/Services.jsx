@@ -105,6 +105,10 @@ export function Services() {
             <a href="/#faq" className="text-paper underline underline-offset-4">
               FAQ
             </a>
+            . Longer answers on cost, timelines and ownership live in{" "}
+            <a href="/answers" className="text-paper underline underline-offset-4">
+              answers
+            </a>
             .
           </p>
         </div>

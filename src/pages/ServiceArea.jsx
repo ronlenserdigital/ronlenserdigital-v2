@@ -1,4 +1,6 @@
 import { PhoneCall, ArrowUpRight } from "lucide-react";
+import { AREAS } from "../areas.js";
+import { ANSWERS } from "../answers.js";
 
 /**
  * Service area page template. The copy comes entirely from src/areas.js,
@@ -57,6 +59,51 @@ export function ServiceArea({ area }) {
               <p className="mt-2 text-sm leading-relaxed text-graphite">{b}</p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-14 border-t border-hairline pt-10">
+          <p className="eyebrow">Questions people ask first</p>
+          <div className="mt-4 grid gap-px bg-hairline sm:grid-cols-2">
+            {ANSWERS.slice(0, 4).map((a) => (
+              <a
+                key={a.slug}
+                href={`/answers/${a.slug}`}
+                className="bg-ink p-5 transition-colors hover:bg-ink-soft"
+              >
+                <h2 className="font-display text-base">{a.question}</h2>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-10 border-t border-hairline pt-8">
+          <p className="eyebrow">Also serving</p>
+          <p className="mt-3 text-[0.98rem] leading-relaxed text-graphite">
+            {AREAS.filter((x) => x.slug !== area.slug).map((x, i, arr) => (
+              <span key={x.slug}>
+                <a
+                  href={`/${x.slug}`}
+                  className="text-paper underline underline-offset-4"
+                >
+                  {x.city}
+                </a>
+                {i < arr.length - 1 ? ", " : ""}
+              </span>
+            ))}
+            . Same terms everywhere: fixed price in writing, about a week, and
+            you own it. See{" "}
+            <a href="/services" className="text-paper underline underline-offset-4">
+              everything I build
+            </a>{" "}
+            or{" "}
+            <a
+              href="/services/local-seo"
+              className="text-paper underline underline-offset-4"
+            >
+              local SEO in {area.city}
+            </a>
+            .
+          </p>
         </div>
 
         <div className="mt-12 flex flex-wrap items-center gap-5">
