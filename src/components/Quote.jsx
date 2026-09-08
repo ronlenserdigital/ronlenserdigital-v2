@@ -4,8 +4,19 @@ import { SelectNative } from "./ui/select-native.jsx";
 import { Input, Textarea } from "./ui/field.jsx";
 import { useMagnetic } from "../lib/motion.js";
 
-/* Put your Web3Forms access key in .env as VITE_WEB3FORMS_KEY */
-const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY ?? "";
+/* Web3Forms access key.
+ *
+ * Committed on purpose. A VITE_ prefixed env var is inlined into the client
+ * bundle at build time, so it is readable in view-source either way; the
+ * exposure is identical and Web3Forms keys are designed to live in
+ * client-side HTML. Hardcoding removes a deploy step that has silently
+ * broken this form for weeks.
+ *
+ * The env var still wins if it is set, so it can be overridden per
+ * environment without a code change. To rotate: get a new key at
+ * web3forms.com and replace the string below. */
+const ACCESS_KEY =
+  import.meta.env.VITE_WEB3FORMS_KEY ?? "f533c763-0551-4d77-b4ae-139ae33ac05c";
 
 /* What Ron Lenser Digital actually sells. Keep this list honest. */
 const SERVICES = [
