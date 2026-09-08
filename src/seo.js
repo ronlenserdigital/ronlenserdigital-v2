@@ -231,24 +231,31 @@ export function jsonLd(path) {
       })),
     });
   } else if (page.answer) {
-    // QAPage so an assistant can lift the short answer verbatim. The text
-    // here is the same string the page renders, so schema and page can
-    // never disagree.
+    // FAQPage, not QAPage. QAPage is defined for pages where users submit
+    // multiple competing answers to a question, like a forum thread. These
+    // pages carry one authoritative answer from the business, so QAPage was
+    // the wrong vocabulary and is now corrected.
+    //
+    // Note this markup earns no rich result: Google deprecated FAQ rich
+    // results on 7 May 2026. It stays because FAQPage remains valid
+    // Schema.org, Google confirms unused structured data is harmless, and
+    // other crawlers still read it. Do not re-add it expecting SERP
+    // decoration.
     graph.push(
       {
-        "@type": "QAPage",
-        "@id": abs(page.path + "#qa"),
-        mainEntity: {
-          "@type": "Question",
-          name: page.answer.question,
-          text: page.answer.question,
-          answerCount: 1,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: page.answer.short,
-            url: abs(page.path),
+        "@type": "FAQPage",
+        "@id": abs(page.path + "#faq"),
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: page.answer.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: page.answer.short,
+              url: abs(page.path),
+            },
           },
-        },
+        ],
       },
       {
         "@type": "BreadcrumbList",
