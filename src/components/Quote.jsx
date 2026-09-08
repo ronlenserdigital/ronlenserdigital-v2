@@ -68,13 +68,22 @@ export function Quote() {
 
     setStatus("sending");
 
+    if (!ACCESS_KEY) {
+      // Without this the failure looks like a network error, which is
+      // indistinguishable from a real outage when debugging later.
+      console.error(
+        "VITE_WEB3FORMS_KEY is not set. The form cannot deliver. Set it in the Vercel project environment variables and redeploy."
+      );
+      return setStatus("error");
+    }
+
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: ACCESS_KEY,
-          subject: `New quote request — ${data.business || data.name}`,
+          subject: `New quote request from ${data.business || data.name}`,
           from_name: "ronlenserdigital.com",
           ...data,
         }),
