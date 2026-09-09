@@ -39,3 +39,6 @@ User-agent: CCBot
 Allow: /
 
 Sitemap: https://www.ronlenserdigital.com/sitemap.xml
+
+# IndexNow key, so Bing, Yandex, Naver, Seznam and Yep can verify pushes
+# Host: https://www.ronlenserdigital.com/85c95e46a203840b9a142bc9101a3210.txt
