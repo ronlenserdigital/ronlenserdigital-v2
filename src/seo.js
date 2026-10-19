@@ -29,6 +29,7 @@ export const SITE = {
     "https://www.facebook.com/ronlenserdigital",
     "https://linkedin.com/in/ronlenser",
     "https://github.com/ronlenserdigital",
+    "https://github.com/RonaldLenser",
   ],
   hours: "Mo-Sa 08:00-19:00",
   areaServed: [
@@ -86,6 +87,27 @@ export const PAGES = {
     description:
       "Local SEO for Fredericksburg businesses: Google Business Profile, service area pages, schema markup and reviews. One fixed quote in writing, no retainer, no ranking promises.",
     type: "website",
+    priority: "0.8",
+  },
+  "/work": {
+    title: "Work | Websites and Web Apps Built in Fredericksburg VA | Ron Lenser Digital",
+    description:
+      "Portfolio of websites, web apps and automations built by Ron Lenser Digital for contractors, insurance agents, restaurants, brands and coaches. Live links and public source code for every project.",
+    type: "website",
+    priority: "0.8",
+  },
+  "/work/lead-gen-automation": {
+    title: "Lead Gen Automation | n8n Case Study | Ron Lenser Digital",
+    description:
+      "How Ron Lenser built a six workflow n8n automation that finds local businesses with no website, verifies it nine ways, writes personal emails with Claude, sorts replies and builds a sales pipeline.",
+    type: "article",
+    priority: "0.7",
+  },
+  "/resume": {
+    title: "Ron Lenser | Resume | AI First Engineer and Workflow Automation",
+    description:
+      "Resume and portfolio of Ron Lenser, AI first engineer in Fredericksburg VA. AI applications, workflow automation, encrypted messaging, RAG with citation checks, and 50+ shipped websites.",
+    type: "profile",
     priority: "0.8",
   },
   "/404": {

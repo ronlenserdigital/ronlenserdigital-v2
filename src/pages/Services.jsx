@@ -26,8 +26,8 @@ const LINES = [
   },
   {
     t: "Automations",
-    href: "/#capabilities",
-    d: "Lead routing, follow ups, invoices, and the tools you already pay for finally talking to each other.",
+    href: "/work/lead-gen-automation",
+    d: "Lead routing, follow ups, invoices, and the tools you already pay for finally talking to each other. See the one that runs my own lead gen.",
   },
   {
     t: "AI answering",

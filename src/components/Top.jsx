@@ -17,6 +17,8 @@ import { BlurText } from "./ui/blur-text.jsx";
 
 const MENU = [
   ["What I do", "#capabilities"],
+  ["Work", "/work"],
+  ["Resume", "/resume"],
   ["Process", "#process"],
   ["Pricing", "#pricing"],
   ["FAQ", "#faq"],
@@ -24,7 +26,7 @@ const MENU = [
 
 export function Nav({ home = true }) {
   const [open, setOpen] = useState(false);
-  const h = (hash) => (home ? hash : `/${hash}`);
+  const h = (hash) => (home || !hash.startsWith("#") ? hash : `/${hash}`);
 
   return (
     <header>
@@ -36,12 +38,7 @@ export function Nav({ home = true }) {
           <div className="flex flex-wrap items-center justify-between gap-4 py-3">
             <div className="flex w-full items-center justify-between lg:w-auto">
               <a href="/" aria-label="Ron Lenser Digital home" className="flex items-center gap-2.5">
-                <span
-                  aria-hidden="true"
-                  className="grid h-7 w-7 place-items-center rounded-md bg-paper font-mono text-[0.6875rem] font-semibold text-ink"
-                >
-                  R
-                </span>
+                <img src="/logo-mark.svg" alt="" aria-hidden="true" width="28" height="32" className="h-8 w-auto" />
                 <span className="font-mono text-[0.6875rem] tracking-[0.16em] uppercase">
                   Ron Lenser Digital
                 </span>
@@ -198,8 +195,8 @@ function SiteFrame() {
         />
 
         <div className="absolute top-5 left-5 z-10 flex items-center gap-1 rounded-full border border-hairline bg-ink/60 p-1 backdrop-blur-md">
-          <span className="grid h-6 w-6 place-items-center rounded-full bg-paper font-mono text-[0.5rem] font-semibold text-ink">
-            R
+          <span className="grid h-6 w-6 place-items-center">
+            <img src="/logo-mark.svg" alt="" aria-hidden="true" width="14" height="16" className="h-4 w-auto" />
           </span>
           {["Work", "Process", "Pricing"].map((l) => (
             <span key={l} className="px-2.5 py-1 text-[0.6875rem] text-graphite">

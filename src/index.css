@@ -249,3 +249,21 @@ section[id] {
     transform: none;
   }
 }
+
+/* /work/lead-gen-automation: workflow canvas + stage connectors */
+.oe-grid {
+  background-color: #070707;
+  background-image: radial-gradient(#1c1c1c 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+.oe-cv .e { fill: none; stroke: #2e2e2e; stroke-width: 1.6; }
+.oe-cv .f { fill: none; stroke: #ffffff; stroke-width: 1.6; stroke-dasharray: 4 18; opacity: 0.55; animation: oe-flow 1.4s linear infinite; }
+.oe-cv text { fill: #a1a1a1; font-size: 11px; font-family: var(--font-sans); }
+@keyframes oe-flow { to { stroke-dashoffset: -22; } }
+.oe-conn { display: none; }
+@media (min-width: 1024px) {
+  .oe-conn { display: block; position: absolute; top: 50%; right: -17px; width: 17px; height: 2px; background: var(--color-hairline); overflow: hidden; z-index: 2; }
+  .oe-conn::after { content: ""; position: absolute; top: 0; left: -8px; width: 8px; height: 2px; background: var(--color-paper); animation: oe-run 1.6s linear infinite; }
+}
+@keyframes oe-run { to { left: 17px; } }
+@media (prefers-reduced-motion: reduce) { .oe-cv .f, .oe-conn::after { animation: none; } }

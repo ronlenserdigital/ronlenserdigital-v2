@@ -27,6 +27,8 @@ const COLUMNS = [
     heading: "What I build",
     items: [
       ["All services", "/services"],
+      ["Work", "/work"],
+      ["Resume", "/resume"],
       ["Websites", "#capabilities"],
       ["Apps and tools", "#capabilities"],
       ["Local SEO", "/services/local-seo"],
@@ -89,9 +91,7 @@ export function Footer({ home = true }) {
       {/* intro */}
       <div className="relative mx-auto grid max-w-7xl items-center justify-center gap-6 p-10 pb-0 md:flex">
         <a href="/" aria-label="Home" className="flex justify-center">
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-dotted border-hairline font-mono text-sm font-semibold">
-            R
-          </span>
+          <img src="/logo-mark.svg" alt="" aria-hidden="true" width="40" height="46" className="h-11 w-auto shrink-0" />
         </a>
         <p className="max-w-3xl bg-transparent text-center text-xs leading-5 text-graphite md:text-left">
           Ron Lenser Digital is an agency of one in Fredericksburg, Virginia. I

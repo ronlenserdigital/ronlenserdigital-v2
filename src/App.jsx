@@ -9,6 +9,9 @@ import { NotFound } from "./pages/NotFound.jsx";
 import { ServiceArea } from "./pages/ServiceArea.jsx";
 import { Services } from "./pages/Services.jsx";
 import { LocalSeo } from "./pages/LocalSeo.jsx";
+import { Work } from "./pages/Work.jsx";
+import { LeadGenAutomation } from "./pages/LeadGenAutomation.jsx";
+import { Resume } from "./pages/Resume.jsx";
 import { Answer, AnswersIndex } from "./pages/Answer.jsx";
 import { AREAS } from "./areas.js";
 import { ANSWERS } from "./answers.js";
@@ -26,6 +29,9 @@ const ROUTES = {
   "/terms": Terms,
   "/services": Services,
   "/services/local-seo": LocalSeo,
+  "/work": Work,
+  "/work/lead-gen-automation": LeadGenAutomation,
+  "/resume": Resume,
   "/answers": AnswersIndex,
 };
 for (const a of ANSWERS) {
